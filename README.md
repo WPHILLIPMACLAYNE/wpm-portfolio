@@ -18,13 +18,18 @@ Antes de continuar o trabalho, leia:
 
 ## GitHub
 
-Repositório privado:
+Repositório público:
 
 ```text
 https://github.com/WPHILLIPMACLAYNE/wpm-portfolio
 ```
 
 Branch principal: `main`.
+Site publicado:
+
+```text
+https://wphillipmaclayne.github.io/wpm-portfolio/
+```
 
 ## Desenvolvimento Local
 
@@ -53,7 +58,7 @@ O codigo principal vive em `src/app`, `src/components`, `src/data` e `src/lib`.
 
 A rodada atual adicionou headers de seguranca, SEO tecnico, `robots.txt`, `sitemap.xml`, JSON-LD, limpeza de artefatos internos, correcao de HTML interativo invalido, melhorias de contraste/mobile e reducao de carga inicial na home. A auditoria profissional de 2026-05-06 tambem corrigiu URLs absolutas com subpath, metadata das paginas de projeto, prerender de projetos estaticos, vulnerabilidade `postcss` via override controlado, export estatico para GitHub Pages, paginas de erro customizadas, assets WebP/JPG otimizados, cobertura Playwright local, configuracao local do Dependabot para npm e fechamento dos MDs executáveis.
 
-A etapa de deploy agora separa claramente o build Next.js com servidor do export estatico para GitHub Pages, sem ativar servico externo automaticamente.
+A etapa de deploy agora separa claramente o build Next.js com servidor do export estatico para GitHub Pages. O Pages publica o artefato `out/` gerado pelo workflow `.github/workflows/pages.yml`.
 
 Detalhes:
 - [docs/08-DEPLOYMENT.md](./docs/08-DEPLOYMENT.md)

@@ -1,6 +1,6 @@
 # 08 - Deployment
 
-Deployment decisions follow `docs/AVAILABLE_SERVICES.md`. No external service is activated automatically from this repository.
+Deployment decisions follow `docs/AVAILABLE_SERVICES.md`.
 
 ## Current Decision
 
@@ -14,6 +14,11 @@ The GitHub Pages path is treated as the explicit static target because the defau
 ```text
 https://wphillipmaclayne.github.io/wpm-portfolio
 ```
+
+The repository is public and GitHub Pages is published by `.github/workflows/pages.yml`.
+The workflow builds the static export with `npm run build:github-pages`, adds
+`out/.nojekyll`, uploads `out/` as a Pages artifact, and deploys through the
+official GitHub Pages Actions flow.
 
 ## Commands
 
@@ -51,4 +56,6 @@ The Node-compatible build keeps the configured security headers and default imag
 
 ## Activation Rule
 
-Do not create or enable a deploy workflow, GitHub Pages setting, external host, analytics, monitoring, or secrets without explicit approval.
+GitHub Pages is approved and active. Do not enable another external host,
+analytics, monitoring, secrets provider, or backend service without explicit
+approval.
