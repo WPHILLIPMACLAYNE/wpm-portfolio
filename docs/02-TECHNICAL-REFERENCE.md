@@ -78,6 +78,32 @@ src/app/
     └── page.tsx        ← Rota /resume
 ```
 
+### Metadata por Segmento
+Rotas Tier 1 (`/projects`, `/about`, `/contact`) e Tier 2 (`/skills`, `/resume`, `/lab`, `/hobbies`) possuem `layout.tsx` de segmento que exporta `metadata` estatico (title, description, canonical, OpenGraph, Twitter). Os layouts sao Server Components e apenas envolvem `{children}` — as paginas client sob eles permanecem inalteradas. O `title` usa o template global `%s | ${SITE_TITLE}` definido no Root Layout.
+
+Cada rota possui:
+- `title` especifico por pagina
+- `description` verificada por string completa no E2E (nao substring)
+- `alternates.canonical` apontando para o caminho da rota
+- `openGraph` com title, description, url e type
+- `twitter` com title e description
+```ts
+// src/app/about/layout.tsx (exemplo do padrao)
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "...",
+  alternates: { canonical: "/about" },
+  openGraph: { ... },
+  twitter: { ... },
+};
+
+export default function AboutLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}
+```
+
 ### Server vs Client Components
 
 | Arquivo | Tipo | Motivo |
@@ -372,7 +398,8 @@ Implementado desde o MVP 1:
 ### Atual
 - 16 páginas/rotas estáticas no build, incluindo `_not-found`, `robots.txt` e `sitemap.xml`
 - Imagens servidas por `next/image` quando aparecem em cards/detalhes
-- WebGL carregado apenas no estagio Console da home
+- WebGL carregado apenas no estagio Console da home em desktop
+- Mobile usa fallback CSS (ShaderBackgroundFallback), sem carregar o bundle Three.js/R3F
 - Export estático GitHub Pages com `NEXT_PUBLIC_DEPLOY_TARGET=github-pages`
 - CSS via Tailwind e tokens WPM
 - Animações via Motion usando `transform`/`opacity` onde possivel
@@ -381,6 +408,7 @@ Implementado desde o MVP 1:
 ### Planejado / Monitorar
 - bundle analysis
 - novas otimizações mobile para `/console`
+- Mobile: ShaderBackgroundWrapper detecta dispositivo e redireciona para ShaderBackgroundFallback (CSS puro), evitando carregar o bundle pesado de Three.js/R3F (~200 KB gzip). Desktop com WebGL mantem a experiencia completa de particulas.
 - futuras mídias devem seguir o padrão WebP/JPG otimizado já usado no livro
 
 ---
@@ -410,6 +438,15 @@ npm audit --audit-level=low
 # E2E
 npm run test:e2e
 ```
+
+Cobertura atual de regressao E2E:
+- Smoke: 16 rotas criticas retornam 200 com conteudo.
+- Fluxo: Press Start entra no Console (WPM.OS + System ready).
+- SEO: 7 rotas Tier 1 + Tier 2 validam title, description (string completa), canonical.
+- WebGL mobile: guarda especifica em `mobile-chrome` prova que o fallback CSS nao cria canvas, nao chama `getContext("webgl"|"webgl2")` e nao carrega o chunk pesado Three/R3F. A descoberta do chunk e dinamica (marcador `WebGLRenderer` + `react-three`) — sem hash fixo.
+- Projetos: media otimizada (.webp) e imagem social OG por slug.
+- 404: pagina customizada renderiza para rotas desconhecidas.
+- Acessibilidade: links de contato alcancaveis via Tab.
 
 ---
 

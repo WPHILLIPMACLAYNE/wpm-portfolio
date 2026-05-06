@@ -4,6 +4,22 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
+# Orquestração Codex + DeepSeek
+
+Antes de qualquer tarefa, leia:
+
+- `docs/AI_TEAM_ORCHESTRATION.md`
+- `docs/AVAILABLE_SERVICES.md`
+- `docs/ARCHITECTURE_DECISIONS.md`
+- `docs/DEPLOYMENT_OPTIONS.md`
+- `docs/SECURITY_AND_SECRETS.md`
+- o arquivo usado como Sala de Comunicação entre Codex e DeepSeek: `docs/AI_COMMAND_ROOM.md`
+
+Codex atua como líder, arquiteto, diretor criativo e auditor.
+DeepSeek atua como executor sênior.
+
+Toda tarefa deve ser delegada, executada, reportada e revisada pela Sala de Comunicação.
+
 ## Project Tooling Context
 
 Before proposing infrastructure, database, deployment, authentication, observability, tests, security, analytics, payments, or design/front-end tooling, consult `docs/AVAILABLE_SERVICES.md`.
