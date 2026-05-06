@@ -90,9 +90,9 @@ export default function ResumePage() {
       <div className="px-6 py-12 pb-20 max-w-3xl mx-auto">
         <Link
           href="/console"
-          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/50 hover:text-wpm-cyan transition-colors mb-10"
+          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/90 hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
         >
-          <span className="text-wpm-purple/50">&lt;-</span> BACK TO CONSOLE
+          <span className="text-wpm-lavender/90">&lt;-</span> BACK TO CONSOLE
         </Link>
 
         <motion.div
@@ -100,17 +100,17 @@ export default function ResumePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-wpm-purple/50 mb-3">
+          <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-wpm-lavender/90 mb-3">
             Career Save
           </p>
           <h1 className="text-3xl md:text-5xl font-light text-wpm-white/80 tracking-wide mb-2">
             Career Save
           </h1>
-          <p className="font-mono text-sm text-wpm-cyan/60 mb-8">{profile.name}</p>
+          <p className="font-mono text-sm text-wpm-cyan/80 mb-8">{profile.name}</p>
 
           {/* Timeline */}
           <section className="mb-12">
-            <h2 className="font-mono text-sm text-wpm-purple/50 mb-6 tracking-wider uppercase">
+            <h2 className="font-mono text-sm text-wpm-lavender/90 mb-6 tracking-wider uppercase">
               Experience
             </h2>
             <div className="relative">
@@ -146,17 +146,17 @@ export default function ResumePage() {
                       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-0 min-w-0">
                         <div className="min-w-0 max-w-full break-words">
                           <p className="text-wpm-white/80 font-medium break-words">{exp.role}</p>
-                          <p className="text-sm text-wpm-gray/50 break-words">{exp.company}</p>
+                          <p className="text-sm text-wpm-gray/90 break-words">{exp.company}</p>
                         </div>
-                        <span className="font-mono text-[10px] text-wpm-gray/40 whitespace-nowrap">
+                        <span className="font-mono text-[11px] text-wpm-gray/90 whitespace-nowrap">
                           {exp.period}
                         </span>
                       </div>
-                      <p className="text-sm text-wpm-gray/50 mt-2 leading-relaxed break-words">
+                      <p className="text-sm text-wpm-gray/90 mt-2 leading-relaxed break-words">
                         {exp.details}
                       </p>
                       {exp.highlight && (
-                        <p className="text-xs text-wpm-cyan/40 mt-1 font-mono">
+                        <p className="text-xs text-wpm-cyan/70 mt-1 font-mono">
                           {exp.highlight}
                         </p>
                       )}
@@ -177,7 +177,7 @@ export default function ResumePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
             >
-              <h2 className="font-mono text-sm text-wpm-purple/50 mb-4 tracking-wider uppercase">
+              <h2 className="font-mono text-sm text-wpm-lavender/90 mb-4 tracking-wider uppercase">
                 Education
               </h2>
               <div className="space-y-3">
@@ -188,8 +188,8 @@ export default function ResumePage() {
                   >
                     <p className="text-wpm-white/70 text-sm">{ed.course}</p>
                     <div className="flex justify-between items-center mt-1">
-                      <p className="text-xs text-wpm-gray/50">{ed.institution}</p>
-                      <span className="font-mono text-[10px] text-wpm-gray/40">
+                      <p className="text-xs text-wpm-gray/90">{ed.institution}</p>
+                      <span className="font-mono text-[11px] text-wpm-gray/90">
                         {ed.period}
                       </span>
                     </div>
@@ -204,7 +204,7 @@ export default function ResumePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
-              <h2 className="font-mono text-sm text-wpm-purple/50 mb-4 tracking-wider uppercase">
+              <h2 className="font-mono text-sm text-wpm-lavender/90 mb-4 tracking-wider uppercase">
                 Certifications
               </h2>
               <div className="space-y-2">
@@ -221,7 +221,7 @@ export default function ResumePage() {
                     >
                       <p className="text-wpm-white/70 text-sm break-words">{cert}</p>
                       {isHighlight && (
-                        <span className="font-mono text-[10px] text-wpm-cyan/40">
+                        <span className="font-mono text-[11px] text-wpm-cyan/70">
                           Em andamento
                         </span>
                       )}

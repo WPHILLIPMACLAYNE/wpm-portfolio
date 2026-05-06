@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useReducedMotion } from "motion/react";
-import { ShaderBackgroundFallback } from "./ShaderBackground";
+import ShaderBackgroundFallback from "./ShaderBackgroundFallback";
 
 /* ───────────────────────────────────────────────────────────
    ShaderBackground — Smart Wrapper

@@ -56,9 +56,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/project-livro-cover.png",
-        width: 1122,
-        height: 1402,
+        url: absoluteUrl("/project-livro-cover-og.jpg"),
+        width: 1200,
+        height: 630,
         alt: "WPM.OS portfolio featured work preview",
       },
     ],
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/project-livro-cover.png"],
+    images: [absoluteUrl("/project-livro-cover-og.jpg")],
   },
 };
 

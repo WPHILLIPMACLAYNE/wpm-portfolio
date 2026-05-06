@@ -17,9 +17,9 @@ export default function LabPage() {
       <div className="px-6 py-12 max-w-3xl mx-auto">
         <Link
           href="/console"
-          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/50 hover:text-wpm-cyan transition-colors mb-10"
+          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/90 hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
         >
-          <span className="text-wpm-purple/50">{">"}</span> BACK TO CONSOLE
+          <span className="text-wpm-lavender/90">{">"}</span> BACK TO CONSOLE
         </Link>
 
         <motion.div
@@ -27,13 +27,13 @@ export default function LabPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-wpm-purple/50 mb-3">
+          <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-wpm-lavender/90 mb-3">
             Experimental Lab
           </p>
           <h1 className="text-3xl md:text-5xl font-light text-wpm-white/80 tracking-wide mb-4">
             Experimental Lab
           </h1>
-          <p className="text-wpm-gray/60 mb-10">
+          <p className="text-wpm-gray/90 mb-10">
             Experimentos, prot\u00f3tipos, shaders e estudos criativos.
           </p>
 
@@ -50,10 +50,10 @@ export default function LabPage() {
                   <span className={`w-1.5 h-1.5 rounded-full ${
                     exp.status === "Completed" ? "bg-wpm-cyan/60" : exp.status === "In Progress" ? "bg-wpm-purple/60" : "bg-wpm-gray/40"
                   }`} />
-                  <span className="font-mono text-[10px] text-wpm-gray/40">{exp.status}</span>
+                  <span className="font-mono text-[11px] text-wpm-gray/90">{exp.status}</span>
                 </div>
                 <h3 className="text-wpm-white/70 mb-1">{exp.title}</h3>
-                <p className="text-sm text-wpm-gray/50">{exp.desc}</p>
+                <p className="text-sm text-wpm-gray/90">{exp.desc}</p>
               </motion.div>
             ))}
           </div>

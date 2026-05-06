@@ -192,7 +192,7 @@ import { motion } from "motion";
 | **Geist Mono** (via `--font-geist-mono`) | Código, terminal, labels técnicos, status |
 
 Escala de tamanhos usada:
-- `text-[10px]` — labels pequenas, status, versão
+- `text-[11px]` — tamanho mínimo para labels pequenas, status, versão
 - `text-xs` (12px) — texto secundário, botões
 - `text-sm` (14px) — descrições, corpo
 - `text-base` — (não usado ativamente)
@@ -357,29 +357,31 @@ Implementado desde o MVP 1:
 | Feature | Implementação |
 |---------|---------------|
 | `prefers-reduced-motion` | Media query desabilita animações e scanlines |
-| Navegação por teclado | ENTER/ESPAÇO no PressStart |
+| Navegação por teclado | ENTER/ESPAÇO no PressStart, ESC nas páginas internas, foco contido em drawer/painel |
 | Skip intro | Botão visível após 1.5s |
 | Contraste | Texto claro sobre fundo escuro |
 | Links semânticos | `<Link>` e `<a>` com props adequadas |
+| Contexto de rota | Top bar mostra seção atual e destaca item ativo |
+| Live region | Home anuncia transições de stage com `aria-live="polite"` |
+| Mobile back | Botão fixo `Back` nas páginas internas em telas pequenas |
 
 ---
 
 ## Performance
 
-### Atual (MVP 1)
-- 13 rotas/metadata endpoints no build incluindo `robots.txt` e `sitemap.xml`
+### Atual
+- 16 páginas/rotas estáticas no build, incluindo `_not-found`, `robots.txt` e `sitemap.xml`
 - Imagens servidas por `next/image` quando aparecem em cards/detalhes
 - WebGL carregado apenas no estagio Console da home
+- Export estático GitHub Pages com `NEXT_PUBLIC_DEPLOY_TARGET=github-pages`
 - CSS via Tailwind e tokens WPM
 - Animações via Motion usando `transform`/`opacity` onde possivel
 - Headers de seguranca configurados em `next.config.ts`
 
-### Planejado (MVP 5)
-- lazy loading de componentes WebGL
-- code splitting por rota
-- otimização de assets (imagens, fontes)
+### Planejado / Monitorar
 - bundle analysis
-- `next/image` para imagens de projeto
+- novas otimizações mobile para `/console`
+- futuras mídias devem seguir o padrão WebP/JPG otimizado já usado no livro
 
 ---
 
@@ -391,6 +393,7 @@ npm run dev         # Inicia servidor de dev (Turbopack)
 
 # Build
 npm run build       # Build de produção
+npm run build:github-pages  # Export estático para GitHub Pages
 
 # Produção
 npm run start       # Inicia servidor de produção
@@ -402,7 +405,10 @@ npm run lint        # ESLint
 npm run typecheck   # TypeScript sem emit
 
 # Dependencias
-npm audit --audit-level=moderate --omit=dev
+npm audit --audit-level=low
+
+# E2E
+npm run test:e2e
 ```
 
 ---

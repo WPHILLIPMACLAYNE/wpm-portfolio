@@ -158,12 +158,12 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
               {bootMessages.slice(0, messageIndex + 1).map((msg, i) => (
                 <motion.p
                   key={i}
-                  className="text-wpm-gray/70"
+                  className="text-wpm-gray/90"
                   initial={hydrated && !prefersReduced ? { opacity: 0, x: -6 } : { opacity: 1, x: 0 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <span className="text-wpm-purple/60">{">"}</span>{" "}
+                  <span className="text-wpm-lavender/90">{">"}</span>{" "}
                   <span className={i === messageIndex ? "text-wpm-cyan/80" : ""}>
                     {msg}
                   </span>
@@ -219,7 +219,7 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
 
             {/* Name */}
             <motion.p
-              className="mt-6 font-mono text-xs md:text-sm tracking-[0.35em] uppercase text-wpm-gray/60"
+              className="mt-6 font-mono text-xs md:text-sm tracking-[0.16em] uppercase text-wpm-gray/90"
               initial={
                 hydrated && !prefersReduced
                   ? { opacity: 0, y: 10 }
@@ -233,7 +233,7 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
 
             {/* Tagline */}
             <motion.p
-              className="mt-8 text-[10px] md:text-xs text-wpm-cyan/40 font-mono tracking-wider"
+              className="mt-8 text-[11px] md:text-xs text-wpm-cyan/70 font-mono tracking-wider"
               initial={hydrated && !prefersReduced ? { opacity: 0 } : { opacity: 1 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.18, delay: 0.18 }}
@@ -247,8 +247,8 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
       {/* Skip button — always visible */}
       {phase !== "done" && (
         <motion.button
-          className="absolute bottom-10 z-10 text-[10px] font-mono tracking-wider uppercase
-                     text-wpm-gray/30 hover:text-wpm-gray/60 transition-colors
+          className="absolute bottom-10 z-10 text-[11px] font-mono tracking-wider uppercase
+                     text-wpm-gray/90 hover:text-wpm-gray/90 transition-colors
                      cursor-pointer focus-visible:outline-none focus-visible:ring-2
                      focus-visible:ring-wpm-purple/50 focus-visible:ring-offset-2
                      focus-visible:ring-offset-wpm-black rounded-sm px-3 py-2"

@@ -12,9 +12,9 @@ export default function SkillsPage() {
       <div className="px-4 md:px-6 py-12 max-w-3xl mx-auto pb-20">
         <Link
           href="/console"
-          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/50 hover:text-wpm-cyan transition-colors mb-10"
+          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/90 hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
         >
-          <span className="text-wpm-purple/50">&lt;-</span> BACK TO CONSOLE
+          <span className="text-wpm-lavender/90">&lt;-</span> BACK TO CONSOLE
         </Link>
 
         <motion.div
@@ -22,13 +22,13 @@ export default function SkillsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-wpm-purple/50 mb-3">
+          <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-wpm-lavender/90 mb-3">
             Skill Tree
           </p>
           <h1 className="text-3xl md:text-5xl font-light text-wpm-white/80 tracking-wide mb-2">
             Skill Tree
           </h1>
-          <p className="font-mono text-sm text-wpm-gray/50 mb-10 max-w-md break-words">
+          <p className="font-mono text-sm text-wpm-gray/90 mb-10 max-w-md break-words">
             Competences grouped by domain — each card represents a working
             cluster of skills acquired through real projects and professional
             experience.
@@ -44,7 +44,7 @@ export default function SkillsPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15 + gi * 0.1 }}
                 >
-                  <p className="font-mono text-xs text-wpm-purple/50 mb-4 uppercase tracking-wider">
+                  <p className="font-mono text-xs text-wpm-lavender/90 mb-4 uppercase tracking-wider">
                     {">"} {group.name}
                   </p>
                   <div className="flex flex-wrap gap-2 min-w-0">
@@ -67,7 +67,7 @@ export default function SkillsPage() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
                 >
-                  <span className="font-mono text-xs text-wpm-purple/40 flex-shrink-0">{">_"}</span>
+                  <span className="font-mono text-xs text-wpm-lavender/90 flex-shrink-0">{">_"}</span>
                   <span className="text-wpm-white/70 break-words">{skill}</span>
                 </motion.div>
               ))}

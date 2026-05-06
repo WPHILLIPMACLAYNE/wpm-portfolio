@@ -5,9 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:github-pages": "NEXT_PUBLIC_DEPLOY_TARGET=github-pages NEXT_PUBLIC_BASE_PATH=/wpm-portfolio NEXT_PUBLIC_SITE_URL=https://wphillipmaclayne.github.io/wpm-portfolio next build",
+    "build:node": "NEXT_PUBLIC_DEPLOY_TARGET=node next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "npm run build && playwright test"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
@@ -22,6 +25,7 @@
     "three": "^0.184.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -30,5 +34,8 @@
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "8.5.14"
   }
 }

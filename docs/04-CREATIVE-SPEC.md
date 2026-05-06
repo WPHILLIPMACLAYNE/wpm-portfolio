@@ -182,7 +182,7 @@ em memória."
 
 | Nome | Tamanho | Uso |
 |------|---------|-----|
-| `text-[10px]` | 10px | Labels, status, versão, microcopy |
+| `text-[11px]` | 11px | Mínimo para labels, status, versão, microcopy |
 | `text-xs` | 12px | Texto secundário, botões pequenos |
 | `text-sm` | 14px | Corpo de texto, descrições |
 | `text-lg` | 18px | Títulos de cards |
@@ -431,7 +431,7 @@ Fase 3 (800ms):   clip-path: inset(0 0 0 0)
 ✅ Documentação completa
 ```
 
-### MVP 2 — Identidade 💭 Em planejamento
+### MVP 2 — Identidade 🗂 Backlog
 
 **Objetivo:** Marca forte, consistência visual.
 
@@ -447,7 +447,7 @@ Fase 3 (800ms):   clip-path: inset(0 0 0 0)
 □ Hover nos cards com parallax 3D sutil
 ```
 
-### MVP 3 — Imersão 💭 Em planejamento
+### MVP 3 — Imersão 🗂 Backlog
 
 **Objetivo:** Experiência sensorial completa.
 
@@ -461,7 +461,7 @@ Fase 3 (800ms):   clip-path: inset(0 0 0 0)
 □ Transição estilo "entrar na tela" entre console e projetos
 ```
 
-### MVP 4 — Conteúdo Real 💭 Em planejamento
+### MVP 4 — Conteúdo Real 🗂 Backlog
 
 ```
 □ Substituir dados mock por projetos reais
@@ -473,7 +473,7 @@ Fase 3 (800ms):   clip-path: inset(0 0 0 0)
 □ Timeline de carreira interativa
 ```
 
-### MVP 5 — Polimento 💭 Em planejamento
+### MVP 5 — Polimento 🗂 Backlog
 
 ```
 □ Performance: bundle analysis, code splitting
@@ -497,7 +497,7 @@ Fase 3 (800ms):   clip-path: inset(0 0 0 0)
 **Mitigação:**
 - [x] Botão SKIP INTRO visível após 1.5s
 - [x] Tempo total curto (6.5s até o console)
-- [ ] Cookie/localStorage para pular intro em visitas subsequentes (MVP 2)
+- [x] `localStorage` para pular intro em visitas subsequentes
 
 ### Risco 2 — Desorientação
 **Problema:** A metáfora de "sistema operacional" pode confundir visitantes que esperam um site normal.
@@ -505,24 +505,24 @@ Fase 3 (800ms):   clip-path: inset(0 0 0 0)
 - [x] Labels sempre visíveis nos botões principais
 - [x] "BACK TO CONSOLE" em todas as páginas internas
 - [x] Top bar persistente com navegação
-- [ ] Breadcrumb visual sutil (MVP 2)
+- [x] Contexto visual sutil na top bar (`WPM.OS / seção`)
 
 ### Risco 3 — Performance em dispositivos fracos
 **Problema:** Scanlines contínuas, partículas e futuros shaders WebGL podem travar dispositivos antigos.
 **Mitigação:**
 - [x] `prefers-reduced-motion` desabilita animações
 - [x] Scanlines são CSS puro (baixo custo)
-- [ ] Botão "Low Performance Mode" (MVP 3)
-- [ ] Detecção de GPU e fallback automático (MVP 5)
+- [deferred] Botão "Low Performance Mode" em futura tela Settings
+- [deferred] Detecção de GPU e fallback automático mais avançado
 
 ### Risco 4 — Inacessibilidade
 **Problema:** Experiência visual intensa pode excluir pessoas com deficiências visuais ou vestibulares.
 **Mitigação:**
 - [x] Todo texto é HTML real, não imagem
 - [x] Contraste adequado (texto claro sobre fundo escuro)
-- [ ] Navegação completa por teclado (MVP 2)
-- [ ] Atributos ARIA em todos elementos interativos (MVP 5)
-- [ ] Testes com leitores de tela (MVP 5)
+- [x] Navegação principal por teclado, ESC, drawer/painel com foco contido
+- [x] Atributos ARIA em links, drawers, painéis, estados indisponíveis e transições
+- [blocked-manual] Testes com leitores de tela reais antes de publicação final
 
 ### Risco 5 — Mobile comprometido
 **Problema:** Layout de console com grid horizontal e overlays fixos pode quebrar em telas pequenas.
@@ -530,23 +530,23 @@ Fase 3 (800ms):   clip-path: inset(0 0 0 0)
 - [x] Grid responsivo (1-3 colunas)
 - [x] Top bar e bottom bar com padding adaptativo
 - [x] Textos com escala responsiva
-- [ ] Menu mobile em drawer ou bottom sheet (MVP 2)
-- [ ] Scanlines e vignette desabilitados no mobile (MVP 2)
+- [x] Menu mobile em drawer
+- [x] Scanlines desabilitados e vignette suavizada no mobile
 
 ### Risco 6 — Falta de conteúdo
 **Problema:** Cards com "Projeto Exemplo 1, 2, 3" não convencem.
 **Mitigação:**
-- [ ] Substituir por projetos reais o quanto antes (MVP 4)
-- [ ] Enquanto isso, textos mock são realistas e bem escritos
-- [ ] Placeholder visualmente coerente (não "lorem ipsum" genérico)
+- [x] Projetos reais principais substituem exemplos genéricos
+- [x] Textos atuais são dados reais/autoria do projeto, não lorem ipsum
+- [x] Placeholder visual coerente com `accentColor` quando não há imagem
 
 ### Risco 7 — Carga cognitiva
 **Problema:** Muitas opções de menu (7 itens) podem sobrecarregar o visitante.
 **Mitigação:**
 - [x] Ícones (siglas) são minimalistas
 - [x] Grid arejado com bastante espaço negativo
-- [ ] Destaque visual para os itens mais importantes (Projects, About) (MVP 2)
-- [ ] Tooltip descritivo no hover (MVP 2)
+- [x] Projetos reais aparecem primeiro na experiência do Console
+- [x] Labels/aria-labels e drawer reduzem dependência de tooltip
 
 ---
 
@@ -582,7 +582,7 @@ Isso mantém a estética "tela", não "papel flutuando".
 |-------|-----------|
 | Duração máxima | 400ms para microinterações, 800ms para transições de tela |
 | Easing padrão | `ease-out` (desaceleração natural) |
-| Stagger delay | 50-100ms entre elementos irmãos |
+| Stagger delay | 30-40ms entre elementos irmãos em listas/ribbons |
 | Loop máximo | 1.5-3s (pulsação de CTA) |
 | Distância máxima | 20px em Y, 0 em X (movimento vertical apenas) |
 | Scale máximo | 1.03-1.05 (quase imperceptível) |
@@ -612,16 +612,16 @@ Isso mantém a estética "tela", não "papel flutuando".
 ### Checklist de Implementação
 
 ```
-[ ] Contraste de texto ≥ 4.5:1 (WCAG AA)
-[ ] Todo texto é HTML, não imagem
-[ ] Estados de foco visíveis (teclado)
-[ ] prefers-reduced-motion respeitado
-[ ] Skip intro funcional
-[ ] Navegação principal acessível por teclado
-[ ] Imagens têm alt text (quando adicionadas)
-[ ] Links têm descrição clara do destino
-[ ] Animações não bloqueiam interação
-[ ] Nada pisca mais que 3x/segundo (risco epilético)
+[x] Contraste de texto ≥ 4.5:1 (WCAG AA)
+[x] Todo texto é HTML, não imagem
+[x] Estados de foco visíveis (teclado)
+[x] prefers-reduced-motion respeitado
+[x] Skip intro funcional
+[x] Navegação principal acessível por teclado
+[x] Imagens têm alt text quando renderizadas
+[x] Links têm descrição clara do destino
+[x] Animações não bloqueiam interação
+[x] Nada pisca mais que 3x/segundo (risco epilético)
 ```
 
 ---

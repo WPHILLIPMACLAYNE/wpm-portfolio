@@ -15,15 +15,15 @@ interface BadgeProps {
 }
 
 const variantClasses: Record<BadgeVariant, string> = {
-  system: "text-wpm-purple/90 border-wpm-purple/30 bg-wpm-purple/5",
+  system: "text-wpm-lavender/90 border-wpm-purple/30 bg-wpm-purple/5",
   action: "text-wpm-cyan/90 border-wpm-cyan/30 bg-wpm-cyan/5",
-  info: "text-wpm-gray/80 border-white/[0.10] bg-white/[0.025]",
-  status: "text-wpm-gray/75 border-transparent bg-transparent",
+  info: "text-wpm-gray/90 border-white/[0.10] bg-white/[0.025]",
+  status: "text-wpm-gray/90 border-transparent bg-transparent",
 };
 
 const sizeClasses: Record<BadgeSize, string> = {
-  sm: "px-2 py-0.5 text-[10px]",
-  md: "px-3 py-1 text-[10px]",
+  sm: "px-2 py-0.5 text-[11px]",
+  md: "px-3 py-1 text-[11px]",
 };
 
 export default function Badge({

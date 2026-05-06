@@ -44,6 +44,12 @@ export default function Home() {
   const [incomingStage, setIncomingStage] = useState<Stage | null>(null);
   const [transitioning, setTransitioning] = useState(false);
   const [startViaTransition, setStartViaTransition] = useState(false);
+  const stageStatus =
+    stage === "console"
+      ? "Console loaded. Seven active modules available."
+      : stage === "boot"
+        ? "Boot intro playing."
+        : "Start screen ready.";
 
   // Once hydrated, apply the skip decision. The first paint stays on PressStart
   // so the primary title is immediately available for LCP.
@@ -93,6 +99,10 @@ export default function Home() {
 
   return (
     <>
+      <p className="sr-only" aria-live="polite" aria-atomic="true">
+        {transitioning ? "System transition in progress." : stageStatus}
+      </p>
+
       {stage === "console" && !transitioning && <ShaderBackgroundWrapper />}
 
       {/* ── BOOT stage ── */}

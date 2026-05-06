@@ -4,6 +4,7 @@
   --color-wpm-black: #050509;
   --color-wpm-deep-blue: #071B3A;
   --color-wpm-purple: #6C4DFF;
+  --color-wpm-lavender: #B8A8FF;
   --color-wpm-cyan: #74F7FF;
   --color-wpm-white: #EAF2FF;
   --color-wpm-gray: #7E8797;
@@ -155,5 +156,15 @@ html.custom-cursor-active [contenteditable="true"] {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .crt-overlay {
+    display: none;
+  }
+
+  .crt-vignette {
+    background: radial-gradient(ellipse at center, transparent 72%, rgba(5, 5, 9, 0.32) 100%);
   }
 }

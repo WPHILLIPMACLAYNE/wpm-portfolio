@@ -37,7 +37,7 @@ export default function PressStart({ onStart }: PressStartProps) {
       />
 
       <div className="flex flex-col items-center gap-8 z-10">
-        <p className="font-mono text-[10px] tracking-[0.5em] uppercase text-wpm-purple/60">
+        <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-wpm-lavender/90">
           WPM.OS v1.0
         </p>
 
@@ -53,7 +53,7 @@ export default function PressStart({ onStart }: PressStartProps) {
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
         >
-          <span className="font-mono text-sm tracking-[0.4em] text-wpm-cyan group-hover:text-glow-cyan transition-all duration-300">
+          <span className="font-mono text-sm tracking-[0.16em] text-wpm-cyan group-hover:text-glow-cyan transition-all duration-300">
             PRESS START
           </span>
           <motion.span
@@ -63,7 +63,7 @@ export default function PressStart({ onStart }: PressStartProps) {
           />
         </motion.button>
 
-        <div className="absolute bottom-10 flex gap-8 text-[10px] font-mono text-wpm-gray/40">
+        <div className="absolute bottom-10 flex gap-8 text-[11px] font-mono text-wpm-gray/90">
           <span>[ENTER] or click</span>
           <span>{profile.name}</span>
         </div>

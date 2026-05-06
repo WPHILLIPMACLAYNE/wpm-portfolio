@@ -143,10 +143,10 @@ export default function MobileNavDrawer({ open, onClose, returnFocusRef }: Mobil
           >
             {/* Drawer header */}
             <div className="p-4 border-b border-white/[0.04]">
-              <p className="font-mono text-[10px] tracking-[0.3em] uppercase text-wpm-purple/50">
+              <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-wpm-lavender/90">
                 Navigation
               </p>
-              <p className="font-mono text-[10px] text-wpm-gray/40 mt-1">
+              <p className="font-mono text-[11px] text-wpm-gray/90 mt-1">
                 Select a module
               </p>
             </div>
@@ -156,19 +156,21 @@ export default function MobileNavDrawer({ open, onClose, returnFocusRef }: Mobil
               {menuItems.map((item) => {
                 const { clickable, hint, className } = getItemStyle(item);
                 const iconName = iconMap[item.id];
+                const descriptionId = `mobile-nav-desc-${item.id}`;
 
                 return (
                   <button
                     key={item.id}
                     onClick={() => handleSelect(item)}
-                    disabled={!clickable}
-                    aria-disabled={!clickable}
+	                    disabled={!clickable}
+	                    aria-disabled={!clickable}
+	                    aria-describedby={!clickable ? descriptionId : undefined}
                     className={`w-full flex items-center gap-3 p-3 rounded-sm text-left
                               transition-colors duration-150
                               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50
                               ${clickable
-                                ? "text-wpm-gray/60 hover:text-wpm-white hover:bg-white/[0.03] cursor-pointer"
-                                : "text-wpm-gray/25 cursor-default"}
+                                ? "text-wpm-gray/90 hover:text-wpm-white hover:bg-white/[0.03] cursor-pointer"
+                                : "text-wpm-gray/90 cursor-default"}
                               ${className}`}
                     style={{ minHeight: 48 }}
                   >
@@ -178,20 +180,25 @@ export default function MobileNavDrawer({ open, onClose, returnFocusRef }: Mobil
                     <span className="font-mono text-xs tracking-wide flex-1">
                       {item.label}
                     </span>
-                    <span className="font-mono text-[9px] tracking-wider min-w-[60px] text-right">
-                      {hint || item.type}
-                    </span>
-                  </button>
+	                    <span className="font-mono text-[11px] tracking-wider min-w-[60px] text-right">
+	                      {hint || item.type}
+	                    </span>
+	                    {!clickable && (
+	                      <span id={descriptionId} className="sr-only">
+	                        This module is not available in the public portfolio yet.
+	                      </span>
+	                    )}
+	                  </button>
                 );
               })}
             </nav>
 
             {/* Footer */}
             <div className="p-4 border-t border-white/[0.04]">
-              <p className="font-mono text-[10px] text-wpm-gray/30">
+              <p className="font-mono text-[11px] text-wpm-gray/90">
                 WPM.OS v1.0
               </p>
-              <p className="font-mono text-[10px] text-wpm-gray/20 mt-0.5">
+              <p className="font-mono text-[11px] text-wpm-gray/90 mt-0.5">
                 ESC or tap outside to close
               </p>
             </div>

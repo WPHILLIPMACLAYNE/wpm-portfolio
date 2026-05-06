@@ -1,5 +1,18 @@
 import type { NextConfig } from "next";
 
+const deployTarget = process.env.NEXT_PUBLIC_DEPLOY_TARGET ?? "node";
+const isGitHubPagesExport = deployTarget === "github-pages";
+
+function normalizeBasePath(value: string | undefined) {
+  if (!value || value === "/") return "";
+  return value.startsWith("/") ? value : `/${value}`;
+}
+
+const basePath = normalizeBasePath(
+  process.env.NEXT_PUBLIC_BASE_PATH ??
+    (isGitHubPagesExport ? "/wpm-portfolio" : "")
+);
+
 const scriptSrc =
   process.env.NODE_ENV === "development"
     ? "'self' 'unsafe-inline' 'unsafe-eval'"
@@ -50,14 +63,25 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  async headers() {
-    return [
-      {
-        source: "/(.*)",
-        headers: securityHeaders,
-      },
-    ];
-  },
+  ...(basePath ? { basePath } : {}),
+  ...(isGitHubPagesExport
+    ? {
+        output: "export" as const,
+        trailingSlash: true,
+        images: {
+          unoptimized: true,
+        },
+      }
+    : {
+        async headers() {
+          return [
+            {
+              source: "/(.*)",
+              headers: securityHeaders,
+            },
+          ];
+        },
+      }),
 };
 
 export default nextConfig;
