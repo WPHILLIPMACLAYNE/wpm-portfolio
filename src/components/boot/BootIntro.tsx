@@ -16,9 +16,9 @@ const bootMessages = [
   "Access granted.",
 ];
 
-const LOADING_DURATION = 2500;
-const REVEAL_DURATION = 1500;
-const EXIT_DELAY = 300;
+const LOADING_DURATION = 600;
+const REVEAL_DURATION = 300;
+const EXIT_DELAY = 50;
 
 export default function BootIntro({ onComplete }: BootIntroProps) {
   const [phase, setPhase] = useState<"loading" | "reveal" | "done">("loading");
@@ -27,7 +27,26 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
   const [hydrated, setHydrated] = useState(false);
   const prefersReduced = useReducedMotion();
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const timeoutRefs = useRef<ReturnType<typeof setTimeout>[]>([]);
   const hasCompleted = useRef(false);
+
+  const clearTimers = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    timeoutRefs.current.forEach(clearTimeout);
+    timeoutRefs.current = [];
+  }, []);
+
+  const scheduleTimeout = useCallback((callback: () => void, delay: number) => {
+    const timeout = setTimeout(() => {
+      timeoutRefs.current = timeoutRefs.current.filter((item) => item !== timeout);
+      callback();
+    }, delay);
+    timeoutRefs.current.push(timeout);
+    return timeout;
+  }, []);
 
   useEffect(() => {
     const raf = requestAnimationFrame(() => setHydrated(true));
@@ -38,7 +57,7 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
     if (hasCompleted.current) return;
     hasCompleted.current = true;
 
-    if (timerRef.current) clearInterval(timerRef.current);
+    clearTimers();
 
     if (prefersReduced) {
       onComplete();
@@ -46,8 +65,8 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
     }
 
     setPhase("done");
-    setTimeout(onComplete, EXIT_DELAY);
-  }, [onComplete, prefersReduced]);
+    scheduleTimeout(onComplete, EXIT_DELAY);
+  }, [clearTimers, onComplete, prefersReduced, scheduleTimeout]);
 
   useEffect(() => {
     // Reduced motion: skip to done immediately, auto-advance after brief pause
@@ -56,8 +75,11 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
         setProgress(100);
         setMessageIndex(bootMessages.length - 1);
       });
-      const timeout = setTimeout(finish, 1500);
-      return () => { cancelAnimationFrame(raf); clearTimeout(timeout); };
+      scheduleTimeout(finish, 350);
+      return () => {
+        cancelAnimationFrame(raf);
+        clearTimers();
+      };
     }
 
     const startTime = Date.now();
@@ -80,17 +102,15 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
 
         // Brief pause before reveal
         setProgress(100);
-        setTimeout(() => {
+        scheduleTimeout(() => {
           setPhase("reveal");
-          setTimeout(finish, REVEAL_DURATION);
-        }, 200);
+          scheduleTimeout(finish, REVEAL_DURATION);
+        }, 50);
       }
     }, 40);
 
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [finish, prefersReduced]);
+    return clearTimers;
+  }, [clearTimers, finish, prefersReduced, scheduleTimeout]);
 
   return (
     <motion.div
@@ -172,7 +192,7 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
                 : { opacity: 1, scale: 1 }
             }
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 0.24, ease: [0.25, 0.1, 0.25, 1] }}
           >
             {/* WPM */}
             <motion.div
@@ -183,7 +203,7 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
                   : { opacity: 1, filter: "blur(0px)" }
               }
               animate={{ opacity: 1, filter: "blur(0px)" }}
-              transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.28, delay: 0.03, ease: "easeOut" }}
             >
               <span
                 className="block"
@@ -206,7 +226,7 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
                   : { opacity: 1, y: 0 }
               }
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.2, delay: 0.12, ease: "easeOut" }}
             >
               {profile.name}
             </motion.p>
@@ -216,7 +236,7 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
               className="mt-8 text-[10px] md:text-xs text-wpm-cyan/40 font-mono tracking-wider"
               initial={hydrated && !prefersReduced ? { opacity: 0 } : { opacity: 1 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.1 }}
+              transition={{ duration: 0.18, delay: 0.18 }}
             >
               System ready. Welcome.
             </motion.p>
@@ -235,7 +255,7 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
           onClick={finish}
           initial={hydrated ? { opacity: 0 } : { opacity: 1 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.4 }}
+          transition={{ delay: 0.15, duration: 0.2 }}
         >
           [ Skip Intro ]
         </motion.button>

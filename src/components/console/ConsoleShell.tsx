@@ -1,13 +1,18 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { menuItems, profile } from "@/data/profile";
 import PageTransition from "@/components/motion/PageTransition";
 import Icon from "@/components/ui/Icon";
-import MobileNavDrawer from "./MobileNavDrawer";
 import type { IconName } from "@/components/ui/Icon";
+
+const MobileNavDrawer = dynamic(() => import("./MobileNavDrawer"), {
+  ssr: false,
+  loading: () => null,
+});
 
 const STORAGE_KEY = "wpm-os-visited";
 
@@ -103,7 +108,7 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
           >
             WPM.OS
           </Link>
-          <span className="font-mono text-[10px] text-wpm-gray/40 hidden sm:inline">v1.0</span>
+          <span className="font-mono text-[10px] text-wpm-gray/70 hidden sm:inline">v1.0</span>
         </div>
 
         {showNav && (
@@ -119,12 +124,12 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
                   <Link
                     key={item.id}
                     href={item.href}
-                    className="relative font-mono text-[10px] text-wpm-gray/50 hover:text-wpm-cyan
+                    className="relative font-mono text-[10px] text-wpm-gray/75 hover:text-wpm-cyan
                              px-2 py-1 transition-colors duration-200 group
                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 focus-visible:ring-offset-2 focus-visible:ring-offset-wpm-black rounded-sm"
                     aria-label={item.label}
                   >
-                    <span className="text-wpm-purple/50 group-hover:text-wpm-purple transition-colors">
+                    <span className="text-wpm-purple/80 group-hover:text-wpm-purple transition-colors">
                       <Icon name={iconName} size="sm" />
                     </span>
                     <span className="ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:inline">
@@ -138,7 +143,7 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
             {/* Mobile nav button */}
             <button
               ref={modulesButtonRef}
-              className="md:hidden font-mono text-[11px] text-wpm-gray/50 hover:text-wpm-cyan transition-colors
+              className="md:hidden font-mono text-[11px] text-wpm-gray/75 hover:text-wpm-cyan transition-colors
                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm px-2 py-1"
               onClick={() => setDrawerOpen(true)}
               aria-label="Open navigation menu"
@@ -153,13 +158,13 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
 
       {/* Bottom bar */}
       <footer className="fixed bottom-0 left-0 right-0 z-30 h-8 border-t border-white/[0.04] bg-wpm-black/80 backdrop-blur-sm flex items-center justify-between px-4 md:px-6">
-        <span className="font-mono text-[10px] text-wpm-gray/40">
+        <span className="font-mono text-[10px] text-wpm-gray/70">
           {profile.name}
         </span>
         <div className="flex items-center gap-4">
           {mode === "hub" && hasVisited && (
             <button
-              className="font-mono text-[10px] text-wpm-gray/30 hover:text-wpm-cyan/60 transition-colors
+              className="font-mono text-[10px] text-wpm-gray/65 hover:text-wpm-cyan/80 transition-colors
                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm px-1"
               onClick={handleReplayIntro}
             >
@@ -167,12 +172,12 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
             </button>
           )}
           {mode === "page" && (
-            <span className="font-mono text-[10px] text-wpm-gray/30">
+            <span className="font-mono text-[10px] text-wpm-gray/65">
               ESC to return
             </span>
           )}
           {mode === "hub" && (
-            <span className="font-mono text-[10px] text-wpm-gray/30">WPM.OS v1.0</span>
+            <span className="font-mono text-[10px] text-wpm-gray/65">WPM.OS v1.0</span>
           )}
         </div>
       </footer>

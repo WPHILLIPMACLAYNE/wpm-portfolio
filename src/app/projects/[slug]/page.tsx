@@ -31,12 +31,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <ConsoleShell showNav={false}>
-      <div className="px-6 py-12 pb-20 max-w-3xl mx-auto">
-        {/* Back */}
-        <Link
-          href="/console"
-          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/50 hover:text-wpm-cyan transition-colors mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
-        >
+        <div className="px-6 py-12 pb-20 max-w-3xl mx-auto">
+          {/* Back */}
+          <Link
+            href="/console"
+            className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/75 hover:text-wpm-cyan transition-colors mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
+          >
           <span className="text-wpm-purple/50">&lt;-</span> BACK TO CONSOLE
         </Link>
 
@@ -44,7 +44,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-4 flex-wrap min-w-0 overflow-hidden">
             <Badge variant="system">{project.category}</Badge>
-            <span className="font-mono text-[10px] text-wpm-gray/40">{project.year}</span>
+            <span className="font-mono text-[10px] text-wpm-gray/75">{project.year}</span>
             <span className="w-1 h-1 rounded-full bg-wpm-purple/30" />
             <Badge variant={statusVariant[project.status] ?? "info"} dot>
               {project.status}
@@ -58,7 +58,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {project.title}
           </h1>
 
-          <p className="font-mono text-sm text-wpm-cyan/50 mb-6 break-words">{project.subtitle}</p>
+          <p className="font-mono text-sm text-wpm-cyan/85 mb-6 break-words">{project.subtitle}</p>
 
           {/* Project cover image */}
           {project.coverImage && (
@@ -74,7 +74,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           )}
 
-          <p className="text-wpm-gray/50 text-sm leading-relaxed break-words">
+          <p className="text-wpm-gray/80 text-sm leading-relaxed break-words">
             {project.problem.slice(0, 200)}...
           </p>
         </div>
@@ -82,11 +82,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {/* Role & Stack */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 p-6 bg-wpm-card border border-white/[0.04] rounded-sm min-w-0 max-w-full overflow-hidden">
           <div className="min-w-0">
-            <p className="font-mono text-[10px] text-wpm-purple/50 mb-2 uppercase tracking-wider">Role</p>
+            <p className="font-mono text-[10px] text-wpm-purple/85 mb-2 uppercase tracking-wider">Role</p>
             <p className="text-wpm-white/70 break-words">{project.role}</p>
           </div>
           <div className="min-w-0">
-            <p className="font-mono text-[10px] text-wpm-purple/50 mb-2 uppercase tracking-wider">Stack</p>
+            <p className="font-mono text-[10px] text-wpm-purple/85 mb-2 uppercase tracking-wider">Stack</p>
             <div className="flex flex-wrap gap-2 min-w-0 overflow-hidden">
               {project.stack.map((tech) => (
                 <Badge key={tech} variant="info" size="sm">
@@ -102,53 +102,53 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         {/* Case Study */}
         <div className="space-y-10 mb-12">
           <section>
-            <h2 className="font-mono text-sm text-wpm-purple/50 mb-3 tracking-wider uppercase">The Problem</h2>
-            <p className="text-wpm-gray/60 leading-relaxed break-words">{project.problem}</p>
+            <h2 className="font-mono text-sm text-wpm-purple/85 mb-3 tracking-wider uppercase">The Problem</h2>
+            <p className="text-wpm-gray/80 leading-relaxed break-words">{project.problem}</p>
           </section>
 
           <section>
-            <h2 className="font-mono text-sm text-wpm-purple/50 mb-3 tracking-wider uppercase">The Solution</h2>
-            <p className="text-wpm-gray/60 leading-relaxed break-words">{project.solution}</p>
+            <h2 className="font-mono text-sm text-wpm-purple/85 mb-3 tracking-wider uppercase">The Solution</h2>
+            <p className="text-wpm-gray/80 leading-relaxed break-words">{project.solution}</p>
           </section>
 
           <section>
-            <h2 className="font-mono text-sm text-wpm-purple/50 mb-3 tracking-wider uppercase">Process</h2>
-            <p className="text-wpm-gray/60 leading-relaxed break-words">{project.process}</p>
+            <h2 className="font-mono text-sm text-wpm-purple/85 mb-3 tracking-wider uppercase">Process</h2>
+            <p className="text-wpm-gray/80 leading-relaxed break-words">{project.process}</p>
           </section>
 
           <section>
-            <h2 className="font-mono text-sm text-wpm-purple/50 mb-3 tracking-wider uppercase">Results</h2>
-            <p className="text-wpm-gray/60 leading-relaxed break-words">{project.results}</p>
+            <h2 className="font-mono text-sm text-wpm-purple/85 mb-3 tracking-wider uppercase">Results</h2>
+            <p className="text-wpm-gray/80 leading-relaxed break-words">{project.results}</p>
           </section>
         </div>
 
         {/* Links */}
-        {hasAnyLink && (
+          {hasAnyLink && (
         <div className="flex gap-3 p-6 bg-wpm-card border border-white/[0.04] rounded-sm flex-wrap">
           {project.links.live && project.links.live !== "#" && (
-            <a href={project.links.live} target="_blank" rel="noopener noreferrer">
-              <Button variant="primary" size="sm">[ LIVE DEMO ]</Button>
-            </a>
+            <Button as="a" href={project.links.live} target="_blank" rel="noopener noreferrer" variant="primary" size="sm">
+              [ LIVE DEMO ]
+            </Button>
           )}
           {project.links.github && project.links.github !== "#" && (
-            <a href={project.links.github} target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost" size="sm">[ GITHUB ]</Button>
-            </a>
+            <Button as="a" href={project.links.github} target="_blank" rel="noopener noreferrer" variant="ghost" size="sm">
+              [ GITHUB ]
+            </Button>
           )}
           {project.links.figma && project.links.figma !== "#" && (
-            <a href={project.links.figma} target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost" size="sm">[ FIGMA ]</Button>
-            </a>
+            <Button as="a" href={project.links.figma} target="_blank" rel="noopener noreferrer" variant="ghost" size="sm">
+              [ FIGMA ]
+            </Button>
           )}
           {project.links.video && project.links.video !== "#" && (
-            <a href={project.links.video} target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost" size="sm">[ VIDEO ]</Button>
-            </a>
+            <Button as="a" href={project.links.video} target="_blank" rel="noopener noreferrer" variant="ghost" size="sm">
+              [ VIDEO ]
+            </Button>
           )}
           {project.links.caseStudy && project.links.caseStudy !== "#" && (
-            <a href={project.links.caseStudy} target="_blank" rel="noopener noreferrer">
-              <Button variant="ghost" size="sm">[ CASE STUDY ]</Button>
-            </a>
+            <Button as="a" href={project.links.caseStudy} target="_blank" rel="noopener noreferrer" variant="ghost" size="sm">
+              [ CASE STUDY ]
+            </Button>
           )}
         </div>
         )}

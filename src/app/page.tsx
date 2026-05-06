@@ -1,24 +1,52 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import BootIntro from "@/components/boot/BootIntro";
+import dynamic from "next/dynamic";
 import PressStart from "@/components/boot/PressStart";
-import ConsoleShell from "@/components/console/ConsoleShell";
-import ConsoleMenu from "@/components/console/ConsoleMenu";
-import ReverseCrtTransition from "@/components/motion/ReverseCrtTransition";
-import ShaderBackgroundWrapper from "@/components/webgl/ShaderBackgroundWrapper";
 import { useIntroSkip } from "@/hooks/useIntroSkip";
 
 type Stage = "boot" | "start" | "console";
 
+const ShaderBackgroundWrapper = dynamic(
+  () => import("@/components/webgl/ShaderBackgroundWrapper"),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
+
+const BootIntro = dynamic(() => import("@/components/boot/BootIntro"), {
+  ssr: false,
+  loading: () => null,
+});
+
+const ConsoleShell = dynamic(() => import("@/components/console/ConsoleShell"), {
+  ssr: false,
+  loading: () => null,
+});
+
+const ConsoleMenu = dynamic(() => import("@/components/console/ConsoleMenu"), {
+  ssr: false,
+  loading: () => null,
+});
+
+const ReverseCrtTransition = dynamic(
+  () => import("@/components/motion/ReverseCrtTransition"),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
+
 export default function Home() {
   const { shouldSkip, hydrated, markVisited, replay } = useIntroSkip();
-  const [stage, setStage] = useState<Stage>("boot");
+  const [stage, setStage] = useState<Stage>("start");
   const [incomingStage, setIncomingStage] = useState<Stage | null>(null);
   const [transitioning, setTransitioning] = useState(false);
   const [startViaTransition, setStartViaTransition] = useState(false);
 
-  // Once hydrated, apply the skip decision
+  // Once hydrated, apply the skip decision. The first paint stays on PressStart
+  // so the primary title is immediately available for LCP.
   useEffect(() => {
     if (!hydrated) return;
     const raf = requestAnimationFrame(() => {
@@ -65,8 +93,7 @@ export default function Home() {
 
   return (
     <>
-      {/* Ambient particle field behind all stages */}
-      <ShaderBackgroundWrapper />
+      {stage === "console" && !transitioning && <ShaderBackgroundWrapper />}
 
       {/* ── BOOT stage ── */}
       {stage === "boot" && !transitioning && (

@@ -2,15 +2,15 @@
 
 Portfólio interativo em Next.js/React com direção visual de sistema operacional autoral, projetos reais como artefatos e navegação imersiva.
 
-## Retomada Em Novo Chat
+## Estado Atual
 
-Antes de continuar o trabalho em outro chat/conta, leia:
+Projeto em fase de hardening técnico. O Console já abre módulos em painéis laterais interativos com foco contido, `Escape` para fechar e rotas reais preservadas como fallback. A auditoria de 2026-05-06 corrigiu HTML interativo inválido, headers de segurança, SEO técnico, contraste, mobile inicial e limpeza de artefatos internos.
+
+Antes de continuar o trabalho, leia:
 
 - [AGENTS.md](./AGENTS.md)
-- [docs/09-HANDOFF-NEXT-CHAT.md](./docs/09-HANDOFF-NEXT-CHAT.md)
-- [AGENT_ROOM_3.md](./AGENT_ROOM_3.md)
-
-Estado atual resumido: ART-DIRECTION V2 e a base da ART-DIRECTION V3 / Module Slide System foram aprovadas. O Console já abre módulos em painéis laterais interativos com foco contido, `Escape` para fechar e rotas reais preservadas como fallback.
+- [docs/00-OVERVIEW.md](./docs/00-OVERVIEW.md)
+- [docs/09-AUDIT-HARDENING-2026-05-06.md](./docs/09-AUDIT-HARDENING-2026-05-06.md)
 
 ## GitHub
 
@@ -22,37 +22,36 @@ https://github.com/WPHILLIPMACLAYNE/wpm-portfolio
 
 Branch principal: `main`.
 
-## Getting Started
+## Desenvolvimento Local
 
-First, run the development server:
+Servidor de desenvolvimento:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build de producao local:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm run start -- --hostname 127.0.0.1 --port 3010
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+O codigo principal vive em `src/app`, `src/components`, `src/data` e `src/lib`.
 
-## Learn More
+## Hardening 2026-05-06
 
-To learn more about Next.js, take a look at the following resources:
+A rodada atual adicionou headers de seguranca, SEO tecnico, `robots.txt`, `sitemap.xml`, JSON-LD, limpeza de artefatos internos, correcao de HTML interativo invalido, melhorias de contraste/mobile e reducao de carga inicial na home.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Detalhes: [docs/09-AUDIT-HARDENING-2026-05-06.md](./docs/09-AUDIT-HARDENING-2026-05-06.md).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Validation
 
-## Deploy on Vercel
+```bash
+npm run lint
+npm run typecheck
+npm run build
+npm audit --audit-level=moderate --omit=dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy and infrastructure decisions must follow [docs/AVAILABLE_SERVICES.md](./docs/AVAILABLE_SERVICES.md).

@@ -25,7 +25,7 @@ export default function ContactPage() {
       <div className="px-6 py-12 max-w-3xl mx-auto">
         <Link
           href="/console"
-          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/50 hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
+            className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/75 hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
         >
           <span className="text-wpm-purple/50">&lt;-</span> BACK TO CONSOLE
         </Link>
@@ -35,7 +35,7 @@ export default function ContactPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-wpm-purple/50 mb-3">
+          <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-wpm-purple/85 mb-3">
             Send Signal
           </p>
           <h1 className="text-3xl md:text-5xl font-light text-wpm-white/80 tracking-wide mb-8">
@@ -62,14 +62,14 @@ export default function ContactPage() {
                   <span className="text-wpm-purple/40 group-hover:text-wpm-purple transition-colors">
                     <Icon name={item.icon} size="lg" />
                   </span>
-                  <span className="font-mono text-sm text-wpm-gray/50 group-hover:text-wpm-cyan/70 transition-colors">
+                  <span className="font-mono text-sm text-wpm-gray/80 group-hover:text-wpm-cyan/90 transition-colors">
                     {item.label}
                   </span>
                 </motion.a>
               ))}
             </div>
           ) : (
-            <p className="font-mono text-sm text-wpm-gray/40 py-6">
+            <p className="font-mono text-sm text-wpm-gray/75 py-6">
               No public contact methods available
             </p>
           )}

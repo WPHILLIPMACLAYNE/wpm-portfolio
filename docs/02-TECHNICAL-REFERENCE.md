@@ -85,10 +85,11 @@ src/app/
 | `layout.tsx` | Server | Apenas HTML estático + fontes |
 | `page.tsx` | Client | Gerencia estado do fluxo (boot/start/console) |
 | `BootIntro.tsx` | Client | Animações Motion, timers, callbacks |
-| `PressStart.tsx` | Client | Animações Motion, eventos de teclado |
-| `ConsoleShell.tsx` | Client | Animações Motion (importa motion) |
+| `PressStart.tsx` | Client | Primeiro paint estatico + eventos de teclado |
+| `ConsoleShell.tsx` | Client | Drawer mobile, ESC e replay da intro |
+| `StaticConsoleShell.tsx` | Server | Shell estatico para rotas de listagem sensiveis a LCP |
 | `ConsoleMenu.tsx` | Client | Animações Motion, grid animado |
-| `ProjectCard.tsx` | Client | Animações Motion, hover effects |
+| `ProjectCartridge.tsx` | Server | Cards de projeto com hover CSS e `next/image` |
 | `projects/[slug]/page.tsx` | Server (async) | Precisa `await params`, dados estáticos |
 | `about/page.tsx` | Client | Animações Motion |
 | Demais páginas | Client | Animações Motion |
@@ -107,6 +108,13 @@ src/app/          ← Pages importam dados e passam para componentes
 ```
 
 **Padrão:** Dados mockados em `src/data/`. No futuro, podem vir de um CMS ou API.
+
+### Performance de carregamento
+
+- A home abre diretamente no `PressStart` para expor o H1 no primeiro paint; `BootIntro` permanece disponivel via replay.
+- `BootIntro`, Console, WebGL e transicao CRT da home sao carregados sob demanda com `next/dynamic`.
+- `ClientCursor` atrasa o cursor customizado e so carrega em desktop com ponteiro fino.
+- `/projects` usa `StaticConsoleShell` e `ProjectCartridge` server-side para reduzir hidratacao acima da dobra.
 
 ---
 
@@ -359,10 +367,12 @@ Implementado desde o MVP 1:
 ## Performance
 
 ### Atual (MVP 1)
-- 11 rotas, todas com tamanho mínimo
-- Sem imagens pesadas
-- CSS inline via Tailwind (purged no build)
-- Animações via Motion (GPU accelerated transforms)
+- 13 rotas/metadata endpoints no build incluindo `robots.txt` e `sitemap.xml`
+- Imagens servidas por `next/image` quando aparecem em cards/detalhes
+- WebGL carregado apenas no estagio Console da home
+- CSS via Tailwind e tokens WPM
+- Animações via Motion usando `transform`/`opacity` onde possivel
+- Headers de seguranca configurados em `next.config.ts`
 
 ### Planejado (MVP 5)
 - lazy loading de componentes WebGL
@@ -387,6 +397,12 @@ npm run start       # Inicia servidor de produção
 
 # Lint
 npm run lint        # ESLint
+
+# Tipagem
+npm run typecheck   # TypeScript sem emit
+
+# Dependencias
+npm audit --audit-level=moderate --omit=dev
 ```
 
 ---

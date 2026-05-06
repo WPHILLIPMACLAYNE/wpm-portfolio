@@ -16,8 +16,7 @@
 | [`05-ARCHITECTURE.md`](./05-ARCHITECTURE.md) | **Arquitetura técnica completa** — estrutura de pastas, catálogo de 30+ componentes, fluxo de estado, estratégia de animação (5 camadas), acessibilidade (4 níveis), performance mobile, ordem de implementação (5 fases), padrões de código |
 | [`06-UX-AUDIT.md`](./06-UX-AUDIT.md) | **Auditoria crítica de UX** — 37 problemas mapeados (4 críticos, 7 alta, 7 média, 7 baixa, 12 de design), checklist pré-deploy com 28 itens |
 | [`AVAILABLE_SERVICES.md`](./AVAILABLE_SERVICES.md) | Catálogo de ferramentas disponíveis via GitHub Student Developer Pack e regra de priorização antes de sugerir serviços externos |
-| [`09-HANDOFF-NEXT-CHAT.md`](./09-HANDOFF-NEXT-CHAT.md) | **Handoff operacional para novo chat/conta** — estado atual, decisões Codex/DeepSeek, bloqueadores V2, direção V3 Module Slide System e comandos de retomada |
-| [`10-END-OF-DAY-2026-05-05.md`](./10-END-OF-DAY-2026-05-05.md) | **Fechamento do dia** — resumo do que foi aprovado, validações, GitHub e próximos passos |
+| [`09-AUDIT-HARDENING-2026-05-06.md`](./09-AUDIT-HARDENING-2026-05-06.md) | Hardening da auditoria técnica: segurança, SEO, performance inicial, contraste, mobile e limpeza de artefatos internos |
 | `07-DATA-MODELS.md` | Modelos de dados, interfaces TypeScript, schemas (a ser criado com evolução) |
 | `08-DEPLOYMENT.md` | Guia de deploy, CI/CD, otimizações (a ser criado quando chegarmos nessa fase) |
 
@@ -40,10 +39,11 @@ Escuro, minimalista, misterioso, tecnológico, com brilho azul/roxo, ruído digi
 ### Objetivo
 Criar um portfólio autoral que una criatividade, UX, motion design e desenvolvimento front-end em uma experiência navegável, performática e acessível.
 
-### Estado atual em 2026-05-05
+### Estado atual em 2026-05-06
 
-- ART-DIRECTION V2 aprovada: Console premium com hero WPM.OS, artefatos reais e mobile sem clipping.
-- ART-DIRECTION V3 base aprovada: Module Slide System com painel lateral/sheet, `aria-controls` válido, focus trap em desktop/mobile e fallback por rotas reais.
+- Hardening técnico aplicado após auditoria de 9 módulos: links externos sem HTML interativo aninhado, headers de segurança, metadata/canonical/robots/sitemap, contraste reforçado e home mobile sem clipping.
+- WebGL da home foi adiado para o estágio Console, evitando carregar a camada 3D durante boot/start.
+- Artefatos internos de agentes, screenshots temporários e SVGs padrão não usados foram removidos do pacote público.
 - Repositório privado preparado em `https://github.com/WPHILLIPMACLAYNE/wpm-portfolio`.
 
 ---
@@ -72,7 +72,7 @@ wpm-portfolio/
 │   ├── 01-STEP-BY-STEP.md
 │   ├── 02-TECHNICAL-REFERENCE.md
 │   ├── 03-CREATIVE-BRIEF.md
-│   └── ...
+│   └── 09-AUDIT-HARDENING-2026-05-06.md
 ├── src/
 │   ├── app/                 ← Rotas (App Router)
 │   │   ├── layout.tsx       ← Root layout + metadados

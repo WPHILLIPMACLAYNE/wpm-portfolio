@@ -18,10 +18,12 @@ WPM.OS tem uma base sólida: identidade forte, navegação funcional e acessibil
 
 ### Estado atual
 ```
-Home → Boot (4.5s) → Press Start → Console (9 módulos)
-                                    ├── Projects → [slug]
-                                    ├── About, Skills, Resume...
-                                    └── Contact
+Home → Press Start → Console (9 módulos)
+                     ├── Projects → [slug]
+                     ├── About, Skills, Resume...
+                     └── Contact
+
+Boot completo: disponivel via replay, sem bloquear o primeiro paint.
 ```
 
 ### O que funciona
@@ -48,9 +50,9 @@ Home → Boot (4.5s) → Press Start → Console (9 módulos)
 ## 2. Risco da Intro Irritar Usuários
 
 ### Estado atual
-- Boot: 2.5s loading + 1.5s reveal = 4s até o fim
-- Start Screen: CRT turn-on 1.2s + interação
-- Total até o Console: ~5.5s + tempo de reação do usuário
+- Primeira visita abre direto em Press Start para preservar LCP.
+- Boot/reveal fica disponivel via replay no Console.
+- Visitantes recorrentes ainda podem ir direto ao Console via `localStorage`.
 
 ### O que funciona
 - [x] Botão SKIP INTRO visível desde o início
@@ -61,7 +63,7 @@ Home → Boot (4.5s) → Press Start → Console (9 módulos)
 
 | # | Problema | Severidade | Solução |
 |---|----------|-----------|---------|
-| P4 | **Visitantes recorrentes** (ex: um recrutador que já viu o portfólio) precisam passar pela intro toda vez. Na segunda visita, 5.5s parece 30s. | **Crítica** | Salvar em `localStorage` que o usuário já visitou. Na segunda visita, pular direto para o Console (ou para a Start Screen sem animação). |
+| P4 | **Resolvido em 2026-05-06.** A intro nao bloqueia mais a primeira tela e visitantes recorrentes podem pular para o Console via `localStorage`. | **Crítica** | Manter replay manual para quem quiser assistir a intro completa. |
 | P5 | A intro não tem **indicador de progresso restante**. O usuário vê a barra, mas não sabe se faltam 2s ou 10s. | **Baixa** | Mostrar porcentagem ou "3... 2... 1..." ao final. Ou, mais elegante: a barra de progresso por si já comunica — e está funcionando. Manter. |
 | P6 | Se o usuário entra pela primeira vez e clica SKIP imediatamente, ele **perde o impacto da marca**. Mas se for forçado a assistir, se irrita. O equilíbrio atual (skip sempre visível) está bom. | **Baixa** | Manter como está. O skip resolve o problema de visitantes impacientes. |
 
@@ -330,7 +332,7 @@ O WPM.OS quer ser memorável (intro cinematográfica, estética de console, part
 
 ```
 [ ] Lighthouse Performance ≥ 90
-[ ] Lighthouse Accessibility ≥ 95
+[x] Lighthouse Accessibility ≥ 95
 [ ] Lighthouse Best Practices ≥ 90
 [ ] Lighthouse SEO ≥ 90
 [ ] Teste com teclado (Tab, Enter, Esc, setas)
@@ -339,10 +341,21 @@ O WPM.OS quer ser memorável (intro cinematográfica, estética de console, part
 [ ] Teste em Chrome, Firefox, Safari
 [ ] Teste com slow 3G throttling
 [ ] next/image em todas imagens
-[ ] Metadados OG para compartilhamento social
-[ ] Sitemap.xml e robots.txt
+[x] Metadados OG para compartilhamento social
+[x] Sitemap.xml e robots.txt
 [ ] SSL/HTTPS no deploy
 ```
+
+### Hardening 2026-05-06
+
+Resolvido nesta rodada:
+
+- CTAs externos sem `<button>` aninhado dentro de `<a>`.
+- Home mobile com titulo do PressStart contido no viewport.
+- WebGL da Home adiado para o Console, reduzindo carga inicial do boot/start.
+- Contraste reforcado em textos pequenos, chips e metadados visuais.
+- Headers de seguranca e SEO tecnico adicionados via App Router/Next config.
+- Artefatos internos e screenshots de QA removidos do pacote publico.
 
 ---
 
