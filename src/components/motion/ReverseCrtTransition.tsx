@@ -8,10 +8,10 @@ interface ReverseCrtTransitionProps {
   onComplete?: () => void;
 }
 
-const EXPAND_MS = 420;
-const LINE_MS = 60;
-const FADE_MS = 120;
-// Total: 600ms before onComplete fires
+const EXPAND_MS = 170;
+const LINE_MS = 30;
+const FADE_MS = 60;
+// Total: 260ms before onComplete fires
 
 export default function ReverseCrtTransition({
   active,
@@ -40,7 +40,7 @@ export default function ReverseCrtTransition({
           hasCalledComplete.current = true;
           onComplete?.();
         }
-      }, 200);
+      }, 90);
       return () => { cancelAnimationFrame(raf); clearTimeout(t); };
     }
 
@@ -127,7 +127,7 @@ export default function ReverseCrtTransition({
               className="absolute inset-0 pointer-events-none"
               initial={{ opacity: 0 }}
               animate={{ opacity: phase === "expand" ? 1 : 0 }}
-              transition={{ duration: 0.15 }}
+              transition={{ duration: 0.1 }}
               style={{
                 backdropFilter: "blur(3px) brightness(1.15)",
                 WebkitBackdropFilter: "blur(3px) brightness(1.15)",
@@ -139,7 +139,7 @@ export default function ReverseCrtTransition({
               className="absolute inset-0 pointer-events-none"
               initial={{ opacity: 1 }}
               animate={{ opacity: phase === "fade-out" ? 0 : 1 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.12 }}
               style={{
                 background:
                   "repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 4px)",

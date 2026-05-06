@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ConsoleShell from "@/components/console/ConsoleShell";
+import StaticConsoleShell from "@/components/console/StaticConsoleShell";
 import ProjectCartridge from "@/components/console/ProjectCartridge";
 import { projects, getFeaturedProjects } from "@/data/projects";
 import Divider from "@/components/ui/Divider";
@@ -15,28 +15,27 @@ export default function ProjectsPage() {
   const locked = projects.filter((p) => p.locked);
 
   return (
-    <ConsoleShell>
+    <StaticConsoleShell currentHref="/projects" currentLabel="Project Library">
       <div className="px-4 md:px-6 py-12 max-w-4xl mx-auto pb-20">
         {/* Back link */}
         <Link
           href="/console"
-          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/50 hover:text-wpm-cyan transition-colors mb-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
+            className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/90 hover:text-wpm-cyan transition-colors mb-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
         >
-          <span className="text-wpm-purple/50">&lt;-</span> BACK TO CONSOLE
+          <span className="text-wpm-lavender/90">&lt;-</span> BACK TO CONSOLE
         </Link>
 
         {/* Header — curated work index */}
         <header className="mb-14">
-          <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-wpm-purple/50 mb-4">
+          <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-wpm-lavender/90 mb-4">
             REAL WORK / 02
           </p>
           <h1 className="font-sans text-3xl md:text-5xl font-light tracking-tight text-wpm-white/90 max-w-2xl break-words">
             Two shipped bodies of work
           </h1>
-          <p className="mt-3 font-sans text-sm md:text-base text-wpm-gray/50 leading-relaxed max-w-xl break-words">
-            One operational system built from lived frontline experience.
-            One editorial product documenting the journey from zero to
-            professional AI workflows.
+          <p className="mt-3 font-sans text-sm text-wpm-gray/90 leading-snug max-w-md break-words">
+            One operational system. One editorial product. Both shipped from
+            real constraints.
           </p>
         </header>
 
@@ -51,7 +50,7 @@ export default function ProjectsPage() {
                   boxShadow: "0 0 6px rgba(116,247,255,0.4)",
                 }}
               />
-              <h2 className="font-mono text-[11px] tracking-[0.2em] uppercase text-wpm-cyan/60">
+              <h2 className="font-mono text-[11px] tracking-[0.2em] uppercase text-wpm-cyan/80">
                 Work Index
               </h2>
             </div>
@@ -68,7 +67,7 @@ export default function ProjectsPage() {
                     {(featuredProofs[project.slug] ?? []).map((chip) => (
                       <span
                         key={chip}
-                        className="font-mono text-[10px] text-wpm-gray/40 bg-white/[0.02] border border-white/[0.03] px-2 py-0.5 rounded-sm break-words max-w-full"
+                    className="font-mono text-[11px] text-wpm-gray/90 bg-white/[0.035] border border-white/[0.08] px-2 py-0.5 rounded-sm break-words max-w-full"
                       >
                         {chip}
                       </span>
@@ -84,7 +83,7 @@ export default function ProjectsPage() {
 
         {/* Role legend */}
         <section className="mb-10">
-          <p className="font-mono text-[11px] text-wpm-gray/40 uppercase tracking-wider">
+          <p className="font-mono text-[11px] text-wpm-gray/90 uppercase tracking-wider">
             Each project represents a complete body of work — problem
             identification, solution design, implementation, and documented
             results.
@@ -96,7 +95,7 @@ export default function ProjectsPage() {
           <section className="mb-14">
             <div className="flex items-center gap-3 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-wpm-gray/40" />
-              <h2 className="font-mono text-[11px] tracking-[0.2em] uppercase text-wpm-gray/50">
+              <h2 className="font-mono text-[11px] tracking-[0.2em] uppercase text-wpm-gray/90">
                 More Projects
               </h2>
             </div>
@@ -117,7 +116,7 @@ export default function ProjectsPage() {
           <section className="mb-14">
             <div className="flex items-center gap-3 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-wpm-purple/30" />
-              <h2 className="font-mono text-[11px] tracking-[0.2em] uppercase text-wpm-purple/30">
+              <h2 className="font-mono text-[11px] tracking-[0.2em] uppercase text-wpm-lavender/90">
                 Encrypted
               </h2>
             </div>
@@ -133,6 +132,6 @@ export default function ProjectsPage() {
           </section>
         )}
       </div>
-    </ConsoleShell>
+    </StaticConsoleShell>
   );
 }

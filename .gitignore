@@ -13,6 +13,7 @@
 # testing
 /coverage
 /test-results/
+/playwright-report/
 
 # next.js
 /.next/
@@ -30,6 +31,11 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+
+# internal agent handoff / visual QA scratch artifacts
+AGENT_ROOM*.md
+CLAUDE.md
+_reversa_sdd/
 
 # env files (can opt-in for committing if needed)
 .env*

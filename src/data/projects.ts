@@ -22,6 +22,8 @@ export interface Project {
   results: string;
   links: ProjectLink;
   coverImage: string;
+  thumbnailImage?: string;
+  ogImage?: string;
   accentColor: string;
   locked?: boolean;
   featured: boolean;
@@ -83,7 +85,9 @@ export const projects: Project[] = [
       "Git",
     ],
     accentColor: "#F59E0B",
-    coverImage: "/project-livro-cover.png",
+    coverImage: "/project-livro-cover-960.webp",
+    thumbnailImage: "/project-livro-cover-640.webp",
+    ogImage: "/project-livro-cover-og.jpg",
     featured: true,
     links: {
       live: "https://wphillipmaclayne.github.io/meu-livro-llm-agentes/site-apresentacao/",

@@ -50,7 +50,7 @@ export default function ModuleRail({
               }}
               initial={prefersReduced ? {} : { opacity: 0, x: 24 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: idx * 0.05 }}
+              transition={{ duration: 0.3, delay: idx * 0.03 }}
             >
               {/* Left glow bar */}
               <motion.div
@@ -72,7 +72,7 @@ export default function ModuleRail({
                 >
                   {item.label}
                 </p>
-                <p className="font-mono text-[10px] text-wpm-gray/50 truncate mt-0.5">
+                <p className="font-mono text-[11px] text-wpm-gray/90 truncate mt-0.5">
                   {item.type}
                 </p>
               </div>
@@ -121,15 +121,15 @@ export default function ModuleRail({
               <div className="w-[3px] h-6 rounded-full flex-shrink-0 bg-wpm-gray/30" />
 
               <div className="flex-1 min-w-0">
-                <p className="font-sans text-sm tracking-wide truncate text-wpm-gray/50">
+                <p className="font-sans text-sm tracking-wide truncate text-wpm-gray/90">
                   {item.label}
                 </p>
-                <p className="font-mono text-[10px] text-wpm-gray/40 truncate mt-0.5">
+                <p className="font-mono text-[11px] text-wpm-gray/90 truncate mt-0.5">
                   {sMeta.label}
                 </p>
               </div>
 
-              <span className="font-mono text-[10px] text-wpm-gray/40 flex-shrink-0">
+              <span className="font-mono text-[11px] text-wpm-gray/90 flex-shrink-0">
                 🔒
               </span>
             </motion.button>

@@ -78,6 +78,32 @@ src/app/
     └── page.tsx        ← Rota /resume
 ```
 
+### Metadata por Segmento
+Rotas Tier 1 (`/projects`, `/about`, `/contact`) e Tier 2 (`/skills`, `/resume`, `/lab`, `/hobbies`) possuem `layout.tsx` de segmento que exporta `metadata` estatico (title, description, canonical, OpenGraph, Twitter). Os layouts sao Server Components e apenas envolvem `{children}` — as paginas client sob eles permanecem inalteradas. O `title` usa o template global `%s | ${SITE_TITLE}` definido no Root Layout.
+
+Cada rota possui:
+- `title` especifico por pagina
+- `description` verificada por string completa no E2E (nao substring)
+- `alternates.canonical` apontando para o caminho da rota
+- `openGraph` com title, description, url e type
+- `twitter` com title e description
+```ts
+// src/app/about/layout.tsx (exemplo do padrao)
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "...",
+  alternates: { canonical: "/about" },
+  openGraph: { ... },
+  twitter: { ... },
+};
+
+export default function AboutLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+}
+```
+
 ### Server vs Client Components
 
 | Arquivo | Tipo | Motivo |
@@ -85,10 +111,11 @@ src/app/
 | `layout.tsx` | Server | Apenas HTML estático + fontes |
 | `page.tsx` | Client | Gerencia estado do fluxo (boot/start/console) |
 | `BootIntro.tsx` | Client | Animações Motion, timers, callbacks |
-| `PressStart.tsx` | Client | Animações Motion, eventos de teclado |
-| `ConsoleShell.tsx` | Client | Animações Motion (importa motion) |
+| `PressStart.tsx` | Client | Primeiro paint estatico + eventos de teclado |
+| `ConsoleShell.tsx` | Client | Drawer mobile, ESC e replay da intro |
+| `StaticConsoleShell.tsx` | Server | Shell estatico para rotas de listagem sensiveis a LCP |
 | `ConsoleMenu.tsx` | Client | Animações Motion, grid animado |
-| `ProjectCard.tsx` | Client | Animações Motion, hover effects |
+| `ProjectCartridge.tsx` | Server | Cards de projeto com hover CSS e `next/image` |
 | `projects/[slug]/page.tsx` | Server (async) | Precisa `await params`, dados estáticos |
 | `about/page.tsx` | Client | Animações Motion |
 | Demais páginas | Client | Animações Motion |
@@ -107,6 +134,13 @@ src/app/          ← Pages importam dados e passam para componentes
 ```
 
 **Padrão:** Dados mockados em `src/data/`. No futuro, podem vir de um CMS ou API.
+
+### Performance de carregamento
+
+- A home abre diretamente no `PressStart` para expor o H1 no primeiro paint; `BootIntro` permanece disponivel via replay.
+- `BootIntro`, Console, WebGL e transicao CRT da home sao carregados sob demanda com `next/dynamic`.
+- `ClientCursor` atrasa o cursor customizado e so carrega em desktop com ponteiro fino.
+- `/projects` usa `StaticConsoleShell` e `ProjectCartridge` server-side para reduzir hidratacao acima da dobra.
 
 ---
 
@@ -184,7 +218,7 @@ import { motion } from "motion";
 | **Geist Mono** (via `--font-geist-mono`) | Código, terminal, labels técnicos, status |
 
 Escala de tamanhos usada:
-- `text-[10px]` — labels pequenas, status, versão
+- `text-[11px]` — tamanho mínimo para labels pequenas, status, versão
 - `text-xs` (12px) — texto secundário, botões
 - `text-sm` (14px) — descrições, corpo
 - `text-base` — (não usado ativamente)
@@ -349,27 +383,33 @@ Implementado desde o MVP 1:
 | Feature | Implementação |
 |---------|---------------|
 | `prefers-reduced-motion` | Media query desabilita animações e scanlines |
-| Navegação por teclado | ENTER/ESPAÇO no PressStart |
+| Navegação por teclado | ENTER/ESPAÇO no PressStart, ESC nas páginas internas, foco contido em drawer/painel |
 | Skip intro | Botão visível após 1.5s |
 | Contraste | Texto claro sobre fundo escuro |
 | Links semânticos | `<Link>` e `<a>` com props adequadas |
+| Contexto de rota | Top bar mostra seção atual e destaca item ativo |
+| Live region | Home anuncia transições de stage com `aria-live="polite"` |
+| Mobile back | Botão fixo `Back` nas páginas internas em telas pequenas |
 
 ---
 
 ## Performance
 
-### Atual (MVP 1)
-- 11 rotas, todas com tamanho mínimo
-- Sem imagens pesadas
-- CSS inline via Tailwind (purged no build)
-- Animações via Motion (GPU accelerated transforms)
+### Atual
+- 16 páginas/rotas estáticas no build, incluindo `_not-found`, `robots.txt` e `sitemap.xml`
+- Imagens servidas por `next/image` quando aparecem em cards/detalhes
+- WebGL carregado apenas no estagio Console da home em desktop
+- Mobile usa fallback CSS (ShaderBackgroundFallback), sem carregar o bundle Three.js/R3F
+- Export estático GitHub Pages com `NEXT_PUBLIC_DEPLOY_TARGET=github-pages`
+- CSS via Tailwind e tokens WPM
+- Animações via Motion usando `transform`/`opacity` onde possivel
+- Headers de seguranca configurados em `next.config.ts`
 
-### Planejado (MVP 5)
-- lazy loading de componentes WebGL
-- code splitting por rota
-- otimização de assets (imagens, fontes)
+### Planejado / Monitorar
 - bundle analysis
-- `next/image` para imagens de projeto
+- novas otimizações mobile para `/console`
+- Mobile: ShaderBackgroundWrapper detecta dispositivo e redireciona para ShaderBackgroundFallback (CSS puro), evitando carregar o bundle pesado de Three.js/R3F (~200 KB gzip). Desktop com WebGL mantem a experiencia completa de particulas.
+- futuras mídias devem seguir o padrão WebP/JPG otimizado já usado no livro
 
 ---
 
@@ -381,13 +421,32 @@ npm run dev         # Inicia servidor de dev (Turbopack)
 
 # Build
 npm run build       # Build de produção
+npm run build:github-pages  # Export estático para GitHub Pages
 
 # Produção
 npm run start       # Inicia servidor de produção
 
 # Lint
 npm run lint        # ESLint
+
+# Tipagem
+npm run typecheck   # TypeScript sem emit
+
+# Dependencias
+npm audit --audit-level=low
+
+# E2E
+npm run test:e2e
 ```
+
+Cobertura atual de regressao E2E:
+- Smoke: 16 rotas criticas retornam 200 com conteudo.
+- Fluxo: Press Start entra no Console (WPM.OS + System ready).
+- SEO: 7 rotas Tier 1 + Tier 2 validam title, description (string completa), canonical.
+- WebGL mobile: guarda especifica em `mobile-chrome` prova que o fallback CSS nao cria canvas, nao chama `getContext("webgl"|"webgl2")` e nao carrega o chunk pesado Three/R3F. A descoberta do chunk e dinamica (marcador `WebGLRenderer` + `react-three`) — sem hash fixo.
+- Projetos: media otimizada (.webp) e imagem social OG por slug.
+- 404: pagina customizada renderiza para rotas desconhecidas.
+- Acessibilidade: links de contato alcancaveis via Tab.
 
 ---
 

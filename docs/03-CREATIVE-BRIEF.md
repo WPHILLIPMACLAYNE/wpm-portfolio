@@ -177,15 +177,13 @@ O visitante acessa uma máquina digital abstrata criada por Wallace Phillip Macl
 - [x] Scrollbar fina e discreta
 - [x] `::selection` estilizada
 
-### Planejado (MVP 5)
-- [ ] Botão "Reduce Motion" explícito
-- [ ] Modo "Low Performance" sem WebGL
-- [ ] Fallback sem JavaScript para conteúdo essencial
-- [ ] Navegação por teclado completa (Tab, setas)
-- [ ] Foco visível em todos elementos interativos
-- [ ] Textos reais, não imagens
-- [ ] Áudio desligado por padrão
-- [ ] Versão mobile simplificada
+### Fechado / Backlog Controlado
+- [x] Navegação principal por teclado, foco visível e escape/back nas telas internas
+- [x] Textos reais em HTML, não imagens
+- [x] Áudio ausente/desligado por padrão
+- [x] Versão mobile simplificada com drawer, targets maiores e scanlines desligadas
+- [blocked] Fallback sem JavaScript completo ainda depende de decisão de escopo, porque a experiência principal é uma aplicação interativa
+- [deferred] Botão "Reduce Motion" explícito e modo Low Performance manual ficam para uma futura tela Settings
 
 ---
 

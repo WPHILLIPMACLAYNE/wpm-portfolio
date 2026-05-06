@@ -11,9 +11,9 @@ export default function HobbiesPage() {
       <div className="px-6 py-12 max-w-3xl mx-auto">
         <Link
           href="/console"
-          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/50 hover:text-wpm-cyan transition-colors mb-10"
+          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/90 hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
         >
-          <span className="text-wpm-purple/50">{">"}</span> BACK TO CONSOLE
+          <span className="text-wpm-lavender/90">{">"}</span> BACK TO CONSOLE
         </Link>
 
         <motion.div
@@ -21,7 +21,7 @@ export default function HobbiesPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-wpm-purple/50 mb-3">
+          <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-wpm-lavender/90 mb-3">
             Side Quests
           </p>
           <h1 className="text-3xl md:text-5xl font-light text-wpm-white/80 tracking-wide mb-8">
@@ -38,8 +38,8 @@ export default function HobbiesPage() {
                 transition={{ delay: i * 0.08 }}
                 whileHover={{ y: -4 }}
               >
-                <span className="font-mono text-2xl text-wpm-cyan/30">\u25C6</span>
-                <span className="text-sm text-wpm-gray/50 text-center">{hobby}</span>
+                <span className="font-mono text-2xl text-wpm-cyan/65">\u25C6</span>
+                <span className="text-sm text-wpm-gray/90 text-center">{hobby}</span>
               </motion.div>
             ))}
           </div>

@@ -24,14 +24,14 @@ function ProjectPips() {
           className="flex items-center gap-2 px-3 py-2 rounded-sm border border-white/[0.06] bg-wpm-card/60"
           initial={prefersReduced ? {} : { opacity: 0, x: -8 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.25, delay: 0.1 + i * 0.08 }}
+          transition={{ duration: 0.25, delay: 0.1 + i * 0.03 }}
         >
           <span
             className="w-2 h-2 rounded-full flex-shrink-0"
             style={{ backgroundColor: p.accentColor, boxShadow: `0 0 6px ${p.accentColor}60` }}
           />
           <span className="font-sans text-sm text-wpm-white/70">{p.title}</span>
-          <span className="font-mono text-[10px] text-wpm-gray/50">{p.year}</span>
+          <span className="font-mono text-[11px] text-wpm-gray/90">{p.year}</span>
         </motion.div>
       ))}
     </div>
@@ -60,7 +60,7 @@ export default function ModulePreview({ item, isActive }: ModulePreviewProps) {
           {item.type}
         </span>
         <span
-          className="font-mono text-[10px] tracking-wider flex items-center gap-1.5"
+          className="font-mono text-[11px] tracking-[0.12em] flex items-center gap-1.5"
           style={{ color: `${sMeta.color}99` }}
         >
           <span
@@ -87,7 +87,7 @@ export default function ModulePreview({ item, isActive }: ModulePreviewProps) {
       </div>
 
       {/* Description */}
-      <p className="font-sans text-sm md:text-base text-wpm-gray/60 leading-relaxed max-w-md">
+      <p className="font-sans text-sm md:text-base text-wpm-gray/90 leading-relaxed max-w-md">
         {item.description}
       </p>
 

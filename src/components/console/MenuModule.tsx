@@ -53,6 +53,7 @@ export default function MenuModule({
   const isActive = item.status === "Active";
   const sMeta = statusMeta[item.status];
   const typeColor = typeColors[item.type] ?? "#7E8797";
+  const statusDescriptionId = `module-status-${item.id}`;
 
   return (
     <motion.a
@@ -65,6 +66,7 @@ export default function MenuModule({
       role="gridcell"
       aria-label={`${item.label} — ${item.type} — ${sMeta.label}`}
       aria-disabled={!isActive}
+      aria-describedby={!isActive ? statusDescriptionId : undefined}
       tabIndex={isFocused ? 0 : -1}
       className="group relative block p-5 rounded-sm cursor-pointer select-none
                  focus:outline-none"
@@ -76,7 +78,7 @@ export default function MenuModule({
       }}
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, delay: index * 0.06, ease: "easeOut" }}
+      transition={{ duration: 0.35, delay: index * 0.03, ease: "easeOut" }}
       onMouseMove={onMouseMove}
       onMouseEnter={(e) => onMouseEnter(e, index)}
       onMouseLeave={onMouseLeave}
@@ -115,13 +117,13 @@ export default function MenuModule({
       <div className="relative z-10 flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <span
-            className="font-mono text-[10px] uppercase tracking-widest"
+            className="font-mono text-[11px] uppercase tracking-[0.12em]"
             style={{ color: `${typeColor}99` }}
           >
             {item.type}
           </span>
           <span
-            className="font-mono text-[10px] tracking-wider flex items-center gap-1.5"
+            className="font-mono text-[11px] tracking-[0.12em] flex items-center gap-1.5"
             style={{ color: `${sMeta.color}99` }}
           >
             <span
@@ -139,17 +141,22 @@ export default function MenuModule({
           {item.label}
         </h3>
 
-        <p className="text-xs text-wpm-gray/50 leading-relaxed">
+        <p className="text-xs text-wpm-gray/90 leading-relaxed">
           {item.description}
         </p>
 
         <div className="flex items-center gap-2 pt-2 border-t border-white/[0.03]">
-          <span className="font-mono text-[10px] text-wpm-gray/30">
+          <span className="font-mono text-[11px] text-wpm-gray/90">
             {isActive ? "PRESS ENTER" : "LOCKED"}
           </span>
+          {!isActive && (
+            <span id={statusDescriptionId} className="sr-only">
+              This module is not available in the public portfolio yet.
+            </span>
+          )}
           {isActive && (
             <motion.span
-              className="font-mono text-[10px] text-wpm-purple/40"
+              className="font-mono text-[11px] text-wpm-lavender/90"
               animate={{ opacity: isFocused ? [0.4, 1, 0.4] : 0.4 }}
               transition={{ duration: 2, repeat: Infinity }}
             >

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useReducedMotion } from "motion/react";
-import { ShaderBackgroundFallback } from "./ShaderBackground";
+import ShaderBackgroundFallback from "./ShaderBackgroundFallback";
 
 /* ───────────────────────────────────────────────────────────
    ShaderBackground — Smart Wrapper
@@ -31,7 +31,8 @@ import { ShaderBackgroundFallback } from "./ShaderBackground";
       }
 
    Comportamento automático:
-   - WebGL disponível + sem prefers-reduced-motion → Canvas com partículas
+   - Desktop + WebGL disponível + sem prefers-reduced-motion → Canvas com partículas
+   - Mobile → sempre CSS fallback (nem consulta WebGL, nunca carrega Three.js/R3F)
    - WebGL indisponível → fallback CSS (gradient + dots)
    - prefers-reduced-motion ativo → fallback CSS
    - Só carrega o código WebGL após a página estar pronta (dynamic import ssr:false)
@@ -69,11 +70,15 @@ export default function ShaderBackgroundWrapper() {
 
   useEffect(() => {
     let cancelled = false;
-    // Defer detection to next frame to avoid sync setState in effect
+    // Defer detection to next frame to avoid sync setState in effect.
+    // Mobile MUST be detected first — we skip WebGL detection on mobile
+    // to avoid creating a temporary canvas.getContext("webgl") context.
     requestAnimationFrame(() => {
       if (cancelled) return;
-      setWebglOk(detectWebGL());
-      setIsMobile(detectMobile());
+      const mobile = detectMobile();
+      setIsMobile(mobile);
+      // Only desktop runs WebGL detection (creates canvas context)
+      setWebglOk(mobile ? false : detectWebGL());
     });
     return () => { cancelled = true; };
   }, []);
@@ -84,9 +89,12 @@ export default function ShaderBackgroundWrapper() {
   // Reduced motion → CSS fallback immediately
   if (prefersReduced) return <ShaderBackgroundFallback />;
 
-  // No WebGL → CSS fallback
+  // No WebGL (or mobile — webglOk forced false) → CSS fallback
   if (!webglOk) return <ShaderBackgroundFallback />;
 
-  // Mobile → WebGL com lowPerf (menos partículas, DPR 1)
-  return <ShaderBackgroundDynamic lowPerf={isMobile} />;
+  // Safety net: mobile (should already be caught by !webglOk)
+  if (isMobile) return <ShaderBackgroundFallback />;
+
+  // Desktop com WebGL disponível
+  return <ShaderBackgroundDynamic />;
 }

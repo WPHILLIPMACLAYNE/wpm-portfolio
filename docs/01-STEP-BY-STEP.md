@@ -978,9 +978,35 @@ export default function Home() {
 
 ---
 
+## Sessão 3 — Fechamento de MDs e Hardening Final Local
+
+### 3.1. Contexto de Navegação e Mobile Back
+
+- `ConsoleShell` passou a mostrar contexto de rota (`WPM.OS / seção`) e destacar o item ativo na navegação.
+- `StaticConsoleShell` recebeu o mesmo contrato para páginas estáticas, começando por `/projects`.
+- Páginas internas ganharam botão fixo `Back` no mobile, evitando depender apenas de `ESC`.
+
+### 3.2. Acessibilidade e Legibilidade
+
+- A Home ganhou `aria-live="polite"` para anunciar transições de stage.
+- Estados locked/coming-soon agora têm descrição semântica quando renderizados como controles indisponíveis.
+- Labels pequenos subiram para mínimo de 11px.
+- Tracking excessivo em rótulos pequenos foi reduzido.
+- Scanlines foram desligados em telas pequenas e a vignette mobile foi suavizada.
+
+### 3.3. Fechamento dos Markdown
+
+- `docs/06-UX-AUDIT.md` foi reconciliado por item: fechado, bloqueado por decisão/aprovação ou backlog intencional.
+- `docs/03-CREATIVE-BRIEF.md`, `docs/04-CREATIVE-SPEC.md`, `docs/02-TECHNICAL-REFERENCE.md`, `docs/00-OVERVIEW.md`, `README.md` e `ENGINEERING_GUIDE.md` foram alinhados ao estado real.
+- Novo fechamento criado em `docs/11-MD-CLOSURE-2026-05-06.md`.
+
+---
+
 ## Próxima Sessão
 
-Aguardando definição das próximas prioridades (MVP 2 — Identidade ou ajustes no MVP 1).
+Próximas prioridades dependem de decisão do autor: email público, formulário/provedor, deploy/SSL/GitHub Pages/CI e QA manual em leitores de tela/navegadores/dispositivos reais.
+
+Backlog criativo segue separado de bloqueio técnico: identidade avançada, efeitos opcionais, analytics aprovado e easter eggs.
 
 ---
 

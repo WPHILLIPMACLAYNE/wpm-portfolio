@@ -1,13 +1,18 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { menuItems, profile } from "@/data/profile";
 import PageTransition from "@/components/motion/PageTransition";
 import Icon from "@/components/ui/Icon";
-import MobileNavDrawer from "./MobileNavDrawer";
 import type { IconName } from "@/components/ui/Icon";
+
+const MobileNavDrawer = dynamic(() => import("./MobileNavDrawer"), {
+  ssr: false,
+  loading: () => null,
+});
 
 const STORAGE_KEY = "wpm-os-visited";
 
@@ -33,9 +38,17 @@ const activeMenuItems = menuItems.filter((m) => m.status === "Active");
 
 export default function ConsoleShell({ children, showNav = true, onReplayIntro, mode = "page" }: ConsoleShellProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [hasVisited, setHasVisited] = useState(false);
   const modulesButtonRef = useRef<HTMLButtonElement>(null);
+  const normalizedPathname = pathname.replace(/^\/wpm-portfolio(?=\/|$)/, "") || "/";
+  const currentItem = activeMenuItems.find(
+    (item) =>
+      normalizedPathname === item.href ||
+      (item.href !== "/" && normalizedPathname.startsWith(`${item.href}/`))
+  );
+  const currentLabel = mode === "hub" ? "Console" : currentItem?.label ?? "Console";
 
   useEffect(() => {
     const raf = requestAnimationFrame(() => {
@@ -103,7 +116,12 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
           >
             WPM.OS
           </Link>
-          <span className="font-mono text-[10px] text-wpm-gray/40 hidden sm:inline">v1.0</span>
+          <span className="hidden font-mono text-[11px] text-wpm-gray/90 sm:inline" aria-hidden="true">
+            /
+          </span>
+          <span className="hidden max-w-44 truncate font-mono text-[11px] uppercase tracking-[0.14em] text-wpm-lavender/90 sm:inline">
+            {currentLabel}
+          </span>
         </div>
 
         {showNav && (
@@ -116,17 +134,26 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
               {activeMenuItems.map((item) => {
                 const iconName = navIconNames[item.id];
                 return (
-                  <Link
-                    key={item.id}
-                    href={item.href}
-                    className="relative font-mono text-[10px] text-wpm-gray/50 hover:text-wpm-cyan
-                             px-2 py-1 transition-colors duration-200 group
-                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 focus-visible:ring-offset-2 focus-visible:ring-offset-wpm-black rounded-sm"
-                    aria-label={item.label}
-                  >
-                    <span className="text-wpm-purple/50 group-hover:text-wpm-purple transition-colors">
-                      <Icon name={iconName} size="sm" />
-                    </span>
+	                  <Link
+	                    key={item.id}
+	                    href={item.href}
+	                    className={`relative font-mono text-[11px] hover:text-wpm-cyan
+	                             px-2 py-1 transition-colors duration-200 group
+	                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 focus-visible:ring-offset-2 focus-visible:ring-offset-wpm-black rounded-sm ${
+                               currentItem?.id === item.id ? "text-wpm-cyan" : "text-wpm-gray/90"
+                             }`}
+	                    aria-label={item.label}
+	                    aria-current={currentItem?.id === item.id ? "page" : undefined}
+	                  >
+	                    <span
+	                      className={`transition-colors ${
+	                        currentItem?.id === item.id
+	                          ? "text-wpm-cyan"
+	                          : "text-wpm-lavender/90 group-hover:text-wpm-lavender"
+	                      }`}
+	                    >
+	                      <Icon name={iconName} size="sm" />
+	                    </span>
                     <span className="ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity hidden lg:inline">
                       {item.label}
                     </span>
@@ -138,7 +165,7 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
             {/* Mobile nav button */}
             <button
               ref={modulesButtonRef}
-              className="md:hidden font-mono text-[11px] text-wpm-gray/50 hover:text-wpm-cyan transition-colors
+              className="md:hidden font-mono text-[11px] text-wpm-gray/90 hover:text-wpm-cyan transition-colors
                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm px-2 py-1"
               onClick={() => setDrawerOpen(true)}
               aria-label="Open navigation menu"
@@ -153,26 +180,26 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
 
       {/* Bottom bar */}
       <footer className="fixed bottom-0 left-0 right-0 z-30 h-8 border-t border-white/[0.04] bg-wpm-black/80 backdrop-blur-sm flex items-center justify-between px-4 md:px-6">
-        <span className="font-mono text-[10px] text-wpm-gray/40">
+        <span className="font-mono text-[11px] text-wpm-gray/90">
           {profile.name}
         </span>
         <div className="flex items-center gap-4">
           {mode === "hub" && hasVisited && (
             <button
-              className="font-mono text-[10px] text-wpm-gray/30 hover:text-wpm-cyan/60 transition-colors
+              className="font-mono text-[11px] text-wpm-gray/90 hover:text-wpm-cyan/80 transition-colors
                          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm px-1"
               onClick={handleReplayIntro}
             >
               Replay Intro
             </button>
           )}
-          {mode === "page" && (
-            <span className="font-mono text-[10px] text-wpm-gray/30">
-              ESC to return
-            </span>
-          )}
+	          {mode === "page" && (
+	            <span className="font-mono text-[11px] text-wpm-gray/90">
+	              ESC / BACK to return
+	            </span>
+	          )}
           {mode === "hub" && (
-            <span className="font-mono text-[10px] text-wpm-gray/30">WPM.OS v1.0</span>
+            <span className="font-mono text-[11px] text-wpm-gray/90">WPM.OS v1.0</span>
           )}
         </div>
       </footer>
@@ -184,6 +211,16 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
 
       {/* Mobile drawer */}
       <MobileNavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} returnFocusRef={modulesButtonRef} />
+
+      {mode === "page" && (
+        <Link
+          href="/console"
+          className="fixed bottom-12 right-4 z-40 inline-flex min-h-11 items-center justify-center border border-wpm-cyan/45 bg-wpm-black/90 px-4 font-mono text-[11px] uppercase tracking-[0.14em] text-wpm-cyan shadow-[0_0_28px_rgba(116,247,255,0.12)] backdrop-blur-sm transition-colors hover:border-wpm-cyan/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-cyan/70 md:hidden"
+          aria-label="Return to console"
+        >
+          Back
+        </Link>
+      )}
 
       {/* CRT overlays */}
       <div className="crt-overlay" />
