@@ -87,9 +87,41 @@ Deploy and infrastructure decisions must follow [docs/AVAILABLE_SERVICES.md](./d
 Publicacao validada:
 
 - Commit: `07a38bf audit: apply visual portfolio hardening`
+- Commit documental final: `81996a8 docs: record live technical visual qa`
 - GitHub Actions: `Deploy GitHub Pages` run `25581405242`, sucesso
+- GitHub Actions mais recente: run `25581839825`, sucesso, head `81996a88c595e9b7c63f0adb59f5aeedfae61476`
 - URL live: `https://wphillipmaclayne.github.io/wpm-portfolio/`
 - Validacao local: `lint`, `typecheck`, `npm ci --dry-run`, `build`, `build:github-pages`, `test:e2e`
 - E2E local: 13 passed, 1 skipped
 - Validacao live: rotas principais 200 em desktop/mobile, imagens carregadas, drawer mobile visivel com `aria-expanded=true`
 - Observacao: workflow emitiu aviso de deprecacao futura do Node.js 20 em actions; nao bloqueia a publicacao atual.
+
+## Handoff Codex — 2026-05-08
+
+Use este bloco para retomar em outro terminal/conta Codex.
+
+Estado confirmado nesta sessao:
+
+- Projeto: `/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio`
+- Branch: `main`
+- Estado Git base usado para este handoff: local limpo e sincronizado com `origin/main`
+- HEAD base usado para este handoff: `81996a8 docs: record live technical visual qa`
+- Ao retomar, `git log` pode mostrar um commit posterior de documentacao/handoff acima desse HEAD base.
+- Site live: `https://wphillipmaclayne.github.io/wpm-portfolio/`
+- Live check: `HTTP/2 200`, `last-modified: Fri, 08 May 2026 22:06:31 GMT`
+- Workflow Pages mais recente auditado: `25581839825`, `completed/success`
+- Nenhum Forge ativo foi detectado na auditoria anterior.
+
+O que ja foi feito:
+
+- Gates locais passaram: `npm run lint`, `npm run typecheck`, `npm ci --dry-run`, `npm run build`, `npm run build:github-pages`, `npm run test:e2e`.
+- E2E local registrou `13 passed, 1 skipped`.
+- Publicacao GitHub Pages validada em rotas desktop/mobile.
+- QA visual tecnico live adicional passou: console desktop/mobile abre, drawer mobile funciona, GitHub/LinkedIn corretos, nenhum email exposto.
+- Documentacao tecnica e de fechamento foi atualizada para registrar publicacao, workflow, URL live, testes e pendencias.
+
+Pendencia unica:
+
+- Falta a aprovacao visual humana de Wallace no site publicado.
+- Retorno esperado: `APROVADO VISUAL` ou `AJUSTAR: descreva o ajuste necessario`.
+- Nao marcar o processo como concluido antes desse aceite humano.

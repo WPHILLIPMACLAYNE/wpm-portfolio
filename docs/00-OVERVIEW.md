@@ -51,6 +51,8 @@ Criar um portfólio autoral que una criatividade, UX, motion design e desenvolvi
 - Auditoria visual de 2026-05-08 removeu `gsap` e `@react-three/drei`, localizou labels do console para PT-BR, removeu `ModulePreview.tsx` como código morto e reforçou tokens visuais.
 - Repositório público publicado em `https://github.com/WPHILLIPMACLAYNE/wpm-portfolio`.
 - GitHub Pages publicado em `https://wphillipmaclayne.github.io/wpm-portfolio/` pelo commit `07a38bf` e workflow `Deploy GitHub Pages` run `25581405242`.
+- Fechamento documental e QA visual tecnico live registrados no commit `81996a8` e no workflow `Deploy GitHub Pages` run `25581839825`, com status `success`.
+- Pendencia restante: aprovacao visual humana de Wallace no site publicado (`APROVADO VISUAL` ou `AJUSTAR: ...`).
 
 ---
 
@@ -66,6 +68,27 @@ Criar um portfólio autoral que una criatividade, UX, motion design e desenvolvi
 | 3D / WebGL | Three.js + React Three Fiber | ativo no estágio Console desktop |
 | Scroll | GSAP + ScrollTrigger | removido; scroll effects ficam no backlog |
 | Utilidades | clsx, tailwind-merge | latest |
+
+### Handoff para retomada em outra conta Codex
+
+Antes de retomar qualquer trabalho:
+
+```bash
+cd /home/acewallthemac/Documentos/portifoliomain/wpm-portfolio
+git status --short --branch
+git log -3 --oneline --decorate
+gh run view 25581839825 --json conclusion,status,headSha,url,createdAt,updatedAt
+curl -I https://wphillipmaclayne.github.io/wpm-portfolio/
+```
+
+Estado esperado:
+
+- `main...origin/main` sem alteracoes locais pendentes.
+- HEAD minimo: `81996a8 docs: record live technical visual qa` ou commit posterior de documentacao/handoff.
+- Workflow `25581839825`: `completed/success`.
+- Site live: `HTTP/2 200`.
+- Pendencia funcional/tecnica conhecida: nenhuma.
+- Pendencia humana: Wallace precisa aprovar visualmente o site publicado ou pedir ajuste concreto.
 
 ---
 

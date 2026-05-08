@@ -4908,3 +4908,91 @@ Apos a publicacao e o fechamento documental, Codex executou uma QA visual tecnic
 ### Resultado
 
 Sem bloqueio visual tecnico identificado. A pendencia restante e exclusivamente humana: Wallace precisa revisar o site publicado e responder `APROVADO VISUAL` ou indicar ajustes concretos.
+
+---
+
+## [CODEX] HANDOFF PARA OUTRO TERMINAL/CONTA — 2026-05-08
+
+**Status:** HANDOFF_DOCS_UPDATED / WAITING_WALLACE_VISUAL_APPROVAL
+
+### Objetivo deste bloco
+
+Registrar tudo que foi concluido para permitir retomada em outro terminal com outra conta Codex sem repetir trabalho ja feito e sem marcar o processo como concluido antes da aprovacao humana.
+
+### Estado atual confirmado
+
+- Projeto: `/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio`
+- Branch: `main`
+- Estado Git base usado para este handoff: `## main...origin/main`
+- Ultimo commit sincronizado usado como base deste handoff: `81996a8 docs: record live technical visual qa`
+- Ao retomar, `git log` pode mostrar um commit posterior de documentacao/handoff acima desse HEAD base.
+- URL live: `https://wphillipmaclayne.github.io/wpm-portfolio/`
+- `curl -I`: `HTTP/2 200`
+- `last-modified`: `Fri, 08 May 2026 22:06:31 GMT`
+- GitHub Actions auditado: `Deploy GitHub Pages` run `25581839825`
+- Status do run: `completed/success`
+- Head SHA do run: `81996a88c595e9b7c63f0adb59f5aeedfae61476`
+
+### Trabalho tecnico ja concluido
+
+- Pre-publicacao local final passou:
+  - `git status --short --branch`
+  - `npm run lint`
+  - `npm run typecheck`
+  - `npm ci --dry-run`
+  - `npm run build`
+  - `npm run build:github-pages`
+- E2E local passou: `npm run test:e2e` com `13 passed, 1 skipped`.
+- Commit de auditoria visual publicado: `07a38bf audit: apply visual portfolio hardening`.
+- Commit de fechamento documental publicado: `0316b91 docs: close portfolio visual audit release`.
+- Commit de QA visual tecnico live publicado: `81996a8 docs: record live technical visual qa`.
+- GitHub Pages publicado e validado no site real.
+- Rotas live validadas em desktop/mobile:
+  - `/`
+  - `/projects`
+  - `/about`
+  - `/contact`
+  - `/skills`
+  - `/resume`
+  - `/lab`
+  - `/hobbies`
+  - `/projects/wpm-gestao-interna`
+  - `/projects/livro-llm-agentes`
+- Imagens live sem quebra detectada.
+- Drawer mobile abre com `aria-expanded="true"` e `role="dialog"` visivel.
+- GitHub publico validado: `https://github.com/acewallthemac`.
+- LinkedIn publico validado: `https://www.linkedin.com/in/wpmaclayne/`.
+- Nenhum `mailto:` e nenhum padrao de email exposto no texto.
+- Sem page/console errors capturados na QA visual tecnica live.
+
+### Documentacao atualizada nesta trilha
+
+- `README.md`
+- `docs/00-OVERVIEW.md`
+- `docs/02-TECHNICAL-REFERENCE.md`
+- `docs/AI_COMMAND_ROOM.md`
+- `docs/VISUAL_AUDIT_REPORT.md`
+- `docs/VISUAL_AUDIT_IMPLEMENTATION.md`
+
+### Comandos recomendados ao retomar
+
+```bash
+cd /home/acewallthemac/Documentos/portifoliomain/wpm-portfolio
+git status --short --branch
+git log -5 --oneline --decorate
+gh run view 25581839825 --json conclusion,status,headSha,url,createdAt,updatedAt
+curl -I https://wphillipmaclayne.github.io/wpm-portfolio/
+```
+
+### Pendencia unica
+
+Falta apenas QA visual humana por Wallace no site publicado.
+
+Resposta esperada de Wallace:
+
+- `APROVADO VISUAL`
+- ou `AJUSTAR: descreva o ajuste necessario`
+
+### Regra para a proxima conta Codex
+
+Nao marcar o objetivo/processo como completo enquanto Wallace nao responder `APROVADO VISUAL`. Se houver `AJUSTAR: ...`, aplicar somente o ajuste solicitado, validar, atualizar docs se necessario, commitar, publicar, monitorar Pages, validar live e pedir novo aceite visual.

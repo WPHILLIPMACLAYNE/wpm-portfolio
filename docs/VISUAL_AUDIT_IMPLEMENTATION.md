@@ -307,8 +307,10 @@ npm run build        # 16 paginas geradas com sucesso
 ### Publicado
 
 - Commit: `07a38bf audit: apply visual portfolio hardening`
+- Commit documental/QA tecnico live: `81996a8 docs: record live technical visual qa`
 - Remote: `origin/main`
 - Workflow: `Deploy GitHub Pages` run `25581405242`, sucesso
+- Workflow mais recente auditado: `Deploy GitHub Pages` run `25581839825`, sucesso
 - URL: `https://wphillipmaclayne.github.io/wpm-portfolio/`
 
 ### Validacao executada
@@ -328,12 +330,21 @@ npm run build        # 16 paginas geradas com sucesso
 - `ModulePreview.tsx` segue removido e nao ha referencias runtime em `src`, `tests`, `package.json` ou `package-lock.json`.
 - `profile.social.email` permanece vazio; a UI e metadata nao prometem email como canal publico.
 - GitHub Actions publicou com sucesso, mas emitiu aviso de deprecacao futura de Node.js 20 nas actions.
+- QA visual tecnico live adicional passou em desktop/mobile: console abre, drawer mobile funciona, GitHub/LinkedIn corretos, nenhum email exposto, sem erros capturados.
+- Pendencia restante: aprovacao visual humana de Wallace no site publicado.
 
 ## 15. PROXIMOS PASSOS RECOMENDADOS
 
 ### Curto Prazo
 1. Revisao visual manual final por Wallace no GitHub Pages publicado.
 2. Decidir se o backlog visual passa para uma nova rodada ou fica estacionado.
+
+### Retomada em outra conta Codex
+1. Confirmar `git status --short --branch` em `/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio`.
+2. Confirmar `gh run view 25581839825 --json conclusion,status,headSha,url,createdAt,updatedAt`.
+3. Confirmar `curl -I https://wphillipmaclayne.github.io/wpm-portfolio/`.
+4. Solicitar ou aguardar resposta humana: `APROVADO VISUAL` ou `AJUSTAR: ...`.
+5. Nao encerrar o processo antes do aceite visual humano.
 
 ### Medio Prazo
 3. Aplicar token migration em `ModuleSlideSystem.tsx` (bg e shadow).

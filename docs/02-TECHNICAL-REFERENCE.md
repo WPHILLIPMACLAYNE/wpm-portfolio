@@ -27,16 +27,16 @@
 | Tecnologia | Versão | Tipo | Descrição |
 |-----------|--------|------|-----------|
 | **Motion** | 12.38.0 | Biblioteca de animação React | Antigo Framer Motion. Componentes via `motion/react` |
-| **GSAP** | latest | Biblioteca de animação JS | ScrollTrigger, timelines (MVP 3) |
+| **GSAP** | removido | Biblioteca de animação JS | Nao esta instalado; scroll reveals ficam no backlog |
 | **CSS Animations** | - | Nativo | Keyframes para scanlines, CRT, glow (globals.css) |
 
 ### 3D / WebGL
 
 | Tecnologia | Versão | Tipo | Descrição |
 |-----------|--------|------|-----------|
-| **Three.js** | latest | Biblioteca 3D | Motor WebGL (MVP 3) |
-| **@react-three/fiber** | latest | Renderer React p/ Three | Cenas 3D declarativas em React (MVP 3) |
-| **@react-three/drei** | latest | Helpers R3F | OrbitControls, shaders, etc. (MVP 3) |
+| **Three.js** | 0.184.0 | Biblioteca 3D | Motor WebGL usado no estagio Console desktop |
+| **@react-three/fiber** | 9.6.1 | Renderer React p/ Three | Cenas 3D declarativas em React |
+| **@react-three/drei** | removido | Helpers R3F | Removido como dependencia morta; nao ha imports runtime |
 
 ### Utilidades
 
@@ -529,13 +529,29 @@ Cobertura atual de regressao E2E:
 ## Fechamento de Publicacao 2026-05-08
 
 - Commit publicado: `07a38bf audit: apply visual portfolio hardening`
+- Commit documental/QA tecnico live: `81996a8 docs: record live technical visual qa`
 - GitHub Actions: `Deploy GitHub Pages` run `25581405242`, sucesso
+- GitHub Actions mais recente auditado: run `25581839825`, `completed/success`, head `81996a88c595e9b7c63f0adb59f5aeedfae61476`
 - URL live: `https://wphillipmaclayne.github.io/wpm-portfolio/`
 - Gates locais: `npm run lint`, `npm run typecheck`, `npm ci --dry-run`, `npm run build`, `npm run build:github-pages`, `npm run test:e2e`
 - E2E local: 13 passed, 1 skipped
 - Validacao live automatizada: rotas principais 200 em desktop/mobile, imagens sem quebra, drawer mobile abriu com `aria-expanded=true`, sem falhas coletadas.
+- QA visual tecnico live adicional: desktop/mobile entram no console, drawer mobile abre, GitHub/LinkedIn corretos, nenhum `mailto:` ou email exposto, sem page/console errors capturados.
 - Nota operacional: GitHub Actions emitiu aviso de deprecacao futura do runtime Node.js 20 para actions; acompanhar antes de 2026-06-02.
+- Pendencia unica para encerramento humano: Wallace revisar o site live e responder `APROVADO VISUAL` ou `AJUSTAR: ...`.
 
 ---
+
+## Handoff Operacional — 2026-05-08
+
+Para retomar em outro terminal/conta Codex:
+
+1. Entrar em `/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio`.
+2. Confirmar `git status --short --branch`.
+3. Confirmar o ultimo workflow com `gh run view 25581839825 --json conclusion,status,headSha,url,createdAt,updatedAt`.
+4. Confirmar a URL com `curl -I https://wphillipmaclayne.github.io/wpm-portfolio/`.
+5. Nao refazer a publicacao nem marcar fechamento completo sem a aprovacao visual humana de Wallace.
+
+Se Wallace responder `AJUSTAR: ...`, aplicar somente o ajuste pedido, validar, documentar, commitar, publicar e pedir novo aceite visual.
 
 > **Regra do projeto:** Esta referência técnica deve ser atualizada sempre que novas tecnologias, padrões ou decisões arquiteturais forem introduzidos.

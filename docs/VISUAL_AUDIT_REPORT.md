@@ -182,11 +182,14 @@ Auditoria visual aplicada e publicada no GitHub Pages.
 | Item | Resultado |
 |---|---|
 | Commit publicado | `07a38bf audit: apply visual portfolio hardening` |
+| Commit documental/QA tecnico | `81996a8 docs: record live technical visual qa` |
 | Workflow | `Deploy GitHub Pages` run `25581405242` |
+| Workflow mais recente | `Deploy GitHub Pages` run `25581839825`, sucesso |
 | Status do workflow | Sucesso |
 | URL live | `https://wphillipmaclayne.github.io/wpm-portfolio/` |
 | E2E local | 13 passed, 1 skipped |
 | Validacao live | Rotas principais 200 desktop/mobile, imagens carregadas, drawer mobile funcional |
+| QA visual tecnico live | PASS: console desktop/mobile, drawer mobile, links publicos, sem email exposto |
 
 ### Itens resolvidos pela implementacao
 
@@ -200,3 +203,4 @@ Auditoria visual aplicada e publicada no GitHub Pages.
 
 - Migrar futuramente o workflow para runtime Node.js 24 quando as actions usadas passarem a exigir isso.
 - Continuar backlog visual de medio/longo prazo sem bloquear a publicacao atual.
+- Pendencia humana: Wallace ainda precisa aprovar visualmente o site publicado (`APROVADO VISUAL`) ou pedir ajuste concreto (`AJUSTAR: ...`).
