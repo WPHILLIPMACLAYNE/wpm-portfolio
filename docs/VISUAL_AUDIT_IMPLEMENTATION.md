@@ -302,20 +302,46 @@ npm run build        # 16 paginas geradas com sucesso
 
 ---
 
-## 14. PROXIMOS PASSOS RECOMENDADOS
+## 14. FECHAMENTO DE PUBLICACAO — 2026-05-08
 
-### Curto Prazo (pre-commit)
-1. Revisar visualmente contraste de `wpm-gray` (#8B95A5) em labels pequenos.
-2. Decidir estrategia para metadata SEO em ingles vs `lang="pt-BR"`.
-3. Testar navegacao entre sub-paginas com e sem reduced motion.
+### Publicado
+
+- Commit: `07a38bf audit: apply visual portfolio hardening`
+- Remote: `origin/main`
+- Workflow: `Deploy GitHub Pages` run `25581405242`, sucesso
+- URL: `https://wphillipmaclayne.github.io/wpm-portfolio/`
+
+### Validacao executada
+
+| Gate | Resultado |
+|---|---|
+| `npm run lint` | PASS |
+| `npm run typecheck` | PASS |
+| `npm ci --dry-run` | PASS |
+| `npm run build` | PASS |
+| `npm run build:github-pages` | PASS |
+| `npm run test:e2e` | 13 passed, 1 skipped |
+| Validacao live desktop/mobile | PASS |
+
+### Observacoes
+
+- `ModulePreview.tsx` segue removido e nao ha referencias runtime em `src`, `tests`, `package.json` ou `package-lock.json`.
+- `profile.social.email` permanece vazio; a UI e metadata nao prometem email como canal publico.
+- GitHub Actions publicou com sucesso, mas emitiu aviso de deprecacao futura de Node.js 20 nas actions.
+
+## 15. PROXIMOS PASSOS RECOMENDADOS
+
+### Curto Prazo
+1. Revisao visual manual final por Wallace no GitHub Pages publicado.
+2. Decidir se o backlog visual passa para uma nova rodada ou fica estacionado.
 
 ### Medio Prazo
-4. Aplicar token migration em `ModuleSlideSystem.tsx` (bg e shadow).
-5. Expandir tokens de design (near-black scale, tracking, shadows) via ADR.
-6. Melhorar a 404 com mais personalidade visual.
+3. Aplicar token migration em `ModuleSlideSystem.tsx` (bg e shadow).
+4. Expandir tokens de design (near-black scale, tracking, shadows) via ADR.
+5. Melhorar a 404 com mais personalidade visual.
 
 ### Largo Prazo
-7. Shader GLSL autoral no hero (substituir particle points).
-8. Horizontal scroll gallery para projetos.
-9. Custom cursor com efeitos contextuais.
-10. Showreel/video player customizado.
+6. Shader GLSL autoral no hero (substituir particle points).
+7. Horizontal scroll gallery para projetos.
+8. Custom cursor com efeitos contextuais.
+9. Showreel/video player customizado.

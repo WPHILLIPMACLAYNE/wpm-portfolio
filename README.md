@@ -4,7 +4,9 @@ Portfólio interativo em Next.js/React com direção visual de sistema operacion
 
 ## Estado Atual
 
-Projeto em fase de fechamento local pós-hardening. O Console já abre módulos em painéis laterais interativos com foco contido, `Escape` para fechar, botão `Back` no mobile e rotas reais preservadas como fallback. A auditoria de 2026-05-06 corrigiu HTML interativo inválido, headers de segurança, SEO técnico, contraste, mobile inicial, páginas de erro customizadas, mídia otimizada, QA E2E, Dependabot local, reconciliação dos MDs e limpeza de artefatos internos.
+Projeto publicado no GitHub Pages apos o fechamento da auditoria visual de 2026-05-08. O commit `07a38bf` (`audit: apply visual portfolio hardening`) foi enviado para `origin/main`, o workflow `Deploy GitHub Pages` passou com sucesso (`25581405242`) e a URL publica foi validada em desktop e mobile.
+
+O Console abre módulos em painéis laterais interativos com foco contido, `Escape` para fechar, botão `Back` no mobile e rotas reais preservadas como fallback. A auditoria de 2026-05-06 corrigiu HTML interativo inválido, headers de segurança, SEO técnico, contraste, mobile inicial, páginas de erro customizadas, mídia otimizada, QA E2E, Dependabot local, reconciliação dos MDs e limpeza de artefatos internos. A auditoria visual de 2026-05-08 removeu dependências mortas, consolidou a localização PT-BR, reforçou tokens visuais e removeu código morto do console.
 
 Antes de continuar o trabalho, leia:
 
@@ -79,3 +81,15 @@ npm audit --audit-level=low
 ```
 
 Deploy and infrastructure decisions must follow [docs/AVAILABLE_SERVICES.md](./docs/AVAILABLE_SERVICES.md).
+
+## Release 2026-05-08
+
+Publicacao validada:
+
+- Commit: `07a38bf audit: apply visual portfolio hardening`
+- GitHub Actions: `Deploy GitHub Pages` run `25581405242`, sucesso
+- URL live: `https://wphillipmaclayne.github.io/wpm-portfolio/`
+- Validacao local: `lint`, `typecheck`, `npm ci --dry-run`, `build`, `build:github-pages`, `test:e2e`
+- E2E local: 13 passed, 1 skipped
+- Validacao live: rotas principais 200 em desktop/mobile, imagens carregadas, drawer mobile visivel com `aria-expanded=true`
+- Observacao: workflow emitiu aviso de deprecacao futura do Node.js 20 em actions; nao bloqueia a publicacao atual.

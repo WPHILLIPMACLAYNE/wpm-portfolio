@@ -4786,3 +4786,87 @@ Antes de qualquer commit, Codex precisa de ordem explicita de Wallace para uma d
 - `PAUSAR`: manter o estado atual, com 45 arquivos staged e `docs/AI_COMMAND_ROOM.md` parcialmente unstaged.
 
 Commit, push, PR, merge, deploy e publicacao continuam bloqueados sem ordem explicita.
+
+---
+
+## [CODEX] RELEASE CLOSURE 2026-05-08
+
+**Status:** PUBLISHED_AND_VALIDATED
+
+### Commit publicado
+
+- Commit: `07a38bf audit: apply visual portfolio hardening`
+- Remote: `origin/main`
+- Branch: `main`
+
+### Validacao local antes do push
+
+```bash
+git status --short --branch
+npm run lint
+npm run typecheck
+npm ci --dry-run
+npm run build
+npm run build:github-pages
+npm run test:e2e
+```
+
+Resultados:
+
+- `git status --short --branch`: `main...origin/main [ahead 1]` antes do push, sem alteracoes locais.
+- `npm run lint`: PASS.
+- `npm run typecheck`: PASS.
+- `npm ci --dry-run`: PASS.
+- `npm run build`: PASS, 16 paginas geradas.
+- `npm run build:github-pages`: PASS, 16 paginas geradas.
+- `npm run test:e2e`: 13 passed, 1 skipped.
+
+### Publicacao
+
+```bash
+git push origin main
+gh run watch 25581405242
+```
+
+Resultados:
+
+- Push: `a1d3f2b..07a38bf main -> main`.
+- GitHub Actions: `Deploy GitHub Pages` run `25581405242`, success.
+- Build static export: success.
+- Deploy GitHub Pages: success.
+- Aviso nao bloqueante: actions baseadas em Node.js 20 serao afetadas pela migracao futura para Node.js 24.
+
+### Validacao live
+
+URL: `https://wphillipmaclayne.github.io/wpm-portfolio/`
+
+Validacao automatizada em desktop e mobile:
+
+- `/`: 200.
+- `/projects`: 200.
+- `/about`: 200.
+- `/contact`: 200.
+- `/skills`: 200.
+- `/resume`: 200.
+- `/lab`: 200.
+- `/hobbies`: 200.
+- `/projects/wpm-gestao-interna`: 200.
+- `/projects/livro-llm-agentes`: 200.
+- Imagens carregadas sem `naturalWidth=0`.
+- Drawer mobile abriu com `aria-expanded=true` e `role="dialog"` visivel.
+- Sem falhas coletadas no script de validacao live.
+
+### Fechamento documental
+
+Atualizados:
+
+- `README.md`
+- `docs/00-OVERVIEW.md`
+- `docs/02-TECHNICAL-REFERENCE.md`
+- `docs/AI_COMMAND_ROOM.md`
+- `docs/VISUAL_AUDIT_REPORT.md`
+- `docs/VISUAL_AUDIT_IMPLEMENTATION.md`
+
+### Pendencia humana
+
+QA visual manual por Wallace no site publicado segue recomendado, mas nao bloqueia a publicacao tecnica: os gates locais, workflow remoto e validacao live automatizada passaram.

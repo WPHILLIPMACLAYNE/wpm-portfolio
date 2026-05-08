@@ -168,3 +168,35 @@
 20. Loader com audio feedback opcional
 21. Showreel/video player customizado
 22. Shader GLSL autoral no hero
+
+---
+
+## 8. FECHAMENTO DE PUBLICACAO — 2026-05-08
+
+### Resultado
+
+Auditoria visual aplicada e publicada no GitHub Pages.
+
+### Evidencia
+
+| Item | Resultado |
+|---|---|
+| Commit publicado | `07a38bf audit: apply visual portfolio hardening` |
+| Workflow | `Deploy GitHub Pages` run `25581405242` |
+| Status do workflow | Sucesso |
+| URL live | `https://wphillipmaclayne.github.io/wpm-portfolio/` |
+| E2E local | 13 passed, 1 skipped |
+| Validacao live | Rotas principais 200 desktop/mobile, imagens carregadas, drawer mobile funcional |
+
+### Itens resolvidos pela implementacao
+
+- `gsap` e `@react-three/drei` removidos do pacote.
+- `ModulePreview.tsx` removido como codigo morto, sem referencias runtime restantes.
+- `lang` do app ajustado para `pt-BR`.
+- Labels e descricoes principais do console localizados para PT-BR.
+- Tokens visuais aplicados em componentes e paginas de maior impacto.
+
+### Pendencias nao bloqueantes
+
+- Migrar futuramente o workflow para runtime Node.js 24 quando as actions usadas passarem a exigir isso.
+- Continuar backlog visual de medio/longo prazo sem bloquear a publicacao atual.

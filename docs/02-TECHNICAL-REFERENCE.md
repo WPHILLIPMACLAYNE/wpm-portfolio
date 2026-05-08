@@ -500,29 +500,41 @@ Cobertura atual de regressao E2E:
 ```json
 {
   "dependencies": {
-    "@react-three/drei": "^x.x.x",
-    "@react-three/fiber": "^x.x.x",
-    "clsx": "^x.x.x",
-    "gsap": "^x.x.x",
+    "@react-three/fiber": "^9.6.1",
+    "clsx": "^2.1.1",
     "motion": "^12.38.0",
-    "next": "^16.2.4",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "tailwind-merge": "^x.x.x",
-    "three": "^x.x.x"
+    "next": "16.2.4",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tailwind-merge": "^3.5.0",
+    "three": "^0.184.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^x.x.x",
-    "@types/node": "^x.x.x",
-    "@types/react": "^x.x.x",
-    "@types/react-dom": "^x.x.x",
-    "eslint": "^x.x.x",
-    "eslint-config-next": "^x.x.x",
-    "tailwindcss": "^x.x.x",
-    "typescript": "^x.x.x"
+    "@playwright/test": "^1.59.1",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.184.1",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
 ```
+
+---
+
+## Fechamento de Publicacao 2026-05-08
+
+- Commit publicado: `07a38bf audit: apply visual portfolio hardening`
+- GitHub Actions: `Deploy GitHub Pages` run `25581405242`, sucesso
+- URL live: `https://wphillipmaclayne.github.io/wpm-portfolio/`
+- Gates locais: `npm run lint`, `npm run typecheck`, `npm ci --dry-run`, `npm run build`, `npm run build:github-pages`, `npm run test:e2e`
+- E2E local: 13 passed, 1 skipped
+- Validacao live automatizada: rotas principais 200 em desktop/mobile, imagens sem quebra, drawer mobile abriu com `aria-expanded=true`, sem falhas coletadas.
+- Nota operacional: GitHub Actions emitiu aviso de deprecacao futura do runtime Node.js 20 para actions; acompanhar antes de 2026-06-02.
 
 ---
 

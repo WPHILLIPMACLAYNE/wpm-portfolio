@@ -43,13 +43,14 @@ Escuro, minimalista, misterioso, tecnológico, com brilho azul/roxo, ruído digi
 ### Objetivo
 Criar um portfólio autoral que una criatividade, UX, motion design e desenvolvimento front-end em uma experiência navegável, performática e acessível.
 
-### Estado atual em 2026-05-06
+### Estado atual em 2026-05-08
 
 - Hardening técnico aplicado após auditoria de 9 módulos: links externos sem HTML interativo aninhado, headers de segurança, metadata/canonical/robots/sitemap, contraste reforçado e home mobile sem clipping.
-- WebGL da home foi adiado para o estágio Console, evitando carregar a camada 3D durante boot/start.
+- WebGL da home foi adiado para o estágio Console, evitando carregar a camada 3D durante boot/start; mobile usa fallback CSS sem carregar o chunk pesado Three/R3F.
 - Artefatos internos de agentes, screenshots temporários e SVGs padrão não usados foram removidos do pacote público.
-- Repositório privado preparado em `https://github.com/WPHILLIPMACLAYNE/wpm-portfolio`.
-- Auditoria profissional de 2026-05-06 criou `ENGINEERING_GUIDE.md`, ampliou `AGENTS.md` e corrigiu URLs absolutas, metadata de projetos, prerender de projetos, export GitHub Pages, contraste, mídia otimizada, bundle WebGL lazy, páginas de erro, QA Playwright, Dependabot npm, override seguro de `postcss` e fechamento dos MDs executáveis.
+- Auditoria visual de 2026-05-08 removeu `gsap` e `@react-three/drei`, localizou labels do console para PT-BR, removeu `ModulePreview.tsx` como código morto e reforçou tokens visuais.
+- Repositório público publicado em `https://github.com/WPHILLIPMACLAYNE/wpm-portfolio`.
+- GitHub Pages publicado em `https://wphillipmaclayne.github.io/wpm-portfolio/` pelo commit `07a38bf` e workflow `Deploy GitHub Pages` run `25581405242`.
 
 ---
 
@@ -62,8 +63,8 @@ Criar um portfólio autoral que una criatividade, UX, motion design e desenvolvi
 | Linguagem | TypeScript | 5.x |
 | Animações | Motion (ex-Framer Motion) | 12.38.0 |
 | Estilização | Tailwind CSS | 4.x |
-| 3D / WebGL | Three.js + React Three Fiber | (instalado, MVP 3) |
-| Scroll | GSAP + ScrollTrigger | (instalado, MVP 3) |
+| 3D / WebGL | Three.js + React Three Fiber | ativo no estágio Console desktop |
+| Scroll | GSAP + ScrollTrigger | removido; scroll effects ficam no backlog |
 | Utilidades | clsx, tailwind-merge | latest |
 
 ---
