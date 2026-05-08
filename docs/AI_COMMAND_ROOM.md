@@ -4870,3 +4870,41 @@ Atualizados:
 ### Pendencia humana
 
 QA visual manual por Wallace no site publicado segue recomendado, mas nao bloqueia a publicacao tecnica: os gates locais, workflow remoto e validacao live automatizada passaram.
+
+---
+
+## [CODEX] LIVE TECHNICAL VISUAL QA 2026-05-08
+
+**Status:** TECHNICAL_QA_PASS / WAITING_WALLACE_VISUAL_APPROVAL
+
+### Contexto
+
+Apos a publicacao e o fechamento documental, Codex executou uma QA visual tecnica adicional no site live para cobrir o maximo possivel antes da aprovacao humana final de Wallace.
+
+### URL
+
+`https://wphillipmaclayne.github.io/wpm-portfolio`
+
+### Evidencia Automatizada
+
+- Desktop home: boot visivel.
+- Desktop console: `PRESS START` entra no console e mostra `Sistema pronto`.
+- Mobile home: boot visivel.
+- Mobile console: `PRESS START` entra no console e mostra `Sistema pronto`.
+- Mobile drawer: botao de navegacao abre drawer com `aria-expanded="true"` e `role="dialog"` visivel.
+- Contato: GitHub detectado como `https://github.com/acewallthemac`.
+- Contato: LinkedIn detectado como `https://www.linkedin.com/in/wpmaclayne/`.
+- Email: nenhum `mailto:` e nenhum padrao de email exposto no texto.
+- Console/page errors: nenhum erro capturado no script.
+
+### Screenshots Gerados Localmente
+
+- `/tmp/wpm-portfolio-live-qa/desktop-home.png`
+- `/tmp/wpm-portfolio-live-qa/desktop-console.png`
+- `/tmp/wpm-portfolio-live-qa/mobile-home.png`
+- `/tmp/wpm-portfolio-live-qa/mobile-console.png`
+- `/tmp/wpm-portfolio-live-qa/mobile-drawer.png`
+
+### Resultado
+
+Sem bloqueio visual tecnico identificado. A pendencia restante e exclusivamente humana: Wallace precisa revisar o site publicado e responder `APROVADO VISUAL` ou indicar ajustes concretos.
