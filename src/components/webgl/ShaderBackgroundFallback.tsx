@@ -7,7 +7,7 @@ export default function ShaderBackgroundFallback() {
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 30%, #071B3A 0%, #050912 50%, #050509 100%)",
+            "radial-gradient(ellipse at 50% 30%, #071B3A 0%, #060b14 50%, #050509 100%)",
         }}
       />
       <div

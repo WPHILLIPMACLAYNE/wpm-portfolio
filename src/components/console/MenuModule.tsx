@@ -6,21 +6,21 @@ import type { MenuItem } from "@/data/profile";
 /* ── metadata ────────────────────────────────────────────── */
 
 export const statusMeta: Record<MenuItem["status"], { color: string; label: string }> = {
-  Active:        { color: "#74F7FF", label: "ACTIVE" },
-  Locked:        { color: "#6C4DFF", label: "LOCKED" },
-  "Coming Soon": { color: "#7E8797", label: "SOON" },
+  Active:        { color: "#74F7FF", label: "ATIVO" },
+  Locked:        { color: "#6C4DFF", label: "BLOQUEADO" },
+  "Coming Soon": { color: "#8B95A5", label: "EM BREVE" },
 };
 
 export const typeColors: Record<string, string> = {
-  Library:    "#6C4DFF",
-  Profile:    "#6C4DFF",
-  Tree:       "#74F7FF",
-  "Save Slot":"#74F7FF",
-  Prototype:  "#6C4DFF",
-  Quest:      "#7E8797",
-  Signal:     "#74F7FF",
-  Config:     "#7E8797",
-  Encrypted:  "#6C4DFF",
+  Biblioteca:      "#6C4DFF",
+  Perfil:          "#6C4DFF",
+  Arvore:          "#74F7FF",
+  "Slot de Save":  "#74F7FF",
+  Prototipo:       "#6C4DFF",
+  Missao:          "#8B95A5",
+  Sinal:           "#74F7FF",
+  Configuracao:    "#8B95A5",
+  Criptografado:   "#6C4DFF",
 };
 
 /* ── component ────────────────────────────────────────────── */
@@ -52,7 +52,7 @@ export default function MenuModule({
 }: MenuModuleProps) {
   const isActive = item.status === "Active";
   const sMeta = statusMeta[item.status];
-  const typeColor = typeColors[item.type] ?? "#7E8797";
+  const typeColor = typeColors[item.type] ?? "#8B95A5";
   const statusDescriptionId = `module-status-${item.id}`;
 
   return (
@@ -63,7 +63,7 @@ export default function MenuModule({
         if (!isActive) e.preventDefault();
         else onSelect?.();
       }}
-      role="gridcell"
+      role="link"
       aria-label={`${item.label} — ${item.type} — ${sMeta.label}`}
       aria-disabled={!isActive}
       aria-describedby={!isActive ? statusDescriptionId : undefined}
@@ -141,17 +141,17 @@ export default function MenuModule({
           {item.label}
         </h3>
 
-        <p className="text-xs text-wpm-gray/90 leading-relaxed">
+        <p className="text-xs text-wpm-gray leading-relaxed">
           {item.description}
         </p>
 
         <div className="flex items-center gap-2 pt-2 border-t border-white/[0.03]">
-          <span className="font-mono text-[11px] text-wpm-gray/90">
-            {isActive ? "PRESS ENTER" : "LOCKED"}
+          <span className="font-mono text-[11px] text-wpm-gray">
+            {isActive ? "PRESSIONE ENTER" : "BLOQUEADO"}
           </span>
           {!isActive && (
             <span id={statusDescriptionId} className="sr-only">
-              This module is not available in the public portfolio yet.
+              Este modulo ainda nao esta disponivel no portfolio publico.
             </span>
           )}
           {isActive && (

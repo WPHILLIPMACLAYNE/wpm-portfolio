@@ -31,14 +31,14 @@ export default function ProjectCartridge({ project, number }: ProjectCartridgePr
         aria-label={`${project.title} — Locked`}
       >
         <div className="flex items-center gap-2 flex-wrap min-w-0">
-          <span className="font-mono text-[11px] uppercase tracking-wider text-wpm-gray/90 whitespace-nowrap">
+          <span className="font-mono text-[11px] uppercase tracking-wider text-wpm-gray whitespace-nowrap">
             {project.category}
           </span>
           <span className="w-1 h-1 rounded-full bg-wpm-gray/30" />
-          <span className="font-mono text-[11px] text-wpm-gray/90 whitespace-nowrap">{project.year}</span>
+          <span className="font-mono text-[11px] text-wpm-gray whitespace-nowrap">{project.year}</span>
         </div>
-        <h3 className="text-lg font-medium text-wpm-gray/90 break-words">{project.title}</h3>
-        <p className="text-sm text-wpm-gray/90 leading-relaxed line-clamp-2 flex-1 break-words">
+        <h3 className="text-lg font-medium text-wpm-gray break-words">{project.title}</h3>
+        <p className="text-sm text-wpm-gray leading-relaxed line-clamp-2 flex-1 break-words">
           {project.subtitle}
         </p>
         <div className="flex items-center gap-2 pt-2 border-t border-white/[0.02]">
@@ -121,7 +121,7 @@ export default function ProjectCartridge({ project, number }: ProjectCartridgePr
               </div>
             </div>
             {/* Module label */}
-            <div className="absolute bottom-3 left-4 font-mono text-[11px] text-wpm-gray/90 uppercase tracking-[0.2em]">
+            <div className="absolute bottom-3 left-4 font-mono text-[11px] text-wpm-gray uppercase tracking-[0.2em]">
               system.modules.active
             </div>
           </div>
@@ -142,7 +142,7 @@ export default function ProjectCartridge({ project, number }: ProjectCartridgePr
               {project.category}
             </span>
             <span className="w-1 h-1 rounded-full bg-wpm-purple/30 flex-shrink-0" />
-            <span className="font-mono text-[11px] text-wpm-gray/90 whitespace-nowrap">{project.year}</span>
+            <span className="font-mono text-[11px] text-wpm-gray whitespace-nowrap">{project.year}</span>
           </div>
 
           {/* Title */}
@@ -151,7 +151,7 @@ export default function ProjectCartridge({ project, number }: ProjectCartridgePr
           </h3>
 
           {/* Subtitle */}
-          <p className="text-sm text-wpm-gray/90 leading-relaxed line-clamp-2 flex-1 break-words">
+          <p className="text-sm text-wpm-gray leading-relaxed line-clamp-2 flex-1 break-words">
             {project.subtitle}
           </p>
 
@@ -160,7 +160,7 @@ export default function ProjectCartridge({ project, number }: ProjectCartridgePr
             {project.stack.slice(0, 3).map((tech) => (
               <span
                 key={tech}
-                className="font-mono text-[11px] text-wpm-gray/90 bg-white/[0.035] px-2 py-0.5 rounded-sm break-words max-w-full"
+                className="font-mono text-[11px] text-wpm-gray bg-white/[0.035] px-2 py-0.5 rounded-sm break-words max-w-full"
               >
                 {tech}
               </span>
@@ -176,9 +176,9 @@ export default function ProjectCartridge({ project, number }: ProjectCartridgePr
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 min-w-0">
               <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${statusColors[project.status] ?? "bg-wpm-gray/70"}`} />
-              <span className="font-mono text-[11px] text-wpm-gray/90 whitespace-nowrap">{project.status}</span>
+              <span className="font-mono text-[11px] text-wpm-gray whitespace-nowrap">{project.status}</span>
             </div>
-            <span className="font-mono text-[11px] text-wpm-gray/90 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap flex-shrink-0">
+            <span className="font-mono text-[11px] text-wpm-gray opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap flex-shrink-0">
               SELECT »
             </span>
           </div>

@@ -15,6 +15,7 @@ Antes de continuar o trabalho, leia:
 - [docs/09-AUDIT-HARDENING-2026-05-06.md](./docs/09-AUDIT-HARDENING-2026-05-06.md)
 - [docs/10-PROFESSIONAL-AUDIT-2026-05-06.md](./docs/10-PROFESSIONAL-AUDIT-2026-05-06.md)
 - [docs/11-MD-CLOSURE-2026-05-06.md](./docs/11-MD-CLOSURE-2026-05-06.md)
+- [docs/12-EXECUTION-PLAN.md](./docs/12-EXECUTION-PLAN.md)
 
 ## GitHub
 

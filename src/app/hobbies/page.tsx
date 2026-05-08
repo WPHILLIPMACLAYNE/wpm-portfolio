@@ -11,7 +11,7 @@ export default function HobbiesPage() {
       <div className="px-6 py-12 max-w-3xl mx-auto">
         <Link
           href="/console"
-          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/90 hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
+          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
         >
           <span className="text-wpm-lavender/90">{">"}</span> BACK TO CONSOLE
         </Link>
@@ -39,7 +39,7 @@ export default function HobbiesPage() {
                 whileHover={{ y: -4 }}
               >
                 <span className="font-mono text-2xl text-wpm-cyan/65">\u25C6</span>
-                <span className="text-sm text-wpm-gray/90 text-center">{hobby}</span>
+                <span className="text-sm text-wpm-gray text-center">{hobby}</span>
               </motion.div>
             ))}
           </div>

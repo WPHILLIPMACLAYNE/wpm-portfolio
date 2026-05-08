@@ -17,7 +17,7 @@ export default function NotFound() {
         <h1 className="mt-5 text-4xl font-light tracking-wide text-wpm-white/90 md:text-6xl">
           Route not found
         </h1>
-        <p className="mt-5 max-w-lg text-sm leading-relaxed text-wpm-gray/90">
+        <p className="mt-5 max-w-lg text-sm leading-relaxed text-wpm-gray">
           This path is outside the current WPM.OS map. Return to the console or
           inspect the published work library.
         </p>

@@ -33,16 +33,16 @@ export default function ModulePanelFrame({
         <div className="flex items-center gap-3">
           <Link
             href={pageHref}
-            className="hidden font-mono text-[11px] uppercase tracking-[0.16em] text-wpm-gray/90 transition-colors hover:text-wpm-cyan/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-cyan/50 sm:inline"
+            className="hidden font-mono text-[11px] uppercase tracking-[0.16em] text-wpm-gray transition-colors hover:text-wpm-cyan/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-cyan/50 sm:inline"
           >
-            Open full page
+            Abrir pagina completa
           </Link>
           <button
             onClick={onClose}
             className="group flex h-10 w-10 items-center justify-center rounded-sm border border-white/[0.08] bg-white/[0.03] transition-all hover:border-wpm-purple/30 hover:bg-wpm-purple/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-cyan/70"
-            aria-label="Close panel"
+            aria-label="Fechar painel"
           >
-            <span className="font-mono text-sm text-wpm-gray/90 transition-colors group-hover:text-wpm-white">
+            <span className="font-mono text-sm text-wpm-gray transition-colors group-hover:text-wpm-white">
               X
             </span>
           </button>

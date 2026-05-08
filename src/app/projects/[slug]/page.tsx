@@ -89,7 +89,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           {/* Back */}
           <Link
             href="/console"
-            className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/90 hover:text-wpm-cyan transition-colors mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
+            className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray hover:text-wpm-cyan transition-colors mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
           >
           <span className="text-wpm-lavender/90">&lt;-</span> BACK TO CONSOLE
         </Link>
@@ -98,7 +98,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-4 flex-wrap min-w-0 overflow-hidden">
             <Badge variant="system">{project.category}</Badge>
-            <span className="font-mono text-[11px] text-wpm-gray/90">{project.year}</span>
+            <span className="font-mono text-[11px] text-wpm-gray">{project.year}</span>
             <span className="w-1 h-1 rounded-full bg-wpm-purple/30" />
             <Badge variant={statusVariant[project.status] ?? "info"} dot>
               {project.status}
@@ -128,7 +128,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           )}
 
-          <p className="text-wpm-gray/90 text-sm leading-relaxed break-words">
+          <p className="text-wpm-gray text-sm leading-relaxed break-words">
             {project.problem.slice(0, 200)}...
           </p>
         </div>
@@ -157,22 +157,22 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="space-y-10 mb-12">
           <section>
             <h2 className="font-mono text-sm text-wpm-lavender/90 mb-3 tracking-wider uppercase">The Problem</h2>
-            <p className="text-wpm-gray/90 leading-relaxed break-words">{project.problem}</p>
+            <p className="text-wpm-gray leading-relaxed break-words">{project.problem}</p>
           </section>
 
           <section>
             <h2 className="font-mono text-sm text-wpm-lavender/90 mb-3 tracking-wider uppercase">The Solution</h2>
-            <p className="text-wpm-gray/90 leading-relaxed break-words">{project.solution}</p>
+            <p className="text-wpm-gray leading-relaxed break-words">{project.solution}</p>
           </section>
 
           <section>
             <h2 className="font-mono text-sm text-wpm-lavender/90 mb-3 tracking-wider uppercase">Process</h2>
-            <p className="text-wpm-gray/90 leading-relaxed break-words">{project.process}</p>
+            <p className="text-wpm-gray leading-relaxed break-words">{project.process}</p>
           </section>
 
           <section>
             <h2 className="font-mono text-sm text-wpm-lavender/90 mb-3 tracking-wider uppercase">Results</h2>
-            <p className="text-wpm-gray/90 leading-relaxed break-words">{project.results}</p>
+            <p className="text-wpm-gray leading-relaxed break-words">{project.results}</p>
           </section>
         </div>
 

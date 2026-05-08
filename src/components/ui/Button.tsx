@@ -21,9 +21,9 @@ const variantClasses: Record<ButtonVariant, string> = {
   primary:
     "border border-wpm-purple/30 bg-wpm-purple/10 text-wpm-cyan hover:border-wpm-purple/60 hover:bg-wpm-purple/20 hover:text-glow-cyan",
   ghost:
-    "border border-transparent text-wpm-gray/90 hover:text-wpm-cyan hover:border-white/[0.12]",
+    "border border-transparent text-wpm-gray hover:text-wpm-cyan hover:border-white/[0.12]",
   icon:
-    "border border-transparent text-wpm-gray/90 hover:text-wpm-lavender hover:bg-wpm-purple/10",
+    "border border-transparent text-wpm-gray hover:text-wpm-lavender hover:bg-wpm-purple/10",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

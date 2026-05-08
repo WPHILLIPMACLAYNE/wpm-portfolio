@@ -14,7 +14,7 @@ export default function AboutPage() {
       <div className="px-6 py-12 pb-20 max-w-3xl mx-auto">
         <Link
           href="/console"
-          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/90 hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
+          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
         >
           <span className="text-wpm-lavender/90">&lt;-</span> BACK TO CONSOLE
         </Link>
@@ -37,7 +37,7 @@ export default function AboutPage() {
             {profile.bio.map((p, i) => (
               <motion.p
                 key={i}
-                    className="text-wpm-gray/90 leading-relaxed break-words"
+                    className="text-wpm-gray leading-relaxed break-words"
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + i * 0.1 }}

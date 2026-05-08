@@ -19,6 +19,7 @@
 | [`09-AUDIT-HARDENING-2026-05-06.md`](./09-AUDIT-HARDENING-2026-05-06.md) | Hardening da auditoria técnica: segurança, SEO, performance inicial, contraste, mobile e limpeza de artefatos internos |
 | [`10-PROFESSIONAL-AUDIT-2026-05-06.md`](./10-PROFESSIONAL-AUDIT-2026-05-06.md) | Auditoria profissional baseada no roteiro GPT-5.5 deep thinking, matriz de severidade, correções aplicadas e validação final |
 | [`11-MD-CLOSURE-2026-05-06.md`](./11-MD-CLOSURE-2026-05-06.md) | Fechamento dos Markdown: itens resolvidos, bloqueios externos, backlog intencional e validação esperada |
+| [`12-EXECUTION-PLAN.md`](./12-EXECUTION-PLAN.md) | Plano operacional mestre: fases, processo Codex + DeepSeek, gates de qualidade e backlog priorizado |
 | [`../ENGINEERING_GUIDE.md`](../ENGINEERING_GUIDE.md) | Guia de padrões técnicos para componentes, dados, motion, acessibilidade, performance e segurança |
 | `07-DATA-MODELS.md` | Modelos de dados, interfaces TypeScript, schemas (a ser criado com evolução) |
 | [`08-DEPLOYMENT.md`](./08-DEPLOYMENT.md) | Guia de deploy com build Next.js server e export estatico GitHub Pages |

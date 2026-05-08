@@ -1,32 +1,35 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* ── Core palette ─────────────────────────────────────── */
   --color-wpm-black: #050509;
   --color-wpm-deep-blue: #071B3A;
   --color-wpm-purple: #6C4DFF;
   --color-wpm-lavender: #B8A8FF;
   --color-wpm-cyan: #74F7FF;
   --color-wpm-white: #EAF2FF;
-  --color-wpm-gray: #7E8797;
+  --color-wpm-gray: #8B95A5;
   --color-wpm-dark-surface: #0A0D14;
   --color-wpm-card: #0D1020;
+
+  /* ── Typography ───────────────────────────────────────── */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* ── Z-index layers (used by .crt-overlay / .crt-vignette) ── */
+  --z-vignette: 49;
+  --z-scanline: 50;
+
+  /* ── Animations ───────────────────────────────────────── */
   --animate-scanline: scanline 8s linear infinite;
-  --animate-flicker: flicker 0.15s infinite;
   --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
   --animate-crt-on: crt-on 1s ease-out;
   --animate-boot-text: boot-text 0.06s steps(1) infinite;
 }
 
-:root {
-  --background: #050509;
-  --foreground: #EAF2FF;
-}
-
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-wpm-black);
+  color: var(--color-wpm-white);
   font-family: var(--font-sans, Arial, Helvetica, sans-serif);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -37,7 +40,7 @@ body {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: var(--z-scanline);
   background: repeating-linear-gradient(
     0deg,
     rgba(0, 0, 0, 0.04) 0px,
@@ -52,7 +55,7 @@ body {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  z-index: 49;
+  z-index: var(--z-vignette);
   background: radial-gradient(ellipse at center, transparent 60%, rgba(5, 5, 9, 0.55) 100%);
 }
 

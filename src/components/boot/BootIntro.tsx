@@ -158,7 +158,7 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
               {bootMessages.slice(0, messageIndex + 1).map((msg, i) => (
                 <motion.p
                   key={i}
-                  className="text-wpm-gray/90"
+                  className="text-wpm-gray"
                   initial={hydrated && !prefersReduced ? { opacity: 0, x: -6 } : { opacity: 1, x: 0 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.2 }}
@@ -219,7 +219,7 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
 
             {/* Name */}
             <motion.p
-              className="mt-6 font-mono text-xs md:text-sm tracking-[0.16em] uppercase text-wpm-gray/90"
+              className="mt-6 font-mono text-xs md:text-sm tracking-[0.16em] uppercase text-wpm-gray"
               initial={
                 hydrated && !prefersReduced
                   ? { opacity: 0, y: 10 }
@@ -248,7 +248,7 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
       {phase !== "done" && (
         <motion.button
           className="absolute bottom-10 z-10 text-[11px] font-mono tracking-wider uppercase
-                     text-wpm-gray/90 hover:text-wpm-gray/90 transition-colors
+                     text-wpm-gray hover:text-wpm-gray transition-colors
                      cursor-pointer focus-visible:outline-none focus-visible:ring-2
                      focus-visible:ring-wpm-purple/50 focus-visible:ring-offset-2
                      focus-visible:ring-offset-wpm-black rounded-sm px-3 py-2"

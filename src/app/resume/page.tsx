@@ -90,7 +90,7 @@ export default function ResumePage() {
       <div className="px-6 py-12 pb-20 max-w-3xl mx-auto">
         <Link
           href="/console"
-          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/90 hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
+          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
         >
           <span className="text-wpm-lavender/90">&lt;-</span> BACK TO CONSOLE
         </Link>
@@ -146,13 +146,13 @@ export default function ResumePage() {
                       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 sm:gap-0 min-w-0">
                         <div className="min-w-0 max-w-full break-words">
                           <p className="text-wpm-white/80 font-medium break-words">{exp.role}</p>
-                          <p className="text-sm text-wpm-gray/90 break-words">{exp.company}</p>
+                          <p className="text-sm text-wpm-gray break-words">{exp.company}</p>
                         </div>
-                        <span className="font-mono text-[11px] text-wpm-gray/90 whitespace-nowrap">
+                        <span className="font-mono text-[11px] text-wpm-gray whitespace-nowrap">
                           {exp.period}
                         </span>
                       </div>
-                      <p className="text-sm text-wpm-gray/90 mt-2 leading-relaxed break-words">
+                      <p className="text-sm text-wpm-gray mt-2 leading-relaxed break-words">
                         {exp.details}
                       </p>
                       {exp.highlight && (
@@ -188,8 +188,8 @@ export default function ResumePage() {
                   >
                     <p className="text-wpm-white/70 text-sm">{ed.course}</p>
                     <div className="flex justify-between items-center mt-1">
-                      <p className="text-xs text-wpm-gray/90">{ed.institution}</p>
-                      <span className="font-mono text-[11px] text-wpm-gray/90">
+                      <p className="text-xs text-wpm-gray">{ed.institution}</p>
+                      <span className="font-mono text-[11px] text-wpm-gray">
                         {ed.period}
                       </span>
                     </div>

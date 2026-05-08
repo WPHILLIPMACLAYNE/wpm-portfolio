@@ -18,7 +18,7 @@ export default function Divider({ label, className, variant = "subtle" }: Divide
     <div className={cn("flex items-center gap-3 w-full", className)}>
       <div className={cn("flex-1 h-[1px]", lineClass)} />
       {label && (
-        <span className="font-mono text-[11px] text-wpm-gray/90 uppercase tracking-wider whitespace-nowrap">
+        <span className="font-mono text-[11px] text-wpm-gray uppercase tracking-wider whitespace-nowrap">
           {label}
         </span>
       )}

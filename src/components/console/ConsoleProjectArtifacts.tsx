@@ -40,7 +40,7 @@ function OperationalArtifact({ project }: { project: Project }) {
 
               <div className="grid grid-cols-[0.82fr_1.18fr] gap-3">
                 <div className="rounded-md border border-white/[0.07] bg-wpm-black/45 p-3">
-                  <p className="mb-3 font-mono text-[11px] uppercase tracking-widest text-wpm-gray/90">Operations</p>
+                  <p className="mb-3 font-mono text-[11px] uppercase tracking-widest text-wpm-gray">Operations</p>
                   <div className="space-y-2.5">
                     {features.map((feature) => (
                       <div key={feature} className="flex items-center gap-2">
@@ -54,11 +54,11 @@ function OperationalArtifact({ project }: { project: Project }) {
                 </div>
 
                 <div className="rounded-md border border-white/[0.07] bg-wpm-black/45 p-3">
-                  <p className="mb-3 font-mono text-[11px] uppercase tracking-widest text-wpm-gray/90">Workflow rail</p>
+                  <p className="mb-3 font-mono text-[11px] uppercase tracking-widest text-wpm-gray">Workflow rail</p>
                   <div className="space-y-3">
                     {pipeline.map((tech, index) => (
                       <div key={tech} className="grid grid-cols-[5rem_1fr] items-center gap-2">
-                        <span className="truncate font-mono text-[11px] uppercase tracking-[0.12em] text-wpm-gray/90">
+                        <span className="truncate font-mono text-[11px] uppercase tracking-[0.12em] text-wpm-gray">
                           {tech}
                         </span>
                         <span className="h-1 rounded-full bg-white/10">
@@ -75,7 +75,7 @@ function OperationalArtifact({ project }: { project: Project }) {
 
               <div className="mt-3 rounded-md border border-white/[0.07] bg-wpm-black/45 p-3">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="font-mono text-[11px] uppercase tracking-widest text-wpm-gray/90">System modules</p>
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-wpm-gray">System modules</p>
                   <div className="flex gap-2">
                     {project.stack.slice(1, 5).map((tech) => (
                       <span
@@ -157,7 +157,7 @@ export default function ProjectArtifact({
           <h2 className="mt-3 max-w-80 break-words font-mono text-base uppercase leading-relaxed tracking-[0.18em] text-wpm-white/88 sm:text-lg sm:tracking-[0.16em]">
             {project.title}
           </h2>
-          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-wpm-gray/90">
+          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-wpm-gray">
             {project.category} / {project.year}
           </p>
         </div>
@@ -178,7 +178,7 @@ export default function ProjectArtifact({
       </div>
 
       <div className="absolute inset-x-5 bottom-5 z-20 flex items-center justify-between gap-4 border-t border-white/[0.06] pt-4">
-        <p className="line-clamp-2 text-sm leading-relaxed text-wpm-gray/90">{project.subtitle}</p>
+        <p className="line-clamp-2 text-sm leading-relaxed text-wpm-gray">{project.subtitle}</p>
         <span className="shrink-0 font-mono text-xs text-wpm-cyan/80 transition-transform group-hover:translate-x-1">
           Inspect -&gt;
         </span>

@@ -69,6 +69,9 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [absoluteUrl("/project-livro-cover-og.jpg")],
   },
+  other: {
+    google: "notranslate",
+  },
 };
 
 export default function RootLayout({
@@ -90,10 +93,16 @@ export default function RootLayout({
 
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="pt-BR"
+      translate="no"
+      className={`${geistSans.variable} ${geistMono.variable} notranslate h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full bg-wpm-black text-wpm-white">
+      <body
+        translate="no"
+        className="notranslate min-h-full bg-wpm-black text-wpm-white"
+        suppressHydrationWarning
+      >
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60]

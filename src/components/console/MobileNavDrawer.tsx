@@ -29,8 +29,8 @@ const iconMap: Record<string, IconName> = {
 function getItemStyle(item: MenuItem): { clickable: boolean; hint: string; className: string } {
   if (item.status === "Active") return { clickable: true, hint: "", className: "" };
   if (item.status === "Coming Soon")
-    return { clickable: false, hint: "Coming Soon", className: "opacity-40" };
-  return { clickable: false, hint: "Locked", className: "opacity-40" };
+    return { clickable: false, hint: "Em breve", className: "opacity-40" };
+  return { clickable: false, hint: "Bloqueado", className: "opacity-40" };
 }
 
 export default function MobileNavDrawer({ open, onClose, returnFocusRef }: MobileNavDrawerProps) {
@@ -139,20 +139,20 @@ export default function MobileNavDrawer({ open, onClose, returnFocusRef }: Mobil
             }}
             role="dialog"
             aria-modal="true"
-            aria-label="Navigation menu"
+            aria-label="Menu de navegacao"
           >
             {/* Drawer header */}
             <div className="p-4 border-b border-white/[0.04]">
               <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-wpm-lavender/90">
-                Navigation
+                Navegacao
               </p>
-              <p className="font-mono text-[11px] text-wpm-gray/90 mt-1">
-                Select a module
+              <p className="font-mono text-[11px] text-wpm-gray mt-1">
+                Selecione um modulo
               </p>
             </div>
 
             {/* Menu items */}
-            <nav aria-label="Mobile navigation" className="p-2">
+            <nav aria-label="Navegacao mobile" className="p-2">
               {menuItems.map((item) => {
                 const { clickable, hint, className } = getItemStyle(item);
                 const iconName = iconMap[item.id];
@@ -169,8 +169,8 @@ export default function MobileNavDrawer({ open, onClose, returnFocusRef }: Mobil
                               transition-colors duration-150
                               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50
                               ${clickable
-                                ? "text-wpm-gray/90 hover:text-wpm-white hover:bg-white/[0.03] cursor-pointer"
-                                : "text-wpm-gray/90 cursor-default"}
+                                ? "text-wpm-gray hover:text-wpm-white hover:bg-white/[0.03] cursor-pointer"
+                                : "text-wpm-gray cursor-default"}
                               ${className}`}
                     style={{ minHeight: 48 }}
                   >
@@ -185,7 +185,7 @@ export default function MobileNavDrawer({ open, onClose, returnFocusRef }: Mobil
 	                    </span>
 	                    {!clickable && (
 	                      <span id={descriptionId} className="sr-only">
-	                        This module is not available in the public portfolio yet.
+	                        Este modulo ainda nao esta disponivel no portfolio publico.
 	                      </span>
 	                    )}
 	                  </button>
@@ -195,11 +195,11 @@ export default function MobileNavDrawer({ open, onClose, returnFocusRef }: Mobil
 
             {/* Footer */}
             <div className="p-4 border-t border-white/[0.04]">
-              <p className="font-mono text-[11px] text-wpm-gray/90">
+              <p className="font-mono text-[11px] text-wpm-gray">
                 WPM.OS v1.0
               </p>
-              <p className="font-mono text-[11px] text-wpm-gray/90 mt-0.5">
-                ESC or tap outside to close
+              <p className="font-mono text-[11px] text-wpm-gray mt-0.5">
+                ESC ou toque fora para fechar
               </p>
             </div>
           </motion.div>

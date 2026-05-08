@@ -120,6 +120,51 @@ export default function AboutLayout({ children }: { children: React.ReactNode })
 | `about/page.tsx` | Client | Animações Motion |
 | Demais páginas | Client | Animações Motion |
 
+### Guard de Traducao e Hidratacao
+
+O `RootLayout` marca `html` e `body` com `translate="no"` e `notranslate`, alem de emitir `meta name="google" content="notranslate"` via metadata. Essa protecao evita que tradutores automaticos/extensoes injetem classes ou atributos no `div hidden` interno de metadata do Next antes da hidratacao, o que pode disparar o overlay `Hydration failed` em ambiente de desenvolvimento.
+
+### Console Chrome: PT-BR e Organizacao Visual (TASK-20260507-001)
+
+A chrome do console (topbar, ribbon de modulos, sidebar de telemetria, drawer mobile) foi localizada para PT-BR e reorganizada visualmente para melhorar a percepcao da interface no desktop.
+
+#### Textos traduzidos (EN → PT-BR)
+
+| Componente | Texto original | Texto PT-BR |
+|---|---|---|
+| ConsoleMenu | `// Interactive portfolio system` | `// Sistema interativo de portfolio` |
+| ConsoleMenu | `Operating evidence for work that ships` | `Evidencia operacional de projetos que entregam` |
+| ConsoleMenu | `Inspect work` | `Inspecionar projetos` |
+| ConsoleMenu | `Open signal` | `Abrir contato` |
+| ConsoleMenu | `System ready.` | `Sistema pronto.` |
+| ConsoleMenu | `Type, click or inspect...` | `Digite, clique ou inspecione...` |
+| ConsoleMenu | `/ Artifacts loaded` | `/ Artefatos carregados` |
+| ConsoleModuleRibbon | `Modules` | `Modulos` |
+| ConsoleModuleRibbon | modulo labels (EN) | labels PT-BR (`Biblioteca de Projetos`, `Perfil do Jogador`, etc.) |
+| ConsoleChrome | `SYS / ONLINE / SIGNAL / STRONG / MODE / DOSSIER / USER` | `SISTEMA / ATIVO / SINAL / FORTE / MODO / DOSSIER / USUARIO` |
+| ConsoleChrome | `ONLINE` (LED label) | `ATIVO` |
+| ConsoleChrome | primaryNav labels | `Projetos`, `Perfil`, `Skills`, `Contato` |
+| ConsoleShell | `open main menu` | `Abrir menu de navegacao` |
+| ConsoleShell | `Replay Intro` | `Repetir Intro` |
+| ConsoleShell | `ESC / BACK to return` | `ESC / VOLTAR para retornar` |
+| ConsoleShell | topbar nav labels (`opacity-0 group-hover:opacity-100`) | labels agora sempre visiveis em `lg:` (sem hover) |
+| MobileNavDrawer | drawer header/dica | `Navegacao` / `Selecione um modulo` |
+| MobileNavDrawer | footer hints | `ESC ou toque fora para fechar` |
+| MobileNavDrawer | locked hint | `Este modulo ainda nao esta disponivel no portfolio publico.` |
+| StaticConsoleShell | default `currentLabel` | `Biblioteca de Projetos` |
+| ModulePanelFrame | `Open full page` | `Abrir pagina completa` |
+| ModulePanelFrame | close button | `Fechar painel` |
+| MenuModule | `PRESS ENTER` / `LOCKED` | `PRESSIONE ENTER` / `BLOQUEADO` |
+| MenuModule | status labels | `ATIVO` / `BLOQUEADO` / `EM BREVE` |
+| MenuModule | type labels (EN) | PT-BR (`Biblioteca`, `Perfil`, `Arvore`, `Slot de Save`, `Prototipo`, `Missao`, `Sinal`, `Configuracao`, `Criptografado`) |
+| ModulePreview | `BROWSE PROJECTS` / `ENTER TO OPEN` | `EXPLORAR PROJETOS` / `ENTER PARA ABRIR` |
+
+#### Melhorias de layout aplicadas
+
+- **ConsoleModuleRibbon**: reposicionado para dentro da secao principal do ConsoleMenu, logo abaixo do header (WPM.OS v1.0 + ConsoleNav) e acima do grid hero+projetos. Isso coloca os modulos visiveis na primeira dobra no desktop, sem esconder os cards de projeto. O ribbon usa `border-t border-white/[0.06] bg-wpm-black/25 backdrop-blur-xl`, grid responsivo com indicadores de cor por tipo (`typeColors`) e shortcut numerico.
+- **Topbar (ConsoleShell / StaticConsoleShell)**: labels dos links de navegacao agora sao sempre visiveis em telas `lg:` (`hidden lg:inline`), removida a dependencia de `opacity-0 group-hover:opacity-100`. A navegacao fica perceptivel sem depender de hover.
+- **ConsoleChrome (SystemTelemetry)**: labels traduzidas para PT-BR. LED indicador com pulso `animate-pulse` e `motion-reduce:animate-none`. Texto "ATIVO" abaixo do LED como status do sistema.
+- **Acessibilidade preservada**: `focus-visible:ring-2`, `aria-label` em PT-BR, `aria-expanded`/`aria-controls` nos botoes de modulo, `prefers-reduced-motion` respeitado.
 ### Fluxo de Dados
 
 ```

@@ -32,12 +32,12 @@ export default function GlobalError({
             <h1 className="mt-5 text-4xl font-light tracking-wide text-wpm-white/90 md:text-6xl">
               WPM.OS could not boot this view
             </h1>
-            <p className="mt-5 max-w-lg text-sm leading-relaxed text-wpm-gray/90">
+            <p className="mt-5 max-w-lg text-sm leading-relaxed text-wpm-gray">
               A root-level rendering error occurred. Retry the render or reload
               from the browser if the fault persists.
             </p>
             {error.digest && (
-              <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-wpm-gray/90">
+              <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-wpm-gray">
                 Digest: {error.digest}
               </p>
             )}

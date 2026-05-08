@@ -29,12 +29,12 @@ export default function ErrorPage({
         <h1 className="mt-5 text-4xl font-light tracking-wide text-wpm-white/90 md:text-6xl">
           Something broke in this panel
         </h1>
-        <p className="mt-5 max-w-lg text-sm leading-relaxed text-wpm-gray/90">
+        <p className="mt-5 max-w-lg text-sm leading-relaxed text-wpm-gray">
           The route failed to render. Try recovering the current view or return
           to the console map.
         </p>
         {error.digest && (
-          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-wpm-gray/90">
+          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.16em] text-wpm-gray">
             Digest: {error.digest}
           </p>
         )}

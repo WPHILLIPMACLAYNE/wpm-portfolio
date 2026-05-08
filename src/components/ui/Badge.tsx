@@ -17,8 +17,8 @@ interface BadgeProps {
 const variantClasses: Record<BadgeVariant, string> = {
   system: "text-wpm-lavender/90 border-wpm-purple/30 bg-wpm-purple/5",
   action: "text-wpm-cyan/90 border-wpm-cyan/30 bg-wpm-cyan/5",
-  info: "text-wpm-gray/90 border-white/[0.10] bg-white/[0.025]",
-  status: "text-wpm-gray/90 border-transparent bg-transparent",
+  info: "text-wpm-gray border-white/[0.10] bg-white/[0.025]",
+  status: "text-wpm-gray border-transparent bg-transparent",
 };
 
 const sizeClasses: Record<BadgeSize, string> = {

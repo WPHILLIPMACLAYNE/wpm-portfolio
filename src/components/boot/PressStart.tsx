@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { motion } from "motion/react";
 import { profile } from "@/data/profile";
 
 interface PressStartProps {
@@ -47,23 +46,19 @@ export default function PressStart({ onStart }: PressStartProps) {
 
         <div className="h-[1px] w-16 bg-wpm-purple/40" />
 
-        <motion.button
-          className="group relative mt-2 cursor-pointer"
+        <button
+          className="group relative mt-2 cursor-pointer hover:scale-[1.03] active:scale-[0.97] transition-transform duration-150"
           onClick={onStart}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
         >
           <span className="font-mono text-sm tracking-[0.16em] text-wpm-cyan group-hover:text-glow-cyan transition-all duration-300">
             PRESS START
           </span>
-          <motion.span
-            className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-wpm-cyan"
-            animate={{ opacity: [0.3, 1, 0.3] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          <span
+            className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-wpm-cyan animate-glow-pulse"
           />
-        </motion.button>
+        </button>
 
-        <div className="absolute bottom-10 flex gap-8 text-[11px] font-mono text-wpm-gray/90">
+        <div className="absolute bottom-10 flex gap-8 text-[11px] font-mono text-wpm-gray">
           <span>[ENTER] or click</span>
           <span>{profile.name}</span>
         </div>

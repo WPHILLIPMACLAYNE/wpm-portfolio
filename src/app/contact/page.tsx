@@ -25,7 +25,7 @@ export default function ContactPage() {
       <div className="px-6 py-12 max-w-3xl mx-auto">
         <Link
           href="/console"
-            className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/90 hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
+            className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
         >
           <span className="text-wpm-lavender/90">&lt;-</span> BACK TO CONSOLE
         </Link>
@@ -62,14 +62,14 @@ export default function ContactPage() {
                   <span className="text-wpm-lavender/90 group-hover:text-wpm-lavender transition-colors">
                     <Icon name={item.icon} size="lg" />
                   </span>
-                  <span className="font-mono text-sm text-wpm-gray/90 group-hover:text-wpm-cyan/90 transition-colors">
+                  <span className="font-mono text-sm text-wpm-gray group-hover:text-wpm-cyan/90 transition-colors">
                     {item.label}
                   </span>
                 </motion.a>
               ))}
             </div>
           ) : (
-            <p className="font-mono text-sm text-wpm-gray/90 py-6">
+            <p className="font-mono text-sm text-wpm-gray py-6">
               No public contact methods available
             </p>
           )}

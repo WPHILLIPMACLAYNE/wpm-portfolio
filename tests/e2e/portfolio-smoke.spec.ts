@@ -94,8 +94,8 @@ test("home start flow enters the console experience", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: /WPM\.OS/i })
   ).toBeVisible();
-  await expect(page.getByText(/System ready/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /inspect work/i })).toBeVisible();
+  await expect(page.getByText(/Sistema pronto/i)).toBeVisible();
+  await expect(page.getByRole("link", { name: /inspecionar projetos/i })).toBeVisible();
 });
 
 test("project detail uses optimized media and social image", async ({ page }) => {
@@ -271,8 +271,8 @@ test("mobile uses CSS fallback without WebGL context or heavy chunk", async ({
   await page.getByRole("button", { name: /press start/i }).click();
 
   // Wait for the console shell to be visible (WPM.OS heading)
-  await expect(page.getByText(/System ready/i)).toBeVisible();
-
+  // Wait for the console shell to be visible (Sistema pronto text)
+  await expect(page.getByText(/Sistema pronto/i)).toBeVisible();
   // Give a moment for any lazy chunk to potentially load
   await page.waitForTimeout(3000);
 

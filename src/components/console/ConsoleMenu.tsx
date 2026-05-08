@@ -41,7 +41,7 @@ export default function ConsoleMenu() {
       className="relative min-h-[calc(100vh-7rem)] overflow-hidden bg-[#02040a]"
       onPointerMove={handlePointerMove}
     >
-      <h1 className="sr-only">WPM.OS — Operating evidence for work that ships</h1>
+      <h1 className="sr-only">WPM.OS — Evidencia operacional de projetos que entregam</h1>
 
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_43%_32%,rgba(7,27,58,0.92),transparent_43%),radial-gradient(circle_at_80%_25%,rgba(108,77,255,0.15),transparent_34%),linear-gradient(180deg,rgba(5,5,9,0.55),#02040a_82%)]" />
@@ -63,12 +63,14 @@ export default function ConsoleMenu() {
         <div className="flex min-w-0 flex-1 flex-col">
           <section className="flex min-w-0 flex-1 flex-col px-5 py-7 md:px-10 md:py-9 xl:px-12">
             <div className="mb-8 flex items-start justify-between gap-6">
-              <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-wpm-gray/90">
+              <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-wpm-gray">
                 <span className="text-wpm-cyan/70">WPM.OS</span>
                 <span className="ml-3">v1.0</span>
               </div>
               <ConsoleNav />
             </div>
+
+            <ConsoleModuleRibbon activeModule={activeModule} onModuleSelect={setActiveModule} />
 
             <div className="grid flex-1 min-w-0 gap-10 xl:grid-cols-[0.85fr_1.15fr] xl:items-center 2xl:grid-cols-[0.7fr_1.3fr]">
               <motion.div
@@ -78,23 +80,23 @@ export default function ConsoleMenu() {
                 className="min-w-0"
               >
                 <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-wpm-lavender/90 sm:text-xs">
-                  {"// Interactive portfolio system"}
+                  {"// Sistema interativo de portfolio"}
                 </p>
                 <div className="mt-7">
                   <p className="max-w-full font-sans text-[clamp(3.7rem,17vw,10rem)] font-black leading-[0.78] tracking-[-0.09em] text-wpm-white md:text-[clamp(5.5rem,11vw,11.5rem)]">
                     WPM<span className="text-wpm-cyan drop-shadow-[0_0_28px_rgba(116,247,255,0.55)]">.OS</span>
                   </p>
                   <p className="mt-7 max-w-[20rem] break-words font-mono text-[clamp(0.82rem,3.8vw,1.55rem)] uppercase leading-snug tracking-[0.01em] text-wpm-white/85 sm:max-w-[38rem] sm:tracking-[0.13em] xl:text-[clamp(1.15rem,1.65vw,1.75rem)]">
-                    <span className="block sm:inline">Operating evidence</span>
+                    <span className="block sm:inline">Evidencia operacional</span>
                     <span className="block sm:inline">
                       {" "}
-                      for work that <span className="text-wpm-cyan">ships</span>
+                      de projetos que <span className="text-wpm-cyan">entregam</span>
                     </span>
                   </p>
                 </div>
 
-                <p className="mt-9 max-w-md text-base leading-relaxed text-wpm-gray/90 sm:text-lg">
-                  Product thinking, operations, UX and web systems built from <span className="text-wpm-cyan">real constraints</span>.
+                <p className="mt-9 max-w-md text-base leading-relaxed text-wpm-gray sm:text-lg">
+                  Pensamento de produto, operacoes, UX e sistemas web construidos com <span className="text-wpm-cyan">restricoes reais</span>.
                 </p>
 
                 <div className="mt-9 flex w-full max-w-full flex-col gap-3 sm:w-auto sm:flex-row">
@@ -103,13 +105,13 @@ export default function ConsoleMenu() {
                     className="group inline-flex min-h-14 w-[calc(100vw-2.5rem)] max-w-full items-center justify-center gap-3 border border-wpm-cyan/55 bg-wpm-cyan/10 px-5 font-mono text-[13px] uppercase tracking-[0.12em] text-wpm-cyan shadow-[0_0_35px_rgba(116,247,255,0.13)] transition-all hover:-translate-y-0.5 hover:bg-wpm-cyan/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-cyan/70 sm:w-auto sm:px-7 sm:text-sm sm:tracking-[0.16em]"
                   >
                     <span className="transition-transform group-hover:translate-x-1">-&gt;</span>
-                    Inspect work
+                    Inspecionar projetos
                   </Link>
                   <Link
                     href="/contact"
                     className="inline-flex min-h-14 w-[calc(100vw-2.5rem)] max-w-full items-center justify-center border border-white/[0.10] bg-white/[0.025] px-5 font-mono text-[13px] uppercase tracking-[0.12em] text-wpm-lavender/90 transition-all hover:-translate-y-0.5 hover:border-wpm-purple/40 hover:text-wpm-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/60 sm:w-auto sm:px-7 sm:text-sm sm:tracking-[0.16em]"
                   >
-                    Open signal
+                    Abrir contato
                   </Link>
                 </div>
               </motion.div>
@@ -131,17 +133,16 @@ export default function ConsoleMenu() {
 
             <div className="mt-8 flex flex-col gap-4 border-t border-white/[0.06] pt-5 md:flex-row md:items-end md:justify-between">
               <div>
-                <p className="font-mono text-sm uppercase tracking-[0.16em] text-wpm-cyan">&gt; System ready.</p>
-                <p className="mt-2 font-mono text-xs text-wpm-gray/90">Type, click or inspect the loaded artifacts.</p>
+                <p className="font-mono text-sm uppercase tracking-[0.16em] text-wpm-cyan">&gt; Sistema pronto.</p>
+                <p className="mt-2 font-mono text-xs text-wpm-gray">Digite, clique ou inspecione os artefatos carregados.</p>
               </div>
               <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.16em] text-wpm-lavender/90">
-                <span>/ Artifacts loaded</span>
+                <span>/ Artefatos carregados</span>
                 <span className="h-px w-24 bg-gradient-to-r from-wpm-purple/60 to-transparent" />
               </div>
             </div>
           </section>
 
-          <ConsoleModuleRibbon activeModule={activeModule} onModuleSelect={setActiveModule} />
         </div>
       </div>
 
@@ -157,14 +158,14 @@ export default function ConsoleMenu() {
               <ProjectLibraryPanel />
             ) : (
               <div className="py-12 text-center">
-                <p className="font-mono text-sm text-wpm-gray/90">
-                  Full content available on the dedicated page.
+                <p className="font-mono text-sm text-wpm-gray">
+                  Conteudo completo disponivel na pagina dedicada.
                 </p>
                 <Link
                   href={activeItem.href}
                   className="mt-6 inline-flex items-center gap-2 font-mono text-sm uppercase tracking-[0.16em] text-wpm-cyan/80 transition-all hover:text-wpm-cyan hover:translate-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-cyan/50"
                 >
-                  Open full page <span>-&gt;</span>
+                  Abrir pagina completa <span>-&gt;</span>
                 </Link>
               </div>
             )}

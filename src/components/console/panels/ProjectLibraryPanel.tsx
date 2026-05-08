@@ -37,10 +37,10 @@ function ProjectCartridgePanel({ project, index }: { project: typeof realProject
         <h3 className="mt-3 max-w-full break-words font-mono text-base uppercase leading-relaxed tracking-[0.16em] text-wpm-white/88 sm:text-lg">
           {project.title}
         </h3>
-        <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.12em] text-wpm-gray/90">
+        <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.12em] text-wpm-gray">
           {project.category} / {project.year}
         </p>
-        <p className="mt-3 text-sm leading-relaxed text-wpm-gray/90">{project.subtitle}</p>
+        <p className="mt-3 text-sm leading-relaxed text-wpm-gray">{project.subtitle}</p>
         <div className="mt-5 relative h-48 sm:h-56 rounded-lg overflow-hidden border border-white/[0.05]">
           {isBook ? (
             <div className="absolute inset-0 flex items-center justify-center" style={{ perspective: "800px" }}>
@@ -91,7 +91,7 @@ export default function ProjectLibraryPanel() {
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-wpm-lavender/90">
           Real Work / {realProjects.length.toString().padStart(2, "0")}
         </p>
-        <p className="mt-3 max-w-lg text-sm leading-relaxed text-wpm-gray/90">
+        <p className="mt-3 max-w-lg text-sm leading-relaxed text-wpm-gray">
           Each artifact represents a shipped project. Inspect the full case study for deep-dive details.
         </p>
       </div>

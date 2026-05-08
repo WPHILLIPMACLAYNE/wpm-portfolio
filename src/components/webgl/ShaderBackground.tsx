@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo, Suspense } from "react";
+import { useRef, useMemo, Suspense, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import ShaderBackgroundFallback from "./ShaderBackgroundFallback";
@@ -142,11 +142,34 @@ function Scene({ lowPerf }: { lowPerf?: boolean }) {
   );
 }
 
+/* ── visibility hook ────────────────────────────────────── */
+
+function useIsVisible(ref: React.RefObject<HTMLDivElement | null>): boolean {
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [ref]);
+
+  return isVisible;
+}
+
 /* ── main component ──────────────────────────────────────── */
 
 export default function ShaderBackground({ lowPerf = false }: ShaderBackgroundProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIsVisible(containerRef);
+
   return (
-    <div className="fixed inset-0 -z-10 pointer-events-none" aria-hidden="true">
+    <div ref={containerRef} className="fixed inset-0 -z-10 pointer-events-none" aria-hidden="true">
       <Suspense fallback={<ShaderBackgroundFallback />}>
         <Canvas
           dpr={lowPerf ? 1 : [1, 1.5]}
@@ -157,6 +180,7 @@ export default function ShaderBackground({ lowPerf = false }: ShaderBackgroundPr
           }}
           camera={{ position: [0, 0, 8], fov: 60, near: 0.5, far: 30 }}
           style={{ position: "absolute", inset: 0 }}
+          frameloop={isVisible ? "always" : "never"}
         >
           <Scene lowPerf={lowPerf} />
         </Canvas>

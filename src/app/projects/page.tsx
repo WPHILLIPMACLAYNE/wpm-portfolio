@@ -20,7 +20,7 @@ export default function ProjectsPage() {
         {/* Back link */}
         <Link
           href="/console"
-            className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray/90 hover:text-wpm-cyan transition-colors mb-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
+            className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray hover:text-wpm-cyan transition-colors mb-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
         >
           <span className="text-wpm-lavender/90">&lt;-</span> BACK TO CONSOLE
         </Link>
@@ -33,7 +33,7 @@ export default function ProjectsPage() {
           <h1 className="font-sans text-3xl md:text-5xl font-light tracking-tight text-wpm-white/90 max-w-2xl break-words">
             Two shipped bodies of work
           </h1>
-          <p className="mt-3 font-sans text-sm text-wpm-gray/90 leading-snug max-w-md break-words">
+          <p className="mt-3 font-sans text-sm text-wpm-gray leading-snug max-w-md break-words">
             One operational system. One editorial product. Both shipped from
             real constraints.
           </p>
@@ -67,7 +67,7 @@ export default function ProjectsPage() {
                     {(featuredProofs[project.slug] ?? []).map((chip) => (
                       <span
                         key={chip}
-                    className="font-mono text-[11px] text-wpm-gray/90 bg-white/[0.035] border border-white/[0.08] px-2 py-0.5 rounded-sm break-words max-w-full"
+                    className="font-mono text-[11px] text-wpm-gray bg-white/[0.035] border border-white/[0.08] px-2 py-0.5 rounded-sm break-words max-w-full"
                       >
                         {chip}
                       </span>
@@ -83,7 +83,7 @@ export default function ProjectsPage() {
 
         {/* Role legend */}
         <section className="mb-10">
-          <p className="font-mono text-[11px] text-wpm-gray/90 uppercase tracking-wider">
+          <p className="font-mono text-[11px] text-wpm-gray uppercase tracking-wider">
             Each project represents a complete body of work — problem
             identification, solution design, implementation, and documented
             results.
@@ -95,7 +95,7 @@ export default function ProjectsPage() {
           <section className="mb-14">
             <div className="flex items-center gap-3 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-wpm-gray/40" />
-              <h2 className="font-mono text-[11px] tracking-[0.2em] uppercase text-wpm-gray/90">
+              <h2 className="font-mono text-[11px] tracking-[0.2em] uppercase text-wpm-gray">
                 More Projects
               </h2>
             </div>
