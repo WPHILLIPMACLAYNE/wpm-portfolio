@@ -1,12 +1,8 @@
 import type { NextConfig } from "next";
+import { normalizeBasePath } from "./src/lib/site";
 
 const deployTarget = process.env.NEXT_PUBLIC_DEPLOY_TARGET ?? "node";
 const isGitHubPagesExport = deployTarget === "github-pages";
-
-function normalizeBasePath(value: string | undefined) {
-  if (!value || value === "/") return "";
-  return value.startsWith("/") ? value : `/${value}`;
-}
 
 const basePath = normalizeBasePath(
   process.env.NEXT_PUBLIC_BASE_PATH ??

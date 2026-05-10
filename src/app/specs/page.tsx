@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import ConsoleShell from "@/components/console/ConsoleShell";
 import ModuleSceneLayout from "@/components/console/ModuleSceneLayout";
 
@@ -37,7 +36,7 @@ export default function SpecsPage() {
              </div>
              <div className="h-px w-full bg-white/5" />
              <p className="font-mono text-[8px] text-wpm-muted uppercase tracking-widest">
-               BUILD_ID: {Math.random().toString(16).slice(2, 10).toUpperCase()}
+               BUILD_ID: 5EEC0D3A
              </p>
           </div>
         }

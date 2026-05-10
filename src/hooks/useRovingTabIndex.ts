@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
 
 interface UseRovingTabIndexOptions {
   itemCount: number;
@@ -17,7 +16,6 @@ export function useRovingTabIndex({
   onSelect,
   handleSelect = false,
 }: UseRovingTabIndexOptions) {
-  const router = useRouter();
   const [focusedIdx, setFocusedIdx] = useState(0);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
   const rowCount = Math.ceil(itemCount / gridCols);
@@ -80,7 +78,7 @@ export function useRovingTabIndex({
 
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [focusedIdx, itemCount, gridCols, rowCount, clamp, handleSelect, onSelect, router]);
+  }, [focusedIdx, itemCount, gridCols, rowCount, clamp, handleSelect, onSelect]);
 
   return {
     focusedIdx,
