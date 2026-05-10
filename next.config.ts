@@ -3,6 +3,8 @@ import { normalizeBasePath } from "./src/lib/site";
 
 const deployTarget = process.env.NEXT_PUBLIC_DEPLOY_TARGET ?? "node";
 const isGitHubPagesExport = deployTarget === "github-pages";
+const isDigitalOceanExport = deployTarget === "digitalocean";
+const isStaticExport = isGitHubPagesExport || isDigitalOceanExport;
 
 const basePath = normalizeBasePath(
   process.env.NEXT_PUBLIC_BASE_PATH ??
@@ -60,7 +62,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   ...(basePath ? { basePath } : {}),
-  ...(isGitHubPagesExport
+  ...(isStaticExport
     ? {
         output: "export" as const,
         trailingSlash: true,

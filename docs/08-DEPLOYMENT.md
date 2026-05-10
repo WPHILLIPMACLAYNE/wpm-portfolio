@@ -54,6 +54,111 @@ GitHub Pages serves static files and does not run a Node.js Next server. Because
 
 The Node-compatible build keeps the configured security headers and default image optimization path.
 
+## DigitalOcean App Platform
+
+DigitalOcean App Platform is the prepared migration target for a root-path
+static export. The repo now includes `.do/app.yaml` with:
+
+- app name `wpm-portfolio`;
+- static site component `web`;
+- GitHub source `WPHILLIPMACLAYNE/wpm-portfolio`, branch `main`;
+- autodeploy enabled with `github.deploy_on_push: true`;
+- source directory `/`;
+- build command `npm ci && npm run build:github-pages`;
+- output directory `out`;
+- build-time public envs:
+  - `NEXT_PUBLIC_DEPLOY_TARGET=digitalocean`;
+  - `NEXT_PUBLIC_BASE_PATH=` empty, so the site is served from `/`;
+  - `NEXT_PUBLIC_SITE_URL=https://wpm-portfolio.ondigitalocean.app` as a starter placeholder.
+
+The existing `build:github-pages` script now keeps GitHub Pages defaults when no
+external env is set, but allows DigitalOcean to override those values through
+App Platform build-time environment variables. GitHub Pages therefore continues
+to build with `/wpm-portfolio`, while DigitalOcean builds without that base
+path.
+
+### Manual setup in the DigitalOcean panel
+
+1. Confirm the GitHub Student Developer Pack credit is active and check the App
+   Platform price before creating the app.
+2. Open DigitalOcean, choose **Create > App Platform**, and select GitHub as the
+   source provider.
+3. Grant DigitalOcean access to the repository if prompted.
+4. Select `WPHILLIPMACLAYNE/wpm-portfolio` and branch `main`.
+5. Keep autodeploy enabled only if App Platform should deploy every push to
+   `main`.
+6. Import or mirror the `.do/app.yaml` settings:
+   - component type: static site;
+   - source directory: `/`;
+   - build command: `npm ci && npm run build:github-pages`;
+   - output directory: `out`;
+   - environment variables listed above with `BUILD_TIME` scope.
+7. Create the app and wait for the first deployment.
+8. Replace the placeholder `NEXT_PUBLIC_SITE_URL` with the final starter domain
+   or custom domain after DigitalOcean shows the live URL.
+9. Validate the live root URL has no `/wpm-portfolio` prefix in navigation,
+   canonical URLs, Open Graph URLs, and asset paths.
+
+### Headers on DigitalOcean
+
+The approved static header manifest remains `public/_headers` and is copied to
+`out/_headers` by the static export. It contains the exact intended production
+headers:
+
+```text
+Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https: ws: wss:; media-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+```
+
+Important: the current DigitalOcean App Spec documentation lists `static_sites`,
+`github.deploy_on_push`, `build_command`, `output_dir`, `envs`, and CORS
+response headers, but does not document a supported field for arbitrary static
+site response headers such as CSP, HSTS, `X-Frame-Options`,
+`X-Content-Type-Options`, `Referrer-Policy`, or `Permissions-Policy`. Do not add
+an undocumented `headers:` block to `.do/app.yaml`; that risks an invalid App
+Platform spec.
+
+After the first deploy, manually verify:
+
+```bash
+curl -I https://wpm-portfolio.ondigitalocean.app/
+```
+
+If DigitalOcean does not apply `out/_headers`, choose one of these before
+launching as the final production host:
+
+- keep DigitalOcean for hosting but add a supported edge/proxy layer that
+  applies the exact headers above;
+- switch this deployment from static site to a Node-compatible service where
+  `next.config.ts` `headers()` can run;
+- keep GitHub Pages active until a static host with first-class `_headers`
+  support is approved.
+
+### Optional GitHub Actions fallback
+
+`.github/workflows/deploy-digitalocean.yml` is available if App Platform
+autodeploy stops working. The workflow:
+
+- runs on pushes to `main` and manual dispatch;
+- installs dependencies;
+- builds the DigitalOcean static export with the root-path envs;
+- verifies `public/_headers` and `out/_headers` are identical;
+- deploys with `digitalocean/app_action/deploy@v2` only when the repository
+  variable `ENABLE_DIGITALOCEAN_ACTION_DEPLOY` is set to `true`.
+
+Required manual setup for the fallback workflow:
+
+1. Create a DigitalOcean API token with App Platform read/write permission.
+2. Add it to GitHub as `DIGITALOCEAN_ACCESS_TOKEN`.
+3. Add repository variable `ENABLE_DIGITALOCEAN_ACTION_DEPLOY=true` only when
+   this fallback should actively deploy.
+4. Avoid enabling both App Platform autodeploy and the GitHub Actions fallback
+   at the same time unless duplicate deployments are acceptable.
+
 ## Security Headers
 
 The repository includes `public/_headers` with the approved security header set

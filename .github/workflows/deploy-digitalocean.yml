@@ -1,0 +1,55 @@
+name: Deploy DigitalOcean App Platform
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: digitalocean-app-platform
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build DigitalOcean static export
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export for DigitalOcean
+        env:
+          NEXT_PUBLIC_DEPLOY_TARGET: digitalocean
+          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_SITE_URL: https://wpm-portfolio.ondigitalocean.app
+        run: npm run build:github-pages
+
+      - name: Verify security headers manifest is exported
+        run: cmp public/_headers out/_headers
+
+  deploy:
+    name: Deploy through DigitalOcean action
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ vars.ENABLE_DIGITALOCEAN_ACTION_DEPLOY == 'true' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy App Platform app
+        uses: digitalocean/app_action/deploy@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}

@@ -11,6 +11,87 @@ Regras:
 
 ---
 
+## [CODEX -> DEEPSEEK] TASK-20260510-DIGITALOCEAN-APP-PLATFORM-PREP
+
+**Status:** CODEX_EXECUTING_WITH_DEEPSEEK_UNAVAILABLE
+**Data:** 2026-05-10
+
+### Problema
+
+Preparar migracao do WPM.OS Portfolio de GitHub Pages para DigitalOcean App Platform mantendo export estatico, retrocompatibilidade com GitHub Pages e documentacao operacional.
+
+### Causa provavel
+
+GitHub Pages nao aplica headers HTTP do repositorio. DigitalOcean App Platform foi escolhido como candidato por estar no GitHub Student Developer Pack e oferecer deploy GitHub/App Spec, mas a documentacao oficial atual nao confirma headers arbitrarios em `static_sites`.
+
+### Arquivos afetados
+
+- `.do/app.yaml`
+- `.github/workflows/deploy-digitalocean.yml`
+- `package.json`
+- `next.config.ts`
+- `docs/08-DEPLOYMENT.md`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Plano
+
+1. Consultar documentacao atual da DigitalOcean App Platform.
+2. Criar app spec YAML para static site com build `npm ci && npm run build:github-pages`, output `out`, envs de DigitalOcean e autodeploy GitHub.
+3. Criar workflow fallback GitHub Actions com build validado e deploy oficial opcional.
+4. Ajustar configuracao minima para `digitalocean` gerar static export sem `/wpm-portfolio`.
+5. Documentar passos manuais no painel DO e a pendencia real de headers arbitrarios.
+6. Validar com `npm run typecheck && npm run lint`.
+
+### Risco
+
+Nao adicionar campo `headers:` nao documentado ao app spec, para evitar spec invalida. Headers aprovados permanecem em `public/_headers` e devem ser verificados no deploy real.
+
+### Validacao esperada
+
+```bash
+npm run typecheck && npm run lint
+```
+
+Nao executar `npm run build` nem `npm run build:github-pages` nesta sandbox por restricao de rede/fontes.
+
+---
+
+## [CODEX -> DEEPSEEK] EXECUTION REPORT TASK-20260510-DIGITALOCEAN-APP-PLATFORM-PREP
+
+**Status:** DONE_WITH_HEADER_SPEC_CAVEAT
+**Data:** 2026-05-10
+
+### Implementado
+
+- Criado `.do/app.yaml` para DigitalOcean App Platform static site com nome `wpm-portfolio`, GitHub `WPHILLIPMACLAYNE/wpm-portfolio`, branch `main`, autodeploy ligado, source dir `/`, build `npm ci && npm run build:github-pages`, output `out` e envs build-time para target `digitalocean`, base path vazio e URL placeholder.
+- Criado `.github/workflows/deploy-digitalocean.yml` como fallback opcional com build DigitalOcean, comparacao `public/_headers` vs `out/_headers` e deploy via `digitalocean/app_action/deploy@v2` apenas quando `ENABLE_DIGITALOCEAN_ACTION_DEPLOY=true`.
+- Ajustado `package.json` para `build:github-pages` manter defaults GitHub Pages quando envs externas nao existirem, mas respeitar envs fornecidas pela DigitalOcean.
+- Ajustado `next.config.ts` para `NEXT_PUBLIC_DEPLOY_TARGET=digitalocean` tambem usar static export.
+- Atualizado `docs/08-DEPLOYMENT.md` com passos manuais no painel DigitalOcean, envs, fluxo GitHub, diferenca de base path, workflow fallback e pendencia real de headers.
+
+### Caveat tecnico sobre headers
+
+A documentacao oficial consultada da DigitalOcean App Platform confirma App Spec YAML, `static_sites`, `github.deploy_on_push`, `build_command`, `output_dir`, env vars e CORS, mas nao confirma campo oficial para headers arbitrarios de resposta em static site. Por isso nao foi criado um bloco `headers:` nao documentado no `.do/app.yaml`. Os headers aprovados permanecem identicos em `public/_headers` e foram copiados como comentario de auditoria na spec.
+
+### Validacao
+
+```bash
+npm run typecheck && npm run lint
+git diff --check
+pgrep -af "[f]orge -C /home/acewallthemac/Documentos/portifoliomain/wpm-portfolio"
+```
+
+Resultados:
+
+- `npm run typecheck`: PASS.
+- `npm run lint`: PASS.
+- `git diff --check`: PASS.
+- Processo Forge/DeepSeek ativo: nenhum encontrado.
+
+### Nao executado
+
+`npm run build` e `npm run build:github-pages` nao foram executados por instrucao da tarefa e por restricao conhecida da sandbox sem rede para fontes.
+
 ## [CODEX -> DEEPSEEK] TASK-20260508-REDESIGN-WPMOS-PREMIUM
 
 **Status:** IN_PROGRESS

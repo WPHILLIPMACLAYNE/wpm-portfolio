@@ -1,0 +1,53 @@
+# DigitalOcean App Platform app spec for the static WPM.OS Portfolio export.
+# Current DigitalOcean App Spec docs expose static_sites env/build/output fields
+# and CORS headers, but do not document arbitrary static-site response headers.
+# Keep the approved security header source in public/_headers and verify live
+# support after the first App Platform deployment.
+name: wpm-portfolio
+
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+
+static_sites:
+  - name: web
+    environment_slug: node-js
+    github:
+      repo: WPHILLIPMACLAYNE/wpm-portfolio
+      branch: main
+      deploy_on_push: true
+    source_dir: /
+    build_command: npm ci && npm run build:github-pages
+    output_dir: out
+    index_document: index.html
+    error_document: 404.html
+    envs:
+      - key: NEXT_PUBLIC_DEPLOY_TARGET
+        value: digitalocean
+        scope: BUILD_TIME
+        type: GENERAL
+      - key: NEXT_PUBLIC_BASE_PATH
+        value: ""
+        scope: BUILD_TIME
+        type: GENERAL
+      - key: NEXT_PUBLIC_SITE_URL
+        value: https://wpm-portfolio.ondigitalocean.app
+        scope: BUILD_TIME
+        type: GENERAL
+
+ingress:
+  rules:
+    - component:
+        name: web
+      match:
+        path:
+          prefix: /
+
+# Approved security headers, copied exactly from public/_headers:
+# /*
+#   Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https: ws: wss:; media-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests
+#   X-Content-Type-Options: nosniff
+#   X-Frame-Options: DENY
+#   Referrer-Policy: strict-origin-when-cross-origin
+#   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+#   Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
