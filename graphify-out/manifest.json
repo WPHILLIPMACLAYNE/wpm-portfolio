@@ -1,0 +1,490 @@
+{
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/vitest.config.ts": {
+    "mtime": 1778438681.848941,
+    "hash": "4cae645d3219d912c59564cb205d74a2"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/playwright.config.ts": {
+    "mtime": 1778431542.2268853,
+    "hash": "775bf4f8701fc8f8936dbe69dcaed888"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/sentry.edge.config.ts": {
+    "mtime": 1778438089.9679728,
+    "hash": "7ec433f404e38a3d079d3d24bc843fbd"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/sentry.server.config.ts": {
+    "mtime": 1778438089.4269757,
+    "hash": "7ec433f404e38a3d079d3d24bc843fbd"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/postcss.config.mjs": {
+    "mtime": 1777920526.553962,
+    "hash": "239f3ebf717465dc636818a1a619398d"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/next.config.ts": {
+    "mtime": 1778438101.9659057,
+    "hash": "376b1e40e8e614fa507a53ceab1b89cb"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/eslint.config.mjs": {
+    "mtime": 1778438760.6925647,
+    "hash": "0455ac0969ee35ceac51afbff1f3c970"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/sentry.client.config.ts": {
+    "mtime": 1778438088.65898,
+    "hash": "09fa0fc1704500067ac2ec9c8d78b782"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/instrumentation-client.ts": {
+    "mtime": 1778438088.9149785,
+    "hash": "0da2f29f87d43b24e015b746bdc487fd"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/webgl/ShaderBackgroundFallback.tsx": {
+    "mtime": 1778267931.3437607,
+    "hash": "3e1ec027a0f4a321c8feab2efc9c8b41"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/webgl/ShaderBackgroundWrapper.tsx": {
+    "mtime": 1778436920.5402923,
+    "hash": "2cf798ae364c898f37a6359ac37c0f94"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/webgl/ShaderBackground.tsx": {
+    "mtime": 1778266065.430547,
+    "hash": "57e5aed7ce85534d7f7155b762b591ee"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/ui/Badge.tsx": {
+    "mtime": 1778266182.5720224,
+    "hash": "40fdf1e987dc5f5fe7ed250b311a0e73"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/ui/Cursor.tsx": {
+    "mtime": 1777934886.0332556,
+    "hash": "02e50aa5f3075abeb2db57cd06f36b22"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/ui/Icon.tsx": {
+    "mtime": 1777922506.3110604,
+    "hash": "b0569d6cd66949c508d4b24aa5619039"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/ui/OSLoader.tsx": {
+    "mtime": 1778368162.2176988,
+    "hash": "5f53c0bc9b1c967d62e880d05463fa41"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/ui/ClientCursor.tsx": {
+    "mtime": 1778090258.8710985,
+    "hash": "d5d7047012bd5e689cff8378443d7935"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/ui/Button.tsx": {
+    "mtime": 1778267218.2228553,
+    "hash": "db88dbcc66b30271123245cc84c44f27"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/ui/Divider.tsx": {
+    "mtime": 1778266181.6550264,
+    "hash": "964b4680dd217a4d106f00e5c0b3eeb3"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/ui/__tests__/OSLoader.test.tsx": {
+    "mtime": 1778438642.9221287,
+    "hash": "a7479d6205f246deec0c75193210c460"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/boot/PressStart.tsx": {
+    "mtime": 1778369610.2391593,
+    "hash": "9cc67816b8df68526e0a6e79243599b5"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/boot/BootIntro.tsx": {
+    "mtime": 1778369610.4431593,
+    "hash": "5e30df7279b02259d491b3e3555bffd3"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/boot/__tests__/PressStart.test.tsx": {
+    "mtime": 1778438642.3771312,
+    "hash": "c5910a41cabc36c51a049343b4ed99a5"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/motion/ReverseCrtTransition.tsx": {
+    "mtime": 1778089302.5471811,
+    "hash": "67e6e67c3e481520c5c2e35a536b9f93"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/motion/PageTransition.tsx": {
+    "mtime": 1778373078.1812706,
+    "hash": "44de30266565397900026c63714de9a0"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/MobileNavDrawer.tsx": {
+    "mtime": 1778373237.4556415,
+    "hash": "d422324cbd3364372fdff29dd7e928c0"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/StaticConsoleShell.tsx": {
+    "mtime": 1778283323.978746,
+    "hash": "51a16c66cc91552aaf757884431549af"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/ConsoleModuleRibbon.tsx": {
+    "mtime": 1778267883.9287562,
+    "hash": "6a723ce5683e72390c300a5335a8dc9f"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/ModulePreviewPanel.tsx": {
+    "mtime": 1778369663.0311875,
+    "hash": "a4634666f9b2646c0a2ae8489d43de70"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/ConsoleChrome.tsx": {
+    "mtime": 1778370216.8525918,
+    "hash": "1b1b67e72752612b5c06c1b3ab642d31"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/ModuleSlideSystem.tsx": {
+    "mtime": 1778282844.2886753,
+    "hash": "1da25eb993a8c463bdc8c61b2b6a3bc6"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/ProjectCartridge.tsx": {
+    "mtime": 1778267193.071878,
+    "hash": "2021f7a7c7911dc650f27a303a03031d"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/ModuleRail.tsx": {
+    "mtime": 1778267890.284621,
+    "hash": "17a912fb0f0e48aada97f26b2e50e3c5"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/ConsoleShell.tsx": {
+    "mtime": 1778373231.0367777,
+    "hash": "620da21b05fa6461e36221f4ea123f7a"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/MenuModule.tsx": {
+    "mtime": 1778267880.746824,
+    "hash": "8e5f1638f60151a28b3e61c7373ece82"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/TacticalVisualStage.tsx": {
+    "mtime": 1778436926.1542711,
+    "hash": "da6a238fe24585e0eac514df2c48d8c4"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/ModulePanelFrame.tsx": {
+    "mtime": 1778267216.0939405,
+    "hash": "fc0d116d0af89e88c86be37f557960b7"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/ConsoleProjectArtifacts.tsx": {
+    "mtime": 1778267919.5380058,
+    "hash": "65092d1ae5b611a59d196070ffc0ae61"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/moduleSceneData.ts": {
+    "mtime": 1778373524.740191,
+    "hash": "22987acb4c0bd35ae935bfaf386548ab"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/HologramStage.tsx": {
+    "mtime": 1778373062.7686524,
+    "hash": "1d08258071a23f89471676b8a0ea0584"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/ModuleSceneLayout.tsx": {
+    "mtime": 1778373199.0004692,
+    "hash": "8988c4db0346278af27cf1fa05426343"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/ConsoleMenu.tsx": {
+    "mtime": 1778368807.36117,
+    "hash": "10ab751ef58c5b05dc6ef942a39e7fbd"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/components/console/panels/ProjectLibraryPanel.tsx": {
+    "mtime": 1778369651.5081823,
+    "hash": "4e99335c7162fc6e16cb6e4578d592e8"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/lib/utils.ts": {
+    "mtime": 1777920938.453432,
+    "hash": "618d00bf4537ce84f9ba62c5b215fb30"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/lib/webglCapability.ts": {
+    "mtime": 1778436720.2450566,
+    "hash": "21736d5d28db03f8fd68313841ac2244"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/lib/site.ts": {
+    "mtime": 1778430065.8457336,
+    "hash": "46b0fd54d22219080e7d3f5f77d798a0"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/lib/__tests__/site.test.ts": {
+    "mtime": 1778455340.5492086,
+    "hash": "d9dd6fceedf17a52fb29c4e87ac34e43"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/lib/__tests__/utils.test.ts": {
+    "mtime": 1778431416.9580958,
+    "hash": "4969fe3ce4fd4ae3a7b7d04cf68e8362"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/hooks/useRovingTabIndex.ts": {
+    "mtime": 1778430255.2973704,
+    "hash": "3c293315fd7cf755b06cbcd4cf48371e"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/hooks/useIntroSkip.ts": {
+    "mtime": 1777935432.2596707,
+    "hash": "9cfdb2074545c83a143c405e28b01ef4"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/hooks/__tests__/useRovingTabIndex.test.ts": {
+    "mtime": 1778438700.6898508,
+    "hash": "f3c9857d0bad94ce307863782ed5e97e"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/hooks/__tests__/useIntroSkip.test.ts": {
+    "mtime": 1778438588.1743944,
+    "hash": "0b77e2c5c0c1a41ddd2935299d6ad48e"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/data/profile.ts": {
+    "mtime": 1778429894.9461992,
+    "hash": "552b171af4470eaf20f4538d6666dcfa"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/data/projects.ts": {
+    "mtime": 1778430213.3494396,
+    "hash": "63caa5238716e63c38359e8e9d611a43"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/types/global.d.ts": {
+    "mtime": 1778430107.8106413,
+    "hash": "c8da5d62cc3d6de364ccbe1d8e0d30ea"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/sitemap.ts": {
+    "mtime": 1778110850.1230998,
+    "hash": "21dc5549d2843378851645be33f56ff6"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/not-found.tsx": {
+    "mtime": 1778428726.8250525,
+    "hash": "e8629945522fcc730ede1e6e26c00557"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/global-error.tsx": {
+    "mtime": 1778438096.6259356,
+    "hash": "ab04bfe1342c3c61d2c043a62ba67ce8"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/error.tsx": {
+    "mtime": 1778438169.252536,
+    "hash": "076c5ba96d50deb37a1b367e543ba724"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/layout.tsx": {
+    "mtime": 1778431042.5855148,
+    "hash": "e1a78b297f631c6a63f958dcb3fb858f"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/robots.ts": {
+    "mtime": 1778110850.1230998,
+    "hash": "4bd427accc4868d883e85ccf3664aada"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/page.tsx": {
+    "mtime": 1778368170.57399,
+    "hash": "b533fd5d03086e44bb27f1ef18fe1b53"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/skills/layout.tsx": {
+    "mtime": 1778110850.1230998,
+    "hash": "556cffdee3fde3afdd4a64e222419110"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/skills/page.tsx": {
+    "mtime": 1778282883.9444673,
+    "hash": "da9487fee07f13dff4ee6b81e14ac584"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/about/layout.tsx": {
+    "mtime": 1778110850.1181834,
+    "hash": "cd0b2e8208b7dae2b48b36a38c264d30"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/about/page.tsx": {
+    "mtime": 1778369651.5081823,
+    "hash": "3b793ca85ea6dbfe33e8287a11d1e4d2"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/lab/layout.tsx": {
+    "mtime": 1778110850.1200998,
+    "hash": "04117e777e59e97109fac0d38859977d"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/lab/page.tsx": {
+    "mtime": 1778282929.8512268,
+    "hash": "ebc64aa8d80e15ced74163c29e464bb6"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/specs/layout.tsx": {
+    "mtime": 1778110850.1190996,
+    "hash": "5dc331e750e3673b2ee4352dd7b930d1"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/specs/page.tsx": {
+    "mtime": 1778428870.6809356,
+    "hash": "01faf5e33b28fce00a50b7b7d3cb7c3b"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/console/page.tsx": {
+    "mtime": 1777939364.0523102,
+    "hash": "04763a0d20bfe5ba82bc1a8dfa2dc004"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/projects/layout.tsx": {
+    "mtime": 1778110850.1220996,
+    "hash": "014da61e6118c0b0dba01ea1d574d3de"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/projects/page.tsx": {
+    "mtime": 1778282996.123633,
+    "hash": "aa9fad825e43f2edc420cc12bb5866f8"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/projects/[slug]/page.tsx": {
+    "mtime": 1778373055.8168266,
+    "hash": "08465bac54771478625ad595bc39feb8"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/resume/layout.tsx": {
+    "mtime": 1778110850.1220996,
+    "hash": "53219fc7e851e1e0f1a19380a0e41d18"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/resume/page.tsx": {
+    "mtime": 1778282929.8492267,
+    "hash": "85a331ad4ae7f621cf466c25287300a5"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/contact/layout.tsx": {
+    "mtime": 1778110850.1181834,
+    "hash": "c894240e89453b29ca627f9a4d99af91"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/src/app/contact/page.tsx": {
+    "mtime": 1778283752.105527,
+    "hash": "1b12be6e8b7ed53a1fda3422ea8b7eb8"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/tests/e2e/portfolio-smoke.spec.ts": {
+    "mtime": 1778436721.7870507,
+    "hash": "e3846f923d0d3c12311fc2109b4075f1"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/ENGINEERING_GUIDE.md": {
+    "mtime": 1778110850.1030996,
+    "hash": "08b9936ee5e32305440ba18682b618f0"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/AGENTS.md": {
+    "mtime": 1778454616.0988386,
+    "hash": "1a1e0d83f230b8b576fdb34410c9e289"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/README.md": {
+    "mtime": 1778374262.49053,
+    "hash": "19cea58ac84cf0cc307b450fac0affc7"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/AUDIT_REPORT.md": {
+    "mtime": 1778433707.7001326,
+    "hash": "5a4c87d1da5a21de670dd2ee20fbafd5"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/11-MD-CLOSURE-2026-05-06.md": {
+    "mtime": 1778111173.5897162,
+    "hash": "77e3dbcd8ff7acc53cec27c8740316f9"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/AI_COMMAND_ROOM.md": {
+    "mtime": 1778438847.1351562,
+    "hash": "947a243ab054f848454a6f91a4f8f0ae"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/10-PROFESSIONAL-AUDIT-2026-05-06.md": {
+    "mtime": 1778110850.1060996,
+    "hash": "7e6a35537633b82a5c5e81c1cb1a6e63"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/VISUAL_AUDIT_REPORT.md": {
+    "mtime": 1778281194.1253052,
+    "hash": "7146b2e38f7e384a7e291b78ccf35443"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/12-EXECUTION-PLAN.md": {
+    "mtime": 1778271832.8081305,
+    "hash": "fbbdaa8fd8f73d7809ff3aed4c47b209"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/AVAILABLE_SERVICES.md": {
+    "mtime": 1778005923.8054652,
+    "hash": "dca8bd9e85427f3f9430e3094a9e1b0b"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/07-REFERENCE-PORTFOLIO-DECONSTRUCTION.md": {
+    "mtime": 1778012593.4182343,
+    "hash": "61bbbed127e8782beaaf65feebb41e80"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/AI_TEAM_ORCHESTRATION.md": {
+    "mtime": 1778110850.1100998,
+    "hash": "51373794aedb842d481175abd5558894"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/00-OVERVIEW.md": {
+    "mtime": 1778281194.0763056,
+    "hash": "98daadd7e37f4a440b59cf2a5bdada35"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/SECURITY_AND_SECRETS.md": {
+    "mtime": 1778110850.1110997,
+    "hash": "6944d7d984323be12238b96c6adadfb7"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/08-MUZLI-100-PORTFOLIO-LESSONS.md": {
+    "mtime": 1778013309.5048614,
+    "hash": "eeb1ea1a360879fb3e6efa87036ce587"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/01-STEP-BY-STEP.md": {
+    "mtime": 1778110850.1051054,
+    "hash": "bf901c527a5fbbd9cb5b6190f5d02479"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/06-UX-AUDIT.md": {
+    "mtime": 1778110850.1060996,
+    "hash": "88182d04131598d92e4b8b9c40bfdcc0"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/04-CREATIVE-SPEC.md": {
+    "mtime": 1778110850.1056266,
+    "hash": "ef75508f74b63061516abfbbf26a9e2b"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/14-WPMOS-TACTICAL-UI-UX-MASTER-GUIDE.md": {
+    "mtime": 1778374250.2414522,
+    "hash": "5a1e8091f1a99fc898850c055cb53eea"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/VISUAL_AUDIT_IMPLEMENTATION.md": {
+    "mtime": 1778284051.6381562,
+    "hash": "e702a6c1b7c9ceac8861836ff983e3ad"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/08-DEPLOYMENT.md": {
+    "mtime": 1778455394.1854694,
+    "hash": "2ec82e225647cd7f9b5a5110c842be61"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/05-ARCHITECTURE.md": {
+    "mtime": 1777922334.970265,
+    "hash": "73dadff857aecdd57408b3a41c6f22b4"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/03-CREATIVE-BRIEF.md": {
+    "mtime": 1778110850.1056266,
+    "hash": "259bb75e367777057cb5dedb15f3ce07"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/DEPLOYMENT_OPTIONS.md": {
+    "mtime": 1778110850.1100998,
+    "hash": "92a7f3616f1183991d3f7d21d9769381"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/13-WPMOS-PREMIUM-REDESIGN-2026-05-08.md": {
+    "mtime": 1778285460.855055,
+    "hash": "aee91645ff23c2edb8b8a5d5d19d1b94"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/ARCHITECTURE_DECISIONS.md": {
+    "mtime": 1778110850.1100998,
+    "hash": "86022dead8219305bc77356df142e52c"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/02-TECHNICAL-REFERENCE.md": {
+    "mtime": 1778438820.1852832,
+    "hash": "b8dec162dbbf9dd6382c132f0e678c11"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/CV_RECONSTRUCTION.md": {
+    "mtime": 1778009788.3441412,
+    "hash": "55f10cd74f2ba9a544b4011da7c0fb79"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/docs/09-AUDIT-HARDENING-2026-05-06.md": {
+    "mtime": 1778090780.491556,
+    "hash": "7d8be3ea8ca6eab4f9e44ac3ce926b37"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/portfolio_codex_context_package/AGENTS.md": {
+    "mtime": 1778110850.1140997,
+    "hash": "174b71abe4230e091356bcaf092854d9"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/portfolio_codex_context_package/docs/PREMIUM_PORTFOLIO_SERVICE_PLAN.md": {
+    "mtime": 1778110850.1155765,
+    "hash": "854d1aa6cec6b349483b9c44885249cd"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/portfolio_codex_context_package/docs/CODEX_TASKING_GUIDE.md": {
+    "mtime": 1778110850.1155765,
+    "hash": "9847d01e52f499fb3313d2f923c02c18"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/portfolio_codex_context_package/docs/AVAILABLE_SERVICES.md": {
+    "mtime": 1778110850.1155765,
+    "hash": "fa0e3cec5ae92446d7e7436f09f44b10"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/portfolio_codex_context_package/docs/SECURITY_AND_SECRETS.md": {
+    "mtime": 1778110850.1160998,
+    "hash": "6944d7d984323be12238b96c6adadfb7"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/portfolio_codex_context_package/docs/AI_CONTEXT.md": {
+    "mtime": 1778110850.1153288,
+    "hash": "1053012ad9e37e03df438db7520662c8"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/portfolio_codex_context_package/docs/LAUNCH_CHECKLIST.md": {
+    "mtime": 1778110850.1155765,
+    "hash": "760973b8ec2396b4203481a6ca8a868f"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/portfolio_codex_context_package/docs/DEPLOYMENT_OPTIONS.md": {
+    "mtime": 1778110850.1155765,
+    "hash": "92a7f3616f1183991d3f7d21d9769381"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/portfolio_codex_context_package/docs/ARCHITECTURE_DECISIONS.md": {
+    "mtime": 1778110850.1155765,
+    "hash": "4db993365d198770664842e79d47a8b8"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/public/project-livro-cover-640.webp": {
+    "mtime": 1778110850.1160998,
+    "hash": "cf0ecc10805d774ff412ffe9b9601269"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/public/project-livro-cover-960.webp": {
+    "mtime": 1778110850.1170998,
+    "hash": "acd524bc2d5cdec67caf9a178a74a942"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/public/project-livro-cover.png": {
+    "mtime": 1778012267.0361712,
+    "hash": "e60121d74382574d43e9999246a778a0"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/public/project-livro-cover-og.jpg": {
+    "mtime": 1778110850.1181834,
+    "hash": "65eeeb6424ddca6460a3f5f905daf8f1"
+  },
+  "/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio/public/project-wpm-gestao-cover.svg": {
+    "mtime": 1778430210.266445,
+    "hash": "cb60dd2466adf924754832215a19d360"
+  }
+}

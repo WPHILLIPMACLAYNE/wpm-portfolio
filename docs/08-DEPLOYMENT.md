@@ -9,16 +9,22 @@ The portfolio supports two build targets:
 1. **GitHub Pages static export** for the public `wpm-portfolio` project URL.
 2. **Node-compatible Next.js host** for environments that need runtime HTTP headers and default Next image optimization.
 
-The GitHub Pages path is treated as the explicit static target because the default public URL is:
+The GitHub Pages path supports the default project URL and the approved
+Namecheap custom domain:
 
 ```text
 https://wphillipmaclayne.github.io/wpm-portfolio
+https://wpmsmartwonkey.me
 ```
 
 The repository is public and GitHub Pages is published by `.github/workflows/pages.yml`.
 The workflow builds the static export with `npm run build:github-pages`, adds
 `out/.nojekyll`, uploads `out/` as a Pages artifact, and deploys through the
-official GitHub Pages Actions flow.
+official GitHub Pages Actions flow. For the Namecheap custom domain deployment,
+the workflow overrides the build envs so the site is exported at the root path
+with `NEXT_PUBLIC_SITE_URL=https://wpmsmartwonkey.me` and
+`NEXT_PUBLIC_BASE_PATH=`. The repository includes `public/CNAME`, which is
+copied into `out/CNAME` during the static export.
 
 ## Commands
 
@@ -32,6 +38,15 @@ npm run start -- --hostname 127.0.0.1 --port 3010
 GitHub Pages static export:
 
 ```bash
+npm run build:github-pages
+```
+
+GitHub Pages custom-domain export:
+
+```bash
+NEXT_PUBLIC_DEPLOY_TARGET=github-pages \
+NEXT_PUBLIC_BASE_PATH= \
+NEXT_PUBLIC_SITE_URL=https://wpmsmartwonkey.me \
 npm run build:github-pages
 ```
 
@@ -216,3 +231,70 @@ validated without breaking Fast Refresh.
 GitHub Pages is approved and active. Do not enable another external host,
 analytics, monitoring, secrets provider, or backend service without explicit
 approval.
+
+## Namecheap Custom Domain
+
+Approved target domain:
+
+```text
+wpmsmartwonkey.me
+```
+
+Recommended architecture:
+
+- GitHub Pages remains the hosting provider.
+- Namecheap manages DNS only.
+- The site is served at the apex/root domain, not `/wpm-portfolio`.
+- `www.wpmsmartwonkey.me` should resolve to the same GitHub Pages site.
+
+### GitHub setup
+
+1. Open the GitHub repository settings.
+2. Go to **Settings > Pages**.
+3. Confirm the source is **GitHub Actions**.
+4. In **Custom domain**, enter:
+
+```text
+wpmsmartwonkey.me
+```
+
+5. Save and wait for GitHub to verify DNS.
+6. Enable **Enforce HTTPS** after DNS verification is complete.
+
+### Namecheap DNS setup
+
+In Namecheap, open the domain control panel, then **Advanced DNS > Host
+Records**.
+
+Create or keep these records:
+
+| Type | Host | Value | TTL |
+| --- | --- | --- | --- |
+| A Record | `@` | `185.199.108.153` | Automatic |
+| A Record | `@` | `185.199.109.153` | Automatic |
+| A Record | `@` | `185.199.110.153` | Automatic |
+| A Record | `@` | `185.199.111.153` | Automatic |
+| CNAME Record | `www` | `wphillipmaclayne.github.io` | Automatic |
+
+Remove conflicting parking, URL redirect, masked redirect, or old host records
+for `@` and `www` before saving. Preserve unrelated records such as email
+(`MX`, SPF, DKIM, DMARC) unless intentionally changing mail service.
+
+### Validation
+
+After DNS propagation:
+
+```bash
+dig +short wpmsmartwonkey.me A
+dig +short www.wpmsmartwonkey.me CNAME
+curl -I https://wpmsmartwonkey.me/
+curl -I https://www.wpmsmartwonkey.me/
+```
+
+Expected:
+
+- apex resolves to GitHub Pages IPs;
+- `www` resolves to `wphillipmaclayne.github.io`;
+- HTTPS is valid;
+- canonical URLs and sitemap use `https://wpmsmartwonkey.me`;
+- navigation and assets do not include `/wpm-portfolio`.

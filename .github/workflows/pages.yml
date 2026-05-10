@@ -34,6 +34,9 @@ jobs:
 
       - name: Build GitHub Pages export
         env:
+          NEXT_PUBLIC_DEPLOY_TARGET: github-pages
+          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_SITE_URL: https://wpmsmartwonkey.me
           NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: npm run build:github-pages
 

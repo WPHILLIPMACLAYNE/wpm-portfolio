@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { absoluteUrl } from "../site";
+import { absoluteUrl, normalizeBasePath } from "../site";
 
 describe("absoluteUrl", () => {
   it("builds an absolute URL from a root-relative path", () => {
@@ -12,5 +12,12 @@ describe("absoluteUrl", () => {
     expect(absoluteUrl("contact")).toBe(
       "https://wphillipmaclayne.github.io/wpm-portfolio/contact"
     );
+  });
+});
+
+describe("normalizeBasePath", () => {
+  it("allows custom-domain root deployments", () => {
+    expect(normalizeBasePath("")).toBe("");
+    expect(normalizeBasePath("/")).toBe("");
   });
 });

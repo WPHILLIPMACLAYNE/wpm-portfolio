@@ -1,0 +1,25 @@
+# Generated/runtime artifacts
+node_modules/
+.next/
+out/
+coverage/
+test-results/
+playwright-report/
+build/
+
+# Local environment and secrets
+.env*
+.vercel/
+.do/
+
+# Git and editor/system files
+.git/
+.DS_Store
+*.pem
+*.tsbuildinfo
+next-env.d.ts
+
+# Agent scratch / handoff artifacts that should not drive the product graph
+AGENT_ROOM*.md
+CLAUDE.md
+_reversa_sdd/
