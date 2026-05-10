@@ -5123,3 +5123,637 @@ Resposta esperada de Wallace:
 ### Regra para a proxima conta Codex
 
 Nao marcar o objetivo/processo como completo enquanto Wallace nao responder `APROVADO VISUAL`. Se houver `AJUSTAR: ...`, aplicar somente o ajuste solicitado, validar, atualizar docs se necessario, commitar, publicar, monitorar Pages, validar live e pedir novo aceite visual.
+
+---
+
+## [CODEX -> DEEPSEEK] TASK-20260510-CODEX-CLI-0130
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Missao
+
+Atualizar o Codex CLI global de `codex-cli 0.129.0` para `@openai/codex@0.130.0`, sem alterar codigo do portfolio.
+
+### Plano de correcao
+
+1. Confirmar pacote alvo no npm.
+2. Instalar `@openai/codex@0.130.0` globalmente.
+3. Validar com `codex --version`.
+4. Registrar resultado neste arquivo append-only.
+
+### Risco
+
+Instalacao global pode falhar por rede, permissao npm ou PATH. Se o PATH nao for atualizado pelo npm, validar o binario ja resolvido no shell atual.
+
+---
+
+## [CODEX -> DEEPSEEK] EXECUTION REPORT TASK-20260510-CODEX-CLI-0130
+
+**Status:** DONE
+**Data:** 2026-05-10
+
+### Executado
+
+- Versao alvo confirmada no npm: `npm view @openai/codex@0.130.0 version` retornou `0.130.0`.
+- Instalacao global executada: `npm i -g @openai/codex@0.130.0`.
+- Resultado da instalacao: `changed 2 packages in 17s`.
+
+### Validacao
+
+```bash
+codex --version
+npm list -g @openai/codex --depth=0
+```
+
+Resultados:
+- `codex --version`: `codex-cli 0.130.0`.
+- `npm list -g @openai/codex --depth=0`: `@openai/codex@0.130.0`.
+
+### Observacao
+
+O comando `codex --version` ainda exibiu o aviso conhecido `WARNING: proceeding, even though we could not update PATH: Read-only file system (os error 30)`, mas o binario ativo foi resolvido corretamente em `/home/acewallthemac/.config/nvm/versions/node/v24.15.0/bin/codex` e retornou a versao esperada.
+
+---
+
+## [CODEX -> DEEPSEEK] TASK TASK-20260510-SEC-01
+
+**Status:** IN_PROGRESS
+**Prioridade:** Alta
+**Area:** Seguranca / Deploy
+**Titulo:** SEC-01 - Security headers para deploy estatico compativel
+
+### Contexto
+
+O audit report marcou SEC-01 como critico porque o deploy ativo em GitHub Pages e um static export. A documentacao local do Next.js 16 confirma que `headers()` em `next.config.ts` nao e suportado em `output: "export"`, e o GitHub Pages nao permite configurar headers HTTP customizados por repositorio.
+
+### Objetivo
+
+Adicionar um manifesto `_headers` versionado para hosts estaticos compativeis com headers de seguranca e documentar que o deploy ativo GitHub Pages continua limitado ate uma migracao aprovada de host.
+
+### Escopo permitido
+
+- `public/_headers`
+- `docs/08-DEPLOYMENT.md`
+- `AUDIT_REPORT.md`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Fora de escopo
+
+- Ativar Cloudflare Pages, Azure, DigitalOcean, Vercel, Netlify ou outro host externo.
+- Alterar secrets, DNS, GitHub Actions ou configuracoes de producao.
+- Refatorar CSP/headers fora do necessario para o manifesto estatico.
+
+### Criterios de aceite
+
+- [ ] `public/_headers` existe com CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy e HSTS.
+- [ ] `npm run build:github-pages` copia `_headers` para `out/_headers`.
+- [ ] `npm run typecheck && npm run lint` passa.
+- [ ] `npm run test:e2e` passa ou registra falha.
+- [ ] `AUDIT_REPORT.md` registra evidencia e limitacao do deploy ativo.
+
+### Comandos esperados
+
+```bash
+npm run typecheck && npm run lint
+npm run build:github-pages
+test -f out/_headers
+npm run test:e2e
+```
+
+---
+
+## [DEEPSEEK -> CODEX] EXECUTION REPORT TASK-20260510-SEC-01
+
+**Status:** BLOCKED
+**Resumo:** Foi criado `public/_headers` com os headers de seguranca previstos e `docs/08-DEPLOYMENT.md` foi atualizado para explicar que GitHub Pages nao aplica esse arquivo. A validacao minima parou em `npm run lint`, por erro preexistente fora do escopo SEC-01.
+
+### Arquivos alterados
+
+- `public/_headers`
+- `docs/08-DEPLOYMENT.md`
+- `AUDIT_REPORT.md`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Implementacao
+
+O manifesto `_headers` fica pronto para host estatico compativel, como Cloudflare Pages, sem ativar servico externo, sem secrets e sem alterar workflow de producao. A documentacao deixa claro que o live atual em GitHub Pages continua sem headers HTTP customizados ate aprovacao de migracao de host.
+
+### Comandos executados
+
+```bash
+npm run typecheck
+npm run lint
+```
+
+### Resultados
+
+- Typecheck: PASS.
+- Lint: FAIL.
+- Build GitHub Pages: nao executado porque o protocolo manda parar no primeiro teste falho.
+- E2E: nao executado pelo mesmo motivo.
+
+### Bloqueio
+
+`npm run lint` falhou em arquivos fora do escopo SEC-01:
+
+- `src/app/specs/page.tsx:40`: `Math.random()` chamado durante render (`react-hooks/purity`).
+- `src/app/not-found.tsx:4`: import `motion` nao usado.
+- `src/app/specs/page.tsx:3`: import `motion` nao usado.
+
+### Recomendacao
+
+Corrigir o lint preexistente em tarefa propria ou autorizar ajuste minimo desses arquivos antes de revalidar SEC-01.
+
+---
+
+## [CODEX -> DEEPSEEK] REVIEW TASK-20260510-SEC-01
+
+**Veredito:** BLOCKED
+
+### Avaliacao
+
+- Arquitetura: parcial aprovada; `_headers` e compativel com host estatico que suporte essa convencao.
+- Seguranca frontend: parcial; repo agora possui manifesto, mas o live GitHub Pages segue sem headers HTTP customizados.
+- Deploy: bloqueado; GitHub Pages nao aplica `_headers` e migracao de host exige aprovacao.
+- Qualidade de codigo: bloqueada por lint fora do escopo SEC-01.
+
+### Problemas encontrados
+
+- A validacao obrigatoria `npm run lint` falhou antes de build/e2e.
+- O live atual nao pode comprovar headers completos sem mudanca de host.
+
+### Proxima tarefa
+
+Parar conforme protocolo do `AUDIT_REPORT.md`. O proximo passo seguro e corrigir ou autorizar a correcao minima dos erros de lint fora do escopo antes de reexecutar SEC-01.
+
+---
+
+## [CODEX] RESUME/REVALIDATION TASK-20260510-SEC-01
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Escopo
+
+Reabrir SEC-01 no `AUDIT_REPORT.md`, revisar o manifesto `public/_headers` e reexecutar a validacao obrigatoria agora que os bloqueios de lint registrados anteriormente aparecem corrigidos no workspace.
+
+### Comandos planejados
+
+```bash
+npm run typecheck && npm run lint
+npm run build:github-pages
+test -f out/_headers
+npm run test:e2e
+```
+
+### Criterio de parada
+
+Se algum comando falhar, registrar `FAILED` no `AUDIT_REPORT.md` e parar sem avancar para DS-02.
+
+---
+
+## [CODEX] REVALIDATION REPORT TASK-20260510-SEC-01
+
+**Status:** FAILED
+**Data:** 2026-05-10
+
+### Comandos executados
+
+```bash
+npm run typecheck && npm run lint
+npm run build:github-pages
+```
+
+### Resultado
+
+- `npm run typecheck`: PASS.
+- `npm run lint`: PASS.
+- `npm run build:github-pages`: FAIL antes de gerar `out/`.
+
+### Bloqueio
+
+O build falhou porque `next/font/google` tentou buscar `Geist` e `Geist Mono` em `fonts.googleapis.com`, mas a sessao atual esta sem acesso de rede:
+
+```text
+Failed to fetch `Geist` from Google Fonts.
+Failed to fetch `Geist Mono` from Google Fonts.
+```
+
+### Impacto no protocolo
+
+`test -f out/_headers` e `npm run test:e2e` nao foram executados porque `npm run build:github-pages` falhou. O `AUDIT_REPORT.md` foi atualizado para `SEC-01 = FAILED`, e a execucao deve parar antes de DS-02.
+
+---
+
+## [CODEX -> DEEPSEEK] TASK-20260510-SEC-01-REVALIDATION
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Missao
+
+Retomar exclusivamente o item `SEC-01` do `AUDIT_REPORT.md`, reconciliar a divergencia entre tabela marcada como DONE e log mais recente marcado como falha, e reexecutar a validacao obrigatoria antes de qualquer avanco para `DS-02`.
+
+### Escopo permitido
+
+- `AUDIT_REPORT.md`
+- `docs/AI_COMMAND_ROOM.md`
+- Validacao do manifesto ja criado em `public/_headers`
+- Revisao da documentacao ja alterada em `docs/08-DEPLOYMENT.md`
+
+### Comandos esperados
+
+```bash
+npm run typecheck && npm run lint
+npm run build:github-pages
+test -f out/_headers
+npm run test:e2e
+```
+
+### Criterio de parada
+
+Se qualquer comando falhar, marcar `SEC-01` como `FAILED` no `AUDIT_REPORT.md`, registrar evidencia e parar sem executar `DS-02`.
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-SEC-01-REVALIDATION
+
+**Status:** FAILED
+**Data:** 2026-05-10
+
+### Comandos executados
+
+```bash
+npm run typecheck && npm run lint
+npm run build:github-pages
+```
+
+### Resultado
+
+- `npm run typecheck`: PASS.
+- `npm run lint`: PASS.
+- `npm run build:github-pages`: FAIL.
+
+### Bloqueio
+
+O build parou em `next/font/google` porque a sessao atual nao conseguiu acessar `fonts.googleapis.com` para baixar `Geist` e `Geist Mono` durante a etapa de build:
+
+```text
+Failed to fetch `Geist` from Google Fonts.
+Failed to fetch `Geist Mono` from Google Fonts.
+```
+
+### Impacto no protocolo
+
+`SEC-01` foi marcado como `FAILED` no `AUDIT_REPORT.md`. `test -f out/_headers` e `npm run test:e2e` nao foram executados porque o build obrigatorio falhou. A execucao deve parar antes de `DS-02`.
+
+---
+
+## [CODEX -> DEEPSEEK] TASK-20260510-AUDIT-FIXES-DS02-DS01
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Missao
+
+Executar os itens restantes solicitados por Wallace no `AUDIT_REPORT.md`, comecando em `DS-02` e sem retrabalhar `SEC-01`.
+
+### Contexto operacional
+
+Wallace informou que `SEC-01` ja deve ser tratado como DONE nesta rodada. A validacao obrigatoria para os itens desta tarefa e somente:
+
+```bash
+npm run typecheck && npm run lint
+```
+
+Nao executar `npm run build:github-pages` porque a sandbox atual nao possui rede externa para o fluxo de fontes do Next.js.
+
+### Ordem obrigatoria
+
+1. DS-02
+2. CODE-03
+3. DS-03
+4. FE-03
+5. PERF-03
+6. FE-02
+7. RES-01
+8. TEST-04
+9. PERF-01
+10. SEO-01
+11. DS-01
+
+### Plano
+
+Para cada item: marcar `IN_PROGRESS`, corrigir o minimo necessario, rodar `npm run typecheck && npm run lint`, marcar `DONE` com evidencia ou `FAILED` e parar, registrar no log e criar commit atomico `fix: [ID] descricao`.
+
+### Observacao sobre DeepSeek
+
+Nao ha processo Forge/DeepSeek ativo detectavel nesta sandbox. Codex vai executar localmente e registrar os reports neste arquivo para preservar a Sala de Comunicacao e o rastro de revisao.
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-DS-02
+
+**Status:** DONE
+**Data:** 2026-05-10
+
+### Arquivos alterados
+
+- `src/data/profile.ts`
+- `src/data/projects.ts`
+- `AUDIT_REPORT.md`
+
+### Resultado
+
+Corrigidos diacriticos em textos exibidos de perfil, menu e projetos. Slugs e URLs foram preservados sem acento por serem identificadores publicos.
+
+### Validacao
+
+```bash
+npm run typecheck && npm run lint
+```
+
+Resultado: PASS.
+
+---
+
+## [CODEX -> DEEPSEEK] TASK-20260510-FINAL-AUDIT-TEST-01
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Missao
+
+Executar a continuacao final da auditoria WPM-Portfolio na ordem definida por Wallace, comecando por `TEST-01` e parando no primeiro item que falhar validacao.
+
+### Escopo permitido inicial
+
+- `package.json`
+- `package-lock.json`
+- `src/lib/__tests__/utils.test.ts`
+- `src/lib/__tests__/site.test.ts`
+- `AUDIT_REPORT.md`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Plano TEST-01
+
+1. Instalar `vitest` como dev dependency.
+2. Adicionar script `test: "vitest run"`.
+3. Criar teste unitario para `cn()`.
+4. Criar teste unitario para `absoluteUrl()`.
+5. Validar com `npm run typecheck && npm run lint && npx vitest run`.
+
+### Observacao sobre DeepSeek
+
+Nao ha processo Forge/DeepSeek ativo detectavel nesta sandbox. Codex executara localmente e registrara o report nesta Sala de Comunicacao para preservar o protocolo.
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-TEST-01
+
+**Status:** DONE
+**Data:** 2026-05-10
+
+### Arquivos alterados
+
+- `package.json`
+- `package-lock.json`
+- `vitest.config.ts`
+- `src/lib/__tests__/utils.test.ts`
+- `src/lib/__tests__/site.test.ts`
+- `AUDIT_REPORT.md`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Resultado
+
+Adicionado Vitest como runner unitario, script `test`, configuracao minima para limitar Vitest a `src/**/*.test.ts` e testes para `cn()` e `absoluteUrl()`.
+
+### Validacao
+
+```bash
+npm run typecheck && npm run lint && npx vitest run
+```
+
+Resultado: PASS. Vitest: 2 arquivos, 3 testes.
+
+---
+
+## [CODEX -> DEEPSEEK] TASK-20260510-PERF-02
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Missao
+
+Reconciliar `PERF-02` como limitação conhecida do GitHub Pages/static export, sem alterar `next.config.ts`.
+
+### Validacao esperada
+
+```bash
+npm run typecheck && npm run lint
+```
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-RES-02
+
+**Status:** DONE
+**Data:** 2026-05-10
+
+### Resultado
+
+Sem necessidade de breakpoints customizados nesta rodada. O projeto usa os breakpoints padrao do Tailwind (`sm`, `md`, `lg`, `xl`, `2xl`) de forma consistente, com apenas uma media query pontual em `src/app/globals.css` para ajuste mobile especifico.
+
+### Validacao
+
+```bash
+npm run typecheck && npm run lint
+```
+
+Resultado: PASS.
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-SEC-03
+
+**Status:** DONE
+**Data:** 2026-05-10
+
+### Arquivos alterados
+
+- `docs/08-DEPLOYMENT.md`
+- `AUDIT_REPORT.md`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Resultado
+
+Documentado que `'unsafe-eval'` e permissao de desenvolvimento para Fast Refresh/HMR e nao deve ser removida sem validar o servidor local. `next.config.ts` foi preservado.
+
+### Validacao
+
+```bash
+npm run typecheck && npm run lint
+```
+
+Resultado: PASS.
+
+---
+
+## [CODEX -> DEEPSEEK] TASK-20260510-RES-02
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Missao
+
+Verificar se o projeto precisa de breakpoints customizados. Se os breakpoints padrao Tailwind forem suficientes para a UI atual, marcar DONE sem alterar CSS/config.
+
+### Validacao esperada
+
+```bash
+npm run typecheck && npm run lint
+```
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-FE-01
+
+**Status:** SKIPPED
+**Data:** 2026-05-10
+
+### Resultado
+
+Refatoracao postergada. `src/app/page.tsx` usa `useState`, `useEffect`, `useCallback`, `useIntroSkip` e componentes carregados com `dynamic(..., { ssr: false })` para controlar os estagios boot/start/console. A documentacao local do Next.js 16 orienta Client Components para estado, effects, browser APIs e hooks customizados. Separar agora a home em Server + Client wrapper teria baixo ganho pratico e risco de regressao visual/interativa.
+
+### Validacao
+
+```bash
+npm run typecheck && npm run lint
+```
+
+Resultado: PASS.
+
+---
+
+## [CODEX -> DEEPSEEK] TASK-20260510-SEC-03
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Missao
+
+Documentar que `'unsafe-eval'` fica restrito ao CSP de desenvolvimento por necessidade de HMR/Fast Refresh. Nao alterar `next.config.ts`.
+
+### Validacao esperada
+
+```bash
+npm run typecheck && npm run lint
+```
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-TEST-03
+
+**Status:** DONE
+**Data:** 2026-05-10
+
+### Arquivos alterados
+
+- `package.json`
+- `playwright.config.ts`
+- `AUDIT_REPORT.md`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Resultado
+
+`test:e2e` agora executa apenas `playwright test`. Como o estado real do config ainda usava `next start`, o `webServer` foi alinhado com o protocolo para iniciar `npm run dev -- --hostname 127.0.0.1 --port 3010`.
+
+### Validacao
+
+```bash
+npm run typecheck && npm run lint
+```
+
+Resultado: PASS.
+
+---
+
+## [CODEX -> DEEPSEEK] TASK-20260510-FE-01
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Missao
+
+Avaliar se vale refatorar `src/app/page.tsx` para Server Component nesta rodada. Se a alteracao for arriscada ou ampla para a auditoria final, documentar `SKIPPED`.
+
+### Validacao esperada
+
+```bash
+npm run typecheck && npm run lint
+```
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-PERF-02
+
+**Status:** DONE
+**Data:** 2026-05-10
+
+### Resultado
+
+`docs/08-DEPLOYMENT.md` ja documenta `images.unoptimized: true` como parte do target GitHub Pages static export e explica que a otimizacao padrao de `next/image` fica desabilitada nesse modo. `next.config.ts` foi preservado.
+
+### Validacao
+
+```bash
+npm run typecheck && npm run lint
+```
+
+Resultado: PASS.
+
+---
+
+## [CODEX -> DEEPSEEK] TASK-20260510-TEST-03
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Missao
+
+Alterar o script `test:e2e` para executar apenas `playwright test`, aproveitando o `webServer` existente em `playwright.config.ts`.
+
+### Validacao esperada
+
+```bash
+npm run typecheck && npm run lint
+```
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-TEST-05
+
+**Status:** DONE / E2E_BLOCKED_BY_SANDBOX
+**Data:** 2026-05-10
+
+### Arquivos alterados
+
+- `tests/e2e/portfolio-smoke.spec.ts`
+- `AUDIT_REPORT.md`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Resultado
+
+Atualizados os seletores do smoke E2E para os textos do redesign premium em home, 404, contato, projeto do livro e smoke mobile. O teste de rotas criticas recebeu timeout local de 60s.
+
+### Validacao
+
+```bash
+npm run typecheck && npm run lint
+npm run test:e2e
+```
+
+Resultado:
+- `npm run typecheck && npm run lint`: PASS apos remover o artefato gerado corrompido `.next/dev/types/validator.ts`.
+- `npm run test:e2e`: BLOCKED antes de iniciar testes porque `next dev --hostname 127.0.0.1 --port 3010` falhou com `listen EPERM 127.0.0.1:3010` na sandbox atual.
