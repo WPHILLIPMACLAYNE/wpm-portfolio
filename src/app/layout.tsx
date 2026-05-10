@@ -109,7 +109,7 @@ export default function RootLayout({
                      font-mono text-xs text-wpm-cyan bg-wpm-black border border-wpm-purple/30 px-4 py-2 rounded-sm
                      focus:outline-none focus:ring-2 focus:ring-wpm-purple/50 focus:ring-offset-2 focus:ring-offset-wpm-black"
         >
-          Skip to content
+          Ir para o conteúdo
         </a>
         <script type="application/ld+json">
           {JSON.stringify(personSchema).replace(/</g, "\\u003c")}

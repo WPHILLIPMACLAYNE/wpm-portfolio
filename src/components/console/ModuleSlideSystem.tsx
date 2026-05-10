@@ -116,7 +116,7 @@ export default function ModuleSlideSystem({
           />
           <motion.div
             key="panel" ref={panelRef}
-            className="fixed inset-y-0 right-0 z-50 flex w-full flex-col border-l border-white/[0.08] bg-[#060b14] shadow-[0_0_120px_rgba(0,0,0,0.7)] focus:outline-none md:w-[74vw] lg:w-[68vw]"
+            className="fixed inset-y-0 right-0 z-50 flex w-full flex-col border-l border-white/[0.08] bg-wpm-elevated shadow-[0_0_120px_rgba(0,0,0,0.62)] focus:outline-none md:w-[74vw] lg:w-[68vw]"
             variants={variants} initial="hidden" animate="visible" exit="exit"
             role="region" aria-label={activeModule ? `${activeModule} panel` : "Module panel"} tabIndex={-1}
             id="module-panel"

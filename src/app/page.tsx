@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
 import PressStart from "@/components/boot/PressStart";
+import OSLoader from "@/components/ui/OSLoader";
 import { useIntroSkip } from "@/hooks/useIntroSkip";
 
 type Stage = "boot" | "start" | "console";
@@ -11,23 +12,23 @@ const ShaderBackgroundWrapper = dynamic(
   () => import("@/components/webgl/ShaderBackgroundWrapper"),
   {
     ssr: false,
-    loading: () => null,
+    loading: () => <OSLoader label="Inicializando Kernel" />,
   }
 );
 
 const BootIntro = dynamic(() => import("@/components/boot/BootIntro"), {
   ssr: false,
-  loading: () => null,
+  loading: () => <OSLoader label="Acessando Setores de Boot" />,
 });
 
 const ConsoleShell = dynamic(() => import("@/components/console/ConsoleShell"), {
   ssr: false,
-  loading: () => null,
+  loading: () => <OSLoader label="Carregando Shell" />,
 });
 
 const ConsoleMenu = dynamic(() => import("@/components/console/ConsoleMenu"), {
   ssr: false,
-  loading: () => null,
+  loading: () => <OSLoader label="Montando Interface" />,
 });
 
 const ReverseCrtTransition = dynamic(

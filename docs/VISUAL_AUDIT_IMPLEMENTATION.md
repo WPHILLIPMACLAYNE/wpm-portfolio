@@ -294,11 +294,11 @@ npm run build        # 16 paginas geradas com sucesso
 
 **Motivo:** ConsoleModuleRibbon implementa roving diretamente (mais simples para este caso). O hook continua util para futuros grids que precisem de navegacao por setas.
 
-### ModuleSlideSystem.tsx — Sem token migration
+### ModuleSlideSystem.tsx — Token migration resolvida
 
-**Decisao:** `ModuleSlideSystem.tsx` permanece com valores hardcoded (`bg-[#060b14]`, `shadow-[0_0_120px_rgba(0,0,0,0.7)]`).
+**Decisao:** `ModuleSlideSystem.tsx` agora usa `bg-wpm-elevated` e shadow controlada.
 
-**Motivo:** Este componente nao foi incluido na rodada de substituicao de tokens. Pendencia documentada.
+**Motivo:** A rodada Premium Redesign adicionou tokens de surface/elevation e removeu a pendencia documentada de background hardcoded no painel.
 
 ---
 
@@ -356,3 +356,32 @@ npm run build        # 16 paginas geradas com sucesso
 7. Horizontal scroll gallery para projetos.
 8. Custom cursor com efeitos contextuais.
 9. Showreel/video player customizado.
+
+---
+
+## 16. PREMIUM REDESIGN WPM.OS — 2026-05-08
+
+### Implementado
+
+- Home convertida em command deck / launcher premium.
+- Module rail com hierarquia, status e pesos visuais.
+- Preview stage rico por modulo, com metadados, tags, mockup textual e CTAs.
+- Scene/dossier layout aplicado nas paginas principais.
+- Tokens expandidos para surface, elevation, text-secondary, muted e tons semanticamente controlados.
+- Footer fixo oculto no mobile para evitar sobreposicao.
+- Artefatos em foco escondidos no launcher mobile para reduzir densidade.
+
+### Validacao
+
+| Gate | Resultado |
+|---|---|
+| `npm run lint` | PASS |
+| `npm run typecheck` | PASS |
+| `npm run build` | PASS |
+| `npm run test:e2e` | 13 passed, 1 skipped |
+| `npm run build:github-pages` | PASS |
+| QA screenshot desktop/mobile | PASS sem overflow horizontal |
+
+### Pendencia
+
+- QA visual humana de Wallace: `APROVADO VISUAL` ou `AJUSTAR: ...`.

@@ -3,9 +3,6 @@ import { getProjectBySlug, projects } from "@/data/projects";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ConsoleShell from "@/components/console/ConsoleShell";
-import Badge from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
-import Divider from "@/components/ui/Divider";
 import Image from "next/image";
 import { SITE_TITLE, absoluteUrl, publicAssetPath } from "@/lib/site";
 
@@ -65,13 +62,6 @@ export async function generateMetadata({
   };
 }
 
-const statusVariant: Record<string, "action" | "system" | "info"> = {
-  Completed: "action",
-  "In Progress": "system",
-  Active: "system",
-  Prototype: "info",
-  Archived: "info",
-};
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
@@ -84,128 +74,158 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   );
 
   return (
-    <ConsoleShell showNav={false}>
-        <div className="px-6 py-12 pb-20 max-w-3xl mx-auto">
-          {/* Back */}
-          <Link
-            href="/console"
-            className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray hover:text-wpm-cyan transition-colors mb-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
-          >
-          <span className="text-wpm-lavender/90">&lt;-</span> BACK TO CONSOLE
-        </Link>
+    <ConsoleShell mode="page" showNav={true}>
+      <div className="relative min-h-screen bg-[#02040a] px-4 py-8 pb-32 md:px-8 lg:px-12">
+        <div 
+          className="pointer-events-none fixed inset-0 z-0 opacity-10"
+          style={{ background: `radial-gradient(circle at 50% 0%, ${project.accentColor}, transparent 50%)` }}
+        />
 
-        {/* Hero */}
-        <div className="mb-10">
-          <div className="flex items-center gap-3 mb-4 flex-wrap min-w-0 overflow-hidden">
-            <Badge variant="system">{project.category}</Badge>
-            <span className="font-mono text-[11px] text-wpm-gray">{project.year}</span>
-            <span className="w-1 h-1 rounded-full bg-wpm-purple/30" />
-            <Badge variant={statusVariant[project.status] ?? "info"} dot>
-              {project.status}
-            </Badge>
-            {project.featured && (
-              <Badge variant="action" size="sm">FEATURED</Badge>
-            )}
+        <div className="mx-auto max-w-6xl relative z-10">
+          <div className="mb-12 flex items-center justify-between border-b border-white/5 pb-4">
+            <Link
+              href="/console"
+              className="group flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-wpm-muted transition-colors hover:text-wpm-cyan"
+            >
+              <span className="border border-white/10 px-1.5 py-0.5 group-hover:border-wpm-cyan/40">ESC</span>
+              <span>Retornar ao Command Deck</span>
+            </Link>
+            <div className="flex items-center gap-4 font-mono text-[9px] text-wpm-muted uppercase tracking-[0.15em]">
+               <span>Artifact_ID: <span style={{ color: project.accentColor }}>{project.slug.toUpperCase()}</span></span>
+               <span className="hidden md:inline">Ver: 2.1.0</span>
+            </div>
           </div>
 
-          <h1 className="text-3xl md:text-5xl font-light text-wpm-white/80 tracking-wide mb-3 break-words">
-            {project.title}
-          </h1>
+          <header className="mb-16">
+            <div className="flex flex-wrap items-center gap-3 mb-8">
+               <span className="border px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest font-bold" 
+                     style={{ color: project.accentColor, borderColor: `${project.accentColor}40`, backgroundColor: `${project.accentColor}08` }}>
+                 {project.category}
+               </span>
+               <span className="font-mono text-[10px] text-wpm-muted uppercase tracking-[0.2em]">Deploy_Year: {project.year}</span>
+               <div className="h-1 w-1 rounded-full bg-white/20" />
+               <span className="font-mono text-[10px] text-wpm-success uppercase tracking-[0.2em] font-bold">{project.status}</span>
+            </div>
 
-          <p className="font-mono text-sm text-wpm-cyan/85 mb-6 break-words">{project.subtitle}</p>
+            <h1 className="font-sans text-5xl md:text-7xl lg:text-9xl font-black uppercase italic tracking-tighter text-wpm-white mb-6 wpm-glitch leading-[0.85]" data-text={project.title}>
+              {project.title}
+            </h1>
+            
+            <p className="max-w-3xl text-xl md:text-2xl font-medium leading-relaxed text-wpm-text-secondary border-l-4 pl-6" style={{ borderColor: `${project.accentColor}60` }}>
+              {project.subtitle}
+            </p>
+          </header>
 
-          {/* Project cover image */}
           {project.coverImage && (
-            <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] mb-6 overflow-hidden rounded-sm border border-white/[0.04]">
-              <Image
+            <div className="relative w-full aspect-[21/9] mb-20 overflow-hidden border border-white/10 bg-black/40 group shadow-2xl">
+               <div className="absolute inset-0 z-10 pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100%_4px]" aria-hidden="true" />
+               <Image
                 src={publicAssetPath(project.coverImage)}
                 alt={`${project.title} cover`}
                 fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover opacity-80 group-hover:scale-105 transition-transform duration-700"
+                priority
+                sizes="100vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-wpm-black/60 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#02040a] via-transparent to-transparent" />
+              
+              <div className="absolute bottom-6 left-6 z-20 flex flex-col gap-1">
+                 <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/40">Visual_Capture_Ref</span>
+                 <span className="font-mono text-[10px] uppercase font-bold text-white/90">IMG_SOURCE_STABLE</span>
+              </div>
             </div>
           )}
 
-          <p className="text-wpm-gray text-sm leading-relaxed break-words">
-            {project.problem.slice(0, 200)}...
-          </p>
-        </div>
+          <div className="grid gap-16 lg:grid-cols-[1fr_320px]">
+            <main className="space-y-16">
+              <section className="relative border border-white/5 bg-[#0a0d14]/40 p-8 md:p-10">
+                 <div className="absolute top-0 left-0 h-4 w-4 border-t border-l border-white/20" />
+                 <div className="absolute bottom-0 right-0 h-4 w-4 border-b border-r border-white/20" />
+                 
+                 <div className="flex items-center gap-3 mb-8">
+                    <div className="h-px w-8 bg-wpm-cyan/40" />
+                    <h2 className="wpm-section-title !text-[12px] opacity-100 uppercase font-black italic">Análise de Operação</h2>
+                 </div>
+                 
+                 <div className="space-y-12">
+                   <div>
+                     <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-wpm-muted mb-4">01_O Problema</p>
+                     <p className="font-sans text-lg leading-relaxed text-wpm-text-secondary">{project.problem}</p>
+                   </div>
+                   <div>
+                     <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-wpm-muted mb-4">02_A Solução</p>
+                     <p className="font-sans text-lg leading-relaxed text-wpm-text-secondary">{project.solution}</p>
+                   </div>
+                   <div>
+                     <p className="font-mono text-[9px] uppercase tracking-[0.3em] text-wpm-muted mb-4">03_Processo_Executivo</p>
+                     <p className="font-sans text-lg leading-relaxed text-wpm-text-secondary">{project.process}</p>
+                   </div>
+                 </div>
+              </section>
 
-        {/* Role & Stack */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 p-6 bg-wpm-card border border-white/[0.04] rounded-sm min-w-0 max-w-full overflow-hidden">
-          <div className="min-w-0">
-            <p className="font-mono text-[11px] text-wpm-lavender/90 mb-2 uppercase tracking-wider">Role</p>
-            <p className="text-wpm-white/70 break-words">{project.role}</p>
+              <section className="border-l-2 border-white/5 pl-8 py-2">
+                 <div className="flex items-center gap-3 mb-6">
+                    <h2 className="wpm-section-title !text-[12px] opacity-80 uppercase font-black">Evidências e Resultados</h2>
+                 </div>
+                 <p className="font-sans text-xl font-medium italic leading-relaxed text-wpm-white/90">
+                   &quot;{project.results}&quot;
+                 </p>
+              </section>
+            </main>
+
+            <aside className="space-y-8">
+              <section className="border border-white/10 bg-white/[0.02] p-6">
+                 <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-wpm-cyan mb-6 font-bold">Specs_Hardware</p>
+                 
+                 <div className="space-y-6">
+                    <div>
+                       <span className="font-mono text-[8px] uppercase tracking-widest text-wpm-muted block mb-2">SPECS_ROLE</span>
+                       <p className="font-mono text-[11px] uppercase font-bold text-wpm-white/80">{project.role}</p>
+                    </div>
+                    
+                    <div className="h-px w-full bg-white/5" />
+                    
+                    <div>
+                       <span className="font-mono text-[8px] uppercase tracking-widest text-wpm-muted block mb-4">TECH_STACK_DUMP</span>
+                       <div className="flex flex-wrap gap-2">
+                          {project.stack.map((tech) => (
+                            <span key={tech} className="border border-white/10 bg-white/[0.03] px-2 py-1 font-mono text-[9px] uppercase text-wpm-white/60">
+                               {tech}
+                            </span>
+                          ))}
+                       </div>
+                    </div>
+                 </div>
+              </section>
+
+              {hasAnyLink && (
+                <section className="border border-wpm-cyan/20 bg-wpm-cyan/[0.02] p-6">
+                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-wpm-cyan mb-6 font-bold">Protocolos_Acao</p>
+                   <div className="flex flex-col gap-3">
+                      {project.links.live && project.links.live !== "#" && (
+                        <a href={project.links.live} target="_blank" rel="noopener noreferrer" 
+                           className="wpm-btn-ripple flex min-h-12 items-center justify-between border border-wpm-cyan/40 bg-wpm-cyan/[0.05] px-4 font-mono text-[10px] uppercase tracking-widest text-wpm-cyan transition-all hover:bg-wpm-cyan/10">
+                           Acessar Deploy <span className="opacity-50">01</span>
+                        </a>
+                      )}
+                      {project.links.github && project.links.github !== "#" && (
+                        <a href={project.links.github} target="_blank" rel="noopener noreferrer" 
+                           className="wpm-btn-ripple flex min-h-12 items-center justify-between border border-white/10 bg-white/[0.02] px-4 font-mono text-[10px] uppercase tracking-widest text-wpm-muted hover:text-wpm-white">
+                           Code_Repository <span className="opacity-50">02</span>
+                        </a>
+                      )}
+                      {project.links.caseStudy && project.links.caseStudy !== "#" && (
+                        <a href={project.links.caseStudy} target="_blank" rel="noopener noreferrer" 
+                           className="wpm-btn-ripple flex min-h-12 items-center justify-between border border-white/10 bg-white/[0.02] px-4 font-mono text-[10px] uppercase tracking-widest text-wpm-muted hover:text-wpm-white">
+                           Doc_Case_Study <span className="opacity-50">03</span>
+                        </a>
+                      )}
+                   </div>
+                </section>
+              )}
+            </aside>
           </div>
-          <div className="min-w-0">
-            <p className="font-mono text-[11px] text-wpm-lavender/90 mb-2 uppercase tracking-wider">Stack</p>
-            <div className="flex flex-wrap gap-2 min-w-0 overflow-hidden">
-              {project.stack.map((tech) => (
-                <Badge key={tech} variant="info" size="sm">
-                  {tech}
-                </Badge>
-              ))}
-            </div>
-          </div>
         </div>
-
-        <Divider variant="subtle" className="mb-10" />
-
-        {/* Case Study */}
-        <div className="space-y-10 mb-12">
-          <section>
-            <h2 className="font-mono text-sm text-wpm-lavender/90 mb-3 tracking-wider uppercase">The Problem</h2>
-            <p className="text-wpm-gray leading-relaxed break-words">{project.problem}</p>
-          </section>
-
-          <section>
-            <h2 className="font-mono text-sm text-wpm-lavender/90 mb-3 tracking-wider uppercase">The Solution</h2>
-            <p className="text-wpm-gray leading-relaxed break-words">{project.solution}</p>
-          </section>
-
-          <section>
-            <h2 className="font-mono text-sm text-wpm-lavender/90 mb-3 tracking-wider uppercase">Process</h2>
-            <p className="text-wpm-gray leading-relaxed break-words">{project.process}</p>
-          </section>
-
-          <section>
-            <h2 className="font-mono text-sm text-wpm-lavender/90 mb-3 tracking-wider uppercase">Results</h2>
-            <p className="text-wpm-gray leading-relaxed break-words">{project.results}</p>
-          </section>
-        </div>
-
-        {/* Links */}
-          {hasAnyLink && (
-        <div className="flex gap-3 p-6 bg-wpm-card border border-white/[0.04] rounded-sm flex-wrap">
-          {project.links.live && project.links.live !== "#" && (
-            <Button as="a" href={project.links.live} target="_blank" rel="noopener noreferrer" variant="primary" size="sm">
-              [ LIVE DEMO ]
-            </Button>
-          )}
-          {project.links.github && project.links.github !== "#" && (
-            <Button as="a" href={project.links.github} target="_blank" rel="noopener noreferrer" variant="ghost" size="sm">
-              [ GITHUB ]
-            </Button>
-          )}
-          {project.links.figma && project.links.figma !== "#" && (
-            <Button as="a" href={project.links.figma} target="_blank" rel="noopener noreferrer" variant="ghost" size="sm">
-              [ FIGMA ]
-            </Button>
-          )}
-          {project.links.video && project.links.video !== "#" && (
-            <Button as="a" href={project.links.video} target="_blank" rel="noopener noreferrer" variant="ghost" size="sm">
-              [ VIDEO ]
-            </Button>
-          )}
-          {project.links.caseStudy && project.links.caseStudy !== "#" && (
-            <Button as="a" href={project.links.caseStudy} target="_blank" rel="noopener noreferrer" variant="ghost" size="sm">
-              [ CASE STUDY ]
-            </Button>
-          )}
-        </div>
-        )}
       </div>
     </ConsoleShell>
   );

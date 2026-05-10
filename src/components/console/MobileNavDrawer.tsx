@@ -1,51 +1,32 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import { useRouter } from "next/navigation";
-import { menuItems } from "@/data/profile";
+import { menuItems, profile } from "@/data/profile";
 import type { MenuItem } from "@/data/profile";
-import Icon from "@/components/ui/Icon";
-import type { IconName } from "@/components/ui/Icon";
 
 interface MobileNavDrawerProps {
   open: boolean;
   onClose: () => void;
-  returnFocusRef: React.RefObject<HTMLButtonElement | null>;
 }
 
-const iconMap: Record<string, IconName> = {
-  projects: "projects",
-  about: "about",
-  skills: "skills",
-  resume: "resume",
-  lab: "lab",
-  hobbies: "hobbies",
-  contact: "contact",
-  settings: "settings",
-  secret: "secret",
-};
-
-function getItemStyle(item: MenuItem): { clickable: boolean; hint: string; className: string } {
-  if (item.status === "Active") return { clickable: true, hint: "", className: "" };
+function getItemStyle(item: MenuItem): { clickable: boolean; hint: string; status: string } {
+  if (item.status === "Active") return { clickable: true, hint: "ACESSO_LIBERADO", status: "ONLINE" };
   if (item.status === "Coming Soon")
-    return { clickable: false, hint: "Em breve", className: "opacity-40" };
-  return { clickable: false, hint: "Bloqueado", className: "opacity-40" };
+    return { clickable: false, hint: "SETOR_EM_DESENVOLVIMENTO", status: "WAIT" };
+  return { clickable: false, hint: "ARQUIVO_CRIPTOGRAFADO", status: "LOCKED" };
 }
 
-export default function MobileNavDrawer({ open, onClose, returnFocusRef }: MobileNavDrawerProps) {
+export default function MobileNavDrawer({ open, onClose }: MobileNavDrawerProps) {
   const router = useRouter();
-  const prefersReduced = useReducedMotion();
   const drawerRef = useRef<HTMLDivElement>(null);
 
-  // Focus trap using live selector query
   useEffect(() => {
     if (!open) return;
     const handleTrap = (e: KeyboardEvent) => {
       if (e.key !== "Tab") return;
-      const items = drawerRef.current?.querySelectorAll<HTMLElement>(
-        'button:not([disabled]), a[href]'
-      );
+      const items = drawerRef.current?.querySelectorAll<HTMLElement>('button:not([disabled])');
       if (!items || items.length === 0) return;
       const first = items[0];
       const last = items[items.length - 1];
@@ -61,39 +42,15 @@ export default function MobileNavDrawer({ open, onClose, returnFocusRef }: Mobil
     return () => window.removeEventListener("keydown", handleTrap);
   }, [open]);
 
-  // Focus first focusable item on open
   useEffect(() => {
     if (!open) return;
     const t = setTimeout(() => {
-      const first = drawerRef.current?.querySelector<HTMLElement>(
-        'button:not([disabled])'
-      );
+      const first = drawerRef.current?.querySelector<HTMLElement>('button:not([disabled])');
       first?.focus();
-    }, 100);
+    }, 150);
     return () => clearTimeout(t);
   }, [open]);
 
-  // Return focus on close
-  useEffect(() => {
-    if (open) return;
-    const t = setTimeout(() => returnFocusRef.current?.focus(), 100);
-    return () => clearTimeout(t);
-  }, [open, returnFocusRef]);
-
-  // Close on Escape — stop propagation to prevent ConsoleShell from intercepting
-  useEffect(() => {
-    if (!open) return;
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.stopPropagation();
-        onClose();
-      }
-    };
-    window.addEventListener("keydown", handleKey, true); // capture phase
-    return () => window.removeEventListener("keydown", handleKey, true);
-  }, [open, onClose]);
-
-  // Lock body scroll
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -114,93 +71,100 @@ export default function MobileNavDrawer({ open, onClose, returnFocusRef }: Mobil
     <AnimatePresence>
       {open && (
         <>
-          {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: prefersReduced ? 0 : 0.2 }}
             onClick={onClose}
             aria-hidden="true"
           />
 
-          {/* Drawer */}
           <motion.div
             ref={drawerRef}
-            className="fixed top-12 right-0 bottom-8 z-50 w-72 max-w-[85vw] bg-wpm-black border-l border-white/[0.06] overflow-y-auto"
+            className="fixed top-0 right-0 bottom-0 z-50 w-[80vw] max-w-sm bg-[#050509] border-l border-wpm-cyan/20 shadow-[-20px_0_50px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col"
             id="mobile-nav-drawer"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{
-              duration: prefersReduced ? 0 : 0.25,
-              ease: [0.33, 0, 0.1, 1],
-            }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             role="dialog"
             aria-modal="true"
-            aria-label="Menu de navegacao"
+            aria-label="Menu de navegacao tatico"
           >
-            {/* Drawer header */}
-            <div className="p-4 border-b border-white/[0.04]">
-              <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-wpm-lavender/90">
-                Navegacao
-              </p>
-              <p className="font-mono text-[11px] text-wpm-gray mt-1">
-                Selecione um modulo
-              </p>
+            {/* Tactical Background */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+                 style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #74F7FF 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+
+            {/* Header */}
+            <div className="relative p-6 border-b border-white/5 flex items-center justify-between bg-white/[0.01]">
+              <div className="flex flex-col">
+                <span className="font-mono text-[10px] tracking-[0.3em] text-wpm-cyan uppercase font-black">Sub_Systems</span>
+                <span className="font-mono text-[8px] text-wpm-muted mt-1 uppercase">Deploy_Interface_v1.0</span>
+              </div>
+              <button 
+                onClick={onClose}
+                className="h-10 w-10 flex items-center justify-center border border-white/10 text-wpm-muted active:text-wpm-cyan active:border-wpm-cyan/40 transition-colors"
+              >
+                <span className="font-mono text-lg">X</span>
+              </button>
             </div>
 
-            {/* Menu items */}
-            <nav aria-label="Navegacao mobile" className="p-2">
-              {menuItems.map((item) => {
-                const { clickable, hint, className } = getItemStyle(item);
-                const iconName = iconMap[item.id];
-                const descriptionId = `mobile-nav-desc-${item.id}`;
-
+            {/* Content / Scrollable Area */}
+            <nav className="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
+              {menuItems.map((item, idx) => {
+                const { clickable, hint, status } = getItemStyle(item);
+                
                 return (
                   <button
                     key={item.id}
                     onClick={() => handleSelect(item)}
-	                    disabled={!clickable}
-	                    aria-disabled={!clickable}
-	                    aria-describedby={!clickable ? descriptionId : undefined}
-                    className={`w-full flex items-center gap-3 p-3 rounded-sm text-left
-                              transition-colors duration-150
-                              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50
-                              ${clickable
-                                ? "text-wpm-gray hover:text-wpm-white hover:bg-white/[0.03] cursor-pointer"
-                                : "text-wpm-gray cursor-default"}
-                              ${className}`}
-                    style={{ minHeight: 48 }}
+                    disabled={!clickable}
+                    className={`relative w-full flex flex-col p-4 border transition-all duration-200 text-left group
+                              ${clickable 
+                                ? "border-white/5 bg-white/[0.02] active:bg-wpm-cyan/[0.05] active:border-wpm-cyan/30" 
+                                : "border-transparent opacity-30"}`}
                   >
-                    <span className="w-7 flex justify-center">
-                      <Icon name={iconName} size="sm" />
-                    </span>
-                    <span className="font-mono text-xs tracking-wide flex-1">
+                    <div className="flex items-center justify-between mb-2">
+                       <div className="flex items-center gap-3">
+                          <div className={`h-1.5 w-1.5 rounded-full ${clickable ? 'bg-wpm-cyan shadow-[0_0_8px_#74F7FF]' : 'bg-white/10'}`} />
+                          <span className="font-mono text-[8px] tracking-[0.2em] text-wpm-muted uppercase">SYS_NODE_0{idx + 1}</span>
+                       </div>
+                       <span className={`font-mono text-[8px] font-bold px-1.5 py-0.5 border ${clickable ? 'border-wpm-cyan/40 text-wpm-cyan' : 'border-white/10 text-white/20'}`}>
+                          {status}
+                       </span>
+                    </div>
+
+                    <span className={`font-sans text-lg font-black uppercase italic tracking-tighter ${clickable ? 'text-wpm-white group-active:text-wpm-cyan' : 'text-wpm-muted'}`}>
                       {item.label}
                     </span>
-	                    <span className="font-mono text-[11px] tracking-wider min-w-[60px] text-right">
-	                      {hint || item.type}
-	                    </span>
-	                    {!clickable && (
-	                      <span id={descriptionId} className="sr-only">
-	                        Este modulo ainda nao esta disponivel no portfolio publico.
-	                      </span>
-	                    )}
-	                  </button>
+                    
+                    <span className="font-mono text-[9px] mt-2 text-wpm-muted leading-tight uppercase tracking-widest">
+                      {hint}
+                    </span>
+
+                    {/* Corner decoration */}
+                    {clickable && (
+                      <div className="absolute bottom-0 right-0 h-2 w-2 border-b border-r border-white/10 group-active:border-wpm-cyan/40" />
+                    )}
+                  </button>
                 );
               })}
             </nav>
 
-            {/* Footer */}
-            <div className="p-4 border-t border-white/[0.04]">
-              <p className="font-mono text-[11px] text-wpm-gray">
-                WPM.OS v1.0
-              </p>
-              <p className="font-mono text-[11px] text-wpm-gray mt-0.5">
-                ESC ou toque fora para fechar
-              </p>
+            {/* Footer Area */}
+            <div className="p-6 border-t border-white/5 bg-white/[0.01] relative">
+               <div className="flex items-center gap-3 mb-4">
+                  <div className="h-1 w-1 bg-wpm-success animate-pulse" />
+                  <span className="font-mono text-[9px] text-wpm-success uppercase tracking-widest font-bold">Encrypted_Session</span>
+               </div>
+               <p className="font-mono text-[8px] text-wpm-muted leading-relaxed uppercase">
+                 User: {profile.name} <br/>
+                 Auth_Status: Authorized_Master
+               </p>
+               
+               {/* Aesthetic scanning line for the footer */}
+               <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-wpm-cyan/20 to-transparent" />
             </div>
           </motion.div>
         </>

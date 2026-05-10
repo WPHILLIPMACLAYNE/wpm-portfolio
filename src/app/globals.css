@@ -11,6 +11,13 @@
   --color-wpm-gray: #8B95A5;
   --color-wpm-dark-surface: #0A0D14;
   --color-wpm-card: #0D1020;
+  --color-wpm-surface: #090D16;
+  --color-wpm-elevated: #0B1220;
+  --color-wpm-text-secondary: #C6D0E0;
+  --color-wpm-muted: #667085;
+  --color-wpm-success: #5BFFC7;
+  --color-wpm-warning: #FFCF6B;
+  --color-wpm-experimental: #FF7AD9;
 
   /* ── Typography ───────────────────────────────────────── */
   --font-sans: var(--font-geist-sans);
@@ -33,6 +40,18 @@ body {
   font-family: var(--font-sans, Arial, Helvetica, sans-serif);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(116, 247, 255, 0.045), transparent 30%),
+    radial-gradient(circle at 82% 4%, rgba(108, 77, 255, 0.055), transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,0.018), transparent 28%);
 }
 
 /* CRT scanline overlay */
@@ -63,6 +82,11 @@ body {
 @keyframes scanline {
   0% { transform: translateY(0); }
   100% { transform: translateY(100vh); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Glow pulse */
@@ -102,9 +126,113 @@ body {
   text-shadow: 0 0 10px rgba(108, 77, 255, 0.5), 0 0 30px rgba(108, 77, 255, 0.3);
 }
 
+/* Glitch effect utility */
+.wpm-glitch {
+  position: relative;
+}
+
+.wpm-glitch::before,
+.wpm-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-wpm-black);
+  clip: rect(0, 0, 0, 0);
+}
+
+.wpm-glitch:hover::before {
+  left: 2px;
+  text-shadow: -1px 0 var(--color-wpm-cyan);
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.wpm-glitch:hover::after {
+  left: -2px;
+  text-shadow: -1px 0 var(--color-wpm-experimental);
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(31px, 9999px, 94px, 0); }
+  20% { clip: rect(62px, 9999px, 42px, 0); }
+  40% { clip: rect(16px, 9999px, 78px, 0); }
+  60% { clip: rect(58px, 9999px, 29px, 0); }
+  80% { clip: rect(93px, 9999px, 64px, 0); }
+  100% { clip: rect(2px, 9999px, 91px, 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); }
+  20% { clip: rect(22px, 9999px, 82px, 0); }
+  40% { clip: rect(46px, 9999px, 18px, 0); }
+  60% { clip: rect(98px, 9999px, 49px, 0); }
+  80% { clip: rect(13px, 9999px, 74px, 0); }
+  100% { clip: rect(52px, 9999px, 31px, 0); }
+}
+
+/* Button hover ripple effect */
+.wpm-btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.wpm-btn-ripple::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(116, 247, 255, 0.4);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.wpm-btn-ripple:hover::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(40, 40);
+    opacity: 0;
+  }
+}
+
 /* Noise/grain utility */
 .bg-noise {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+.wpm-data-surface {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.055), rgba(255,255,255,0.012)),
+    var(--color-wpm-elevated);
+  border: 1px solid rgba(255,255,255,0.075);
+}
+
+.wpm-section-title {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(184, 168, 255, 0.9);
+}
+
+.wpm-readable {
+  color: var(--color-wpm-text-secondary);
+  line-height: 1.72;
 }
 
 /* Custom cursor — hide native on body, preserve native on interactive elements */

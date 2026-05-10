@@ -138,11 +138,11 @@ export const menuItems: MenuItem[] = [
     status: "Active",
   },
   {
-    id: "hobbies",
-    label: "Missoes Secundarias",
-    href: "/hobbies",
-    description: "Interesses e projetos pessoais",
-    type: "Missao",
+    id: "specs",
+    label: "Especificações do Sistema",
+    href: "/specs",
+    description: "Documentação técnica e arquitetura do WPM.OS",
+    type: "Dossie Tecnico",
     status: "Active",
   },
   {

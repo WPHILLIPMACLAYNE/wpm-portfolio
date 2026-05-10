@@ -2,79 +2,64 @@
 
 import { motion } from "motion/react";
 import ConsoleShell from "@/components/console/ConsoleShell";
-import Link from "next/link";
+import ModuleSceneLayout from "@/components/console/ModuleSceneLayout";
 import { profile } from "@/data/profile";
 import Badge from "@/components/ui/Badge";
+
+const strengthByGroup: Record<string, string> = {
+  "Operacao & Gestao": "core",
+  "Vendas & Trade Marketing": "field",
+  "Produto & UX": "design",
+  "Tecnologia & IA": "systems",
+};
 
 export default function SkillsPage() {
   return (
     <ConsoleShell>
-      <div className="px-4 md:px-6 py-12 max-w-3xl mx-auto pb-20">
-        <Link
-          href="/console"
-          className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray hover:text-wpm-cyan transition-colors mb-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
-        >
-          <span className="text-wpm-lavender/90">&lt;-</span> BACK TO CONSOLE
-        </Link>
-
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-wpm-lavender/90 mb-3">
-            Skill Tree
-          </p>
-          <h1 className="text-3xl md:text-5xl font-light text-wpm-white/80 tracking-wide mb-2">
-            Skill Tree
-          </h1>
-          <p className="font-mono text-sm text-wpm-gray mb-10 max-w-md break-words">
-            Competences grouped by domain — each card represents a working
-            cluster of skills acquired through real projects and professional
-            experience.
-          </p>
-
-          {profile.skillGroups ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {profile.skillGroups.map((group, gi) => (
-                <motion.div
-                  key={group.name}
-                  className="p-5 bg-wpm-card border border-white/[0.04] rounded-sm min-w-0 max-w-full overflow-hidden"
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.15 + gi * 0.1 }}
-                >
-                  <p className="font-mono text-xs text-wpm-lavender/90 mb-4 uppercase tracking-wider">
-                    {">"} {group.name}
+      <ModuleSceneLayout
+        moduleId="skills"
+        title="Arvore de Skills"
+        subtitle="Mapa de competencias por dominios conectados: operacao comercial, trade, produto, UX, desenvolvimento web e IA generativa."
+      >
+        <section className="grid gap-4 md:grid-cols-2">
+          {profile.skillGroups.map((group, index) => (
+            <motion.article
+              key={group.name}
+              className="relative overflow-hidden border border-white/[0.07] bg-wpm-elevated/75 p-5"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.06 }}
+            >
+              <div className="pointer-events-none absolute inset-x-5 top-14 h-px bg-gradient-to-r from-wpm-success/40 via-white/10 to-transparent" aria-hidden="true" />
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-wpm-success/80">
+                    cluster / {strengthByGroup[group.name] ?? "domain"}
                   </p>
-                  <div className="flex flex-wrap gap-2 min-w-0">
-                    {group.skills.map((s) => (
-                      <Badge key={s} variant="system" size="sm">
-                        {s}
-                      </Badge>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {profile.skills.map((skill, i) => (
-                <motion.div
-                  key={skill}
-                  className="flex items-center gap-4 p-4 bg-wpm-card border border-white/[0.04] rounded-sm hover:border-wpm-purple/20 transition-colors min-w-0"
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                >
-                  <span className="font-mono text-xs text-wpm-lavender/90 flex-shrink-0">{">_"}</span>
-                  <span className="text-wpm-white/70 break-words">{skill}</span>
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </motion.div>
-      </div>
+                  <h2 className="mt-2 text-xl font-semibold tracking-normal text-wpm-white">{group.name}</h2>
+                </div>
+                <span className="border border-wpm-success/25 bg-wpm-success/[0.06] px-2 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-wpm-success">
+                  nivel {index + 1}
+                </span>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-2">
+                {group.skills.map((skill) => (
+                  <Badge key={skill} variant="system" size="sm">
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </motion.article>
+          ))}
+        </section>
+
+        <section className="wpm-data-surface p-5">
+          <p className="wpm-section-title">Leitura do mapa</p>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-wpm-gray">
+            A arvore nao separa negocio de tecnologia: cada cluster representa uma frente de execucao usada em projetos reais, desde atendimento e indicadores ate interfaces, documentacao, testes e automacao com IA.
+          </p>
+        </section>
+      </ModuleSceneLayout>
     </ConsoleShell>
   );
 }

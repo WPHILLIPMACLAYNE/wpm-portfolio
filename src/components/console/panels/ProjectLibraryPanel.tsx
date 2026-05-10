@@ -15,87 +15,111 @@ function ProjectCartridgePanel({ project, index }: { project: typeof realProject
 
   return (
     <motion.div
-      initial={prefersReduced ? false : { opacity: 0, y: 18 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: 0.1 * index }}
-      className="group relative overflow-hidden rounded-xl border border-white/[0.07] bg-white/[0.018]"
+      initial={prefersReduced ? false : { opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.4, delay: 0.08 * index }}
+      className="group relative overflow-hidden border border-white/5 bg-[#0a0d14]/60 backdrop-blur-sm transition-all hover:border-white/15"
     >
-      <div
-        className="absolute inset-0 opacity-60 transition-opacity group-hover:opacity-100"
-        style={{ background: `radial-gradient(circle at 50% 28%, ${project.accentColor}18, transparent 48%)` }}
+      <div 
+        className="absolute -right-12 -top-12 h-24 w-24 blur-[40px] opacity-20 transition-opacity group-hover:opacity-40"
+        style={{ backgroundColor: project.accentColor }}
       />
-      <div className="relative z-10 p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-4">
-          <p className="font-mono text-[11px] text-wpm-cyan">{String(index + 1).padStart(2, "0")}</p>
+
+      <div className="relative z-10 p-6">
+        <div className="flex items-start justify-between">
+          <div className="flex flex-col">
+            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-wpm-muted">
+              Artifact_0{index + 1}
+            </span>
+            <span className="mt-1 font-mono text-[8px] uppercase tracking-widest text-white/20">
+              HASH: AF-992
+            </span>
+          </div>
           <span
-            className="shrink-0 rounded-sm border px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.16em]"
-            style={{ color: project.accentColor, borderColor: `${project.accentColor}35`, backgroundColor: `${project.accentColor}10` }}
+            className="border px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] font-bold"
+            style={{ color: project.accentColor, borderColor: `${project.accentColor}40`, backgroundColor: `${project.accentColor}10` }}
           >
             {project.status}
           </span>
         </div>
-        <h3 className="mt-3 max-w-full break-words font-mono text-base uppercase leading-relaxed tracking-[0.16em] text-wpm-white/88 sm:text-lg">
+
+        <h3 className="mt-4 font-sans text-2xl font-black uppercase italic leading-none tracking-tighter text-wpm-white group-hover:text-wpm-cyan transition-colors">
           {project.title}
         </h3>
-        <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.12em] text-wpm-gray">
-          {project.category} / {project.year}
-        </p>
-        <p className="mt-3 text-sm leading-relaxed text-wpm-gray">{project.subtitle}</p>
-        <div className="mt-5 relative h-48 sm:h-56 rounded-lg overflow-hidden border border-white/[0.05]">
+        
+        <div className="mt-3 flex items-center gap-3">
+           <span className="h-px w-8 bg-white/10" />
+           <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-wpm-muted">
+            {project.category} <span className="mx-1 opacity-50">/</span> {project.year}
+          </p>
+        </div>
+
+        <div className="mt-6 relative h-44 overflow-hidden border border-white/5 bg-black/40 group-hover:border-white/10 transition-colors">
+          <div className="absolute inset-0 z-10 pointer-events-none bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100%_3px]" aria-hidden="true" />
+          
           {isBook ? (
-            <div className="absolute inset-0 flex items-center justify-center" style={{ perspective: "800px" }}>
-              <div className="relative h-36 w-24 overflow-hidden rounded-sm border border-wpm-purple/30 shadow-[0_20px_60px_rgba(108,77,255,0.25)] sm:h-44 sm:w-28"
-                style={{ transform: "rotateY(-15deg) rotateX(3deg)" }}>
+            <div className="absolute inset-0 flex items-center justify-center bg-wpm-black/20" style={{ perspective: "1000px" }}>
+              <div className="relative h-32 w-22 overflow-hidden border border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-y-[-20deg]"
+                style={{ transform: "rotateY(-10deg) rotateX(5deg)" }}>
                 {thumbnailImage && (
                   <Image
                     src={publicAssetPath(thumbnailImage)}
                     alt=""
                     fill
-                    sizes="(max-width: 640px) 96px, 112px"
+                    sizes="88px"
                     className="object-cover"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-black/40" />
               </div>
             </div>
           ) : (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-              <div className="h-12 w-12 rounded-full border border-emerald-400/20 bg-emerald-400/5 flex items-center justify-center">
-                <span className="font-mono text-emerald-300/80 text-lg">&gt;_</span>
-              </div>
-              <div className="flex gap-2">
-                {project.stack.slice(0, 4).map((tech) => (
-                  <span key={tech} className="rounded-sm border border-emerald-400/15 bg-emerald-400/5 px-2 py-0.5 font-mono text-[11px] uppercase text-emerald-300/60">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-gradient-to-br from-wpm-black to-transparent">
+               <div className="relative mb-4 flex h-10 w-10 items-center justify-center">
+                  <div className="absolute inset-0 animate-spin-slow border border-dashed border-wpm-cyan/20 rounded-full" />
+                  <span className="font-mono text-wpm-cyan/60 text-lg">[]</span>
+               </div>
+               <div className="flex flex-wrap justify-center gap-1.5 px-4">
+                  {project.stack.slice(0, 3).map((tech) => (
+                    <span key={tech} className="border border-white/5 bg-white/[0.02] px-3 py-0.5 font-mono text-[8px] uppercase tracking-wider text-wpm-muted group-hover:text-wpm-white transition-colors">
+                      {tech}
+                    </span>
+                  ))}
+               </div>
             </div>
           )}
         </div>
-        <Link
-          href={`/projects/${project.slug}`}
-          className="mt-5 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-wpm-cyan/80 transition-all hover:text-wpm-cyan hover:translate-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-cyan/50"
-        >
-          Inspect full case <span>-&gt;</span>
-        </Link>
+
+        <div className="mt-6 flex items-center justify-between">
+           <p className="text-xs leading-relaxed text-wpm-gray line-clamp-2 max-w-[70%]">
+            {project.subtitle}
+          </p>
+           <Link
+            href={`/projects/${project.slug}`}
+            className="wpm-btn-ripple flex h-10 w-10 items-center justify-center border border-white/10 bg-white/[0.03] text-wpm-cyan transition-all hover:bg-wpm-cyan hover:text-wpm-black"
+            aria-label={`Inspect ${project.title}`}
+          >
+            <span className="font-mono text-sm">{"->"}</span>
+          </Link>
+        </div>
       </div>
+      
+      <div className="absolute bottom-0 right-0 h-4 w-4 border-b border-r border-white/10 transition-colors group-hover:border-wpm-cyan/40" />
     </motion.div>
   );
 }
 
 export default function ProjectLibraryPanel() {
   return (
-    <div className="space-y-6">
-      <div>
-        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-wpm-lavender/90">
-          Real Work / {realProjects.length.toString().padStart(2, "0")}
+    <div className="space-y-8">
+      <div className="border-l-2 border-wpm-cyan/40 pl-4 py-1">
+        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-wpm-lavender/90">
+          Operative_Index / {realProjects.length.toString().padStart(2, "0")}
         </p>
-        <p className="mt-3 max-w-lg text-sm leading-relaxed text-wpm-gray">
-          Each artifact represents a shipped project. Inspect the full case study for deep-dive details.
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-wpm-gray italic">
+          Colecao de artefatos e evidencias de entrega real. Cada entrada representa um sistema, produto ou publicacao validada em ambiente de producao.
         </p>
       </div>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-6 sm:grid-cols-2">
         {realProjects.map((project, index) => (
           <ProjectCartridgePanel key={project.slug} project={project} index={index} />
         ))}

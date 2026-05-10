@@ -4,10 +4,9 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { motion } from "motion/react";
 import { menuItems, profile } from "@/data/profile";
 import PageTransition from "@/components/motion/PageTransition";
-import Icon from "@/components/ui/Icon";
-import type { IconName } from "@/components/ui/Icon";
 
 const MobileNavDrawer = dynamic(() => import("./MobileNavDrawer"), {
   ssr: false,
@@ -23,17 +22,6 @@ interface ConsoleShellProps {
   mode?: "hub" | "page";
 }
 
-const navIconNames: Record<string, IconName> = {
-  projects: "projects",
-  about: "about",
-  skills: "skills",
-  resume: "resume",
-  lab: "lab",
-  hobbies: "hobbies",
-  contact: "contact",
-};
-
-// Only show modules that have real routes
 const activeMenuItems = menuItems.filter((m) => m.status === "Active");
 
 export default function ConsoleShell({ children, showNav = true, onReplayIntro, mode = "page" }: ConsoleShellProps) {
@@ -48,7 +36,8 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
       normalizedPathname === item.href ||
       (item.href !== "/" && normalizedPathname.startsWith(`${item.href}/`))
   );
-  const currentLabel = mode === "hub" ? "Console" : currentItem?.label ?? "Console";
+  
+  const currentLabel = mode === "hub" ? "SISTEMA OPERACIONAL" : currentItem?.label ?? "ARQUIVO";
 
   useEffect(() => {
     const raf = requestAnimationFrame(() => {
@@ -79,7 +68,6 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Don't navigate if drawer is open
       if (drawerOpen) return;
       if (
         e.key === "Escape" &&
@@ -106,125 +94,177 @@ export default function ConsoleShell({ children, showNav = true, onReplayIntro, 
         }}
       />
 
-      {/* Top bar */}
-      <header className="fixed top-0 left-0 right-0 z-30 h-12 border-b border-white/[0.04] bg-wpm-black/80 backdrop-blur-sm flex items-center justify-between px-4 md:px-6">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            className="font-mono text-sm tracking-widest text-wpm-cyan/80 hover:text-wpm-cyan transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 focus-visible:ring-offset-2 focus-visible:ring-offset-wpm-black rounded-sm"
-            aria-label="WPM.OS Home"
-          >
-            WPM.OS
-          </Link>
-          <span className="hidden font-mono text-[11px] text-wpm-gray sm:inline" aria-hidden="true">
-            /
-          </span>
-          <span className="hidden max-w-44 truncate font-mono text-[11px] uppercase tracking-[0.14em] text-wpm-cyan/80 sm:inline">
-            {currentLabel}
-          </span>
+      {/* Modern High-Tech Header */}
+      <header className="fixed top-0 left-0 right-0 z-30 h-16 bg-[#050509]/90 backdrop-blur-xl border-b border-white/[0.08]">
+        <div className="mx-auto h-full flex items-center justify-between px-6">
+          
+          {/* Logo & Status */}
+          <div className="flex items-center gap-6">
+            <Link
+              href="/"
+              className="flex items-center gap-3 group"
+            >
+              <div className="relative flex h-9 w-9 items-center justify-center border border-wpm-cyan/30 bg-wpm-cyan/5">
+                 <motion.div 
+                   animate={{ opacity: [0.4, 1, 0.4] }}
+                   transition={{ duration: 2, repeat: Infinity }}
+                   className="h-1.5 w-1.5 bg-wpm-cyan shadow-[0_0_8px_rgba(116,247,255,0.8)]" 
+                 />
+                 <div className="absolute top-0 left-0 h-1.5 w-1.5 border-t border-l border-wpm-cyan" />
+                 <div className="absolute bottom-0 right-0 h-1.5 w-1.5 border-b border-r border-wpm-cyan" />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-mono text-[10px] font-black tracking-[0.3em] text-wpm-white leading-none">WPM.OS</span>
+                <span className="font-mono text-[7px] text-wpm-cyan/50 tracking-[0.2em] mt-1 uppercase">KERNEL_V1.0</span>
+              </div>
+            </Link>
+
+            <div className="hidden h-10 w-px bg-white/10 sm:block" />
+
+            <div className="hidden flex-col sm:flex">
+               <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-wpm-muted">NODE_STATUS</span>
+               <div className="flex items-center gap-2">
+                  <div className="h-1 w-1 rounded-full bg-wpm-success animate-pulse" />
+                  <span className="font-mono text-[10px] uppercase font-bold text-wpm-white/80">{currentLabel}</span>
+               </div>
+            </div>
+          </div>
+
+          {showNav && (
+            <>
+              {/* Desktop Refined Tactical Nav */}
+              <nav className="hidden lg:flex items-center h-full gap-1">
+                {activeMenuItems.map((item, idx) => {
+                  const active = currentItem?.id === item.id;
+                  
+                  return (
+                    <Link
+                      key={item.id}
+                      href={item.href}
+                      className={`relative flex items-center px-6 h-12 transition-all duration-300 group overflow-hidden
+                               ${active 
+                                 ? "bg-wpm-cyan/[0.04] border border-wpm-cyan/20" 
+                                 : "border border-white/5 hover:border-white/20 hover:bg-white/[0.02]"
+                               }`}
+                    >
+                      {/* Internal corner decoration */}
+                      <div className={`absolute top-0 left-0 h-1 w-1 border-t border-l transition-colors ${active ? 'border-wpm-cyan' : 'border-white/10'}`} />
+                      
+                      <div className="flex items-center gap-3 relative z-10">
+                        {/* THE LED */}
+                        <div className="relative flex items-center justify-center">
+                          <div className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${
+                            active 
+                              ? "bg-wpm-cyan shadow-[0_0_10px_rgba(116,247,255,1)]" 
+                              : "bg-white/10 group-hover:bg-wpm-cyan/40"
+                          }`} />
+                          {active && (
+                            <motion.div 
+                              layoutId="led-ring"
+                              initial={{ scale: 0.8, opacity: 0 }}
+                              animate={{ scale: 2.5, opacity: 0 }}
+                              transition={{ duration: 1.5, repeat: Infinity }}
+                              className="absolute h-1.5 w-1.5 rounded-full border border-wpm-cyan"
+                            />
+                          )}
+                        </div>
+
+                        <div className="flex flex-col">
+                           <span className={`font-mono text-[10px] font-bold tracking-[0.15em] uppercase transition-colors ${
+                             active ? "text-wpm-white" : "text-wpm-muted group-hover:text-wpm-white"
+                           }`}>
+                             {item.label}
+                           </span>
+                           <span className="font-mono text-[6px] tracking-widest text-white/10 uppercase group-hover:text-wpm-cyan/20 transition-colors">
+                             ID_SUBSYS_0{idx + 1}
+                           </span>
+                        </div>
+                      </div>
+
+                      {/* Hover/Active Background Glow */}
+                      <div className={`absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-white/[0.02] opacity-0 group-hover:opacity-100 transition-opacity`} />
+                      
+                      {active && (
+                        <motion.div 
+                          layoutId="nav-active-indicator"
+                          className="absolute bottom-0 left-2 right-2 h-0.5 bg-wpm-cyan shadow-[0_0_15px_rgba(116,247,255,0.8)]" 
+                        />
+                      )}
+                    </Link>
+                  );
+                })}
+              </nav>
+
+              {/* Mobile Menu Toggle */}
+              <button
+                ref={modulesButtonRef}
+                className="lg:hidden flex items-center gap-4 px-5 py-2 border border-wpm-cyan/20 bg-wpm-cyan/[0.03] active:bg-wpm-cyan/[0.1] transition-all"
+                onClick={() => setDrawerOpen(true)}
+              >
+                <div className="flex flex-col gap-1.5">
+                   <div className="h-0.5 w-5 bg-wpm-cyan shadow-[0_0_5px_rgba(116,247,255,0.5)]" />
+                   <div className="h-0.5 w-3 bg-wpm-cyan shadow-[0_0_5px_rgba(116,247,255,0.5)]" />
+                </div>
+                <span className="font-mono text-[10px] uppercase font-black tracking-[0.2em] text-wpm-cyan">Modules</span>
+              </button>
+            </>
+          )}
         </div>
-
-        {showNav && (
-          <>
-            {/* Desktop nav — icon row */}
-            <nav
-              aria-label="Navegacao rapida"
-              className="hidden md:flex items-center gap-0.5"
-            >
-              {activeMenuItems.map((item) => {
-                const iconName = navIconNames[item.id];
-                return (
-	                  <Link
-	                    key={item.id}
-	                    href={item.href}
-	                    className={`relative font-mono text-[11px] hover:text-wpm-cyan
-	                             px-2 py-1 transition-colors duration-200 group
-	                             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 focus-visible:ring-offset-2 focus-visible:ring-offset-wpm-black rounded-sm ${
-                               currentItem?.id === item.id ? "text-wpm-cyan" : "text-wpm-gray"
-                             }`}
-	                    aria-label={item.label}
-	                    aria-current={currentItem?.id === item.id ? "page" : undefined}
-	                  >
-	                    <span
-	                      className={`transition-colors ${
-	                        currentItem?.id === item.id
-	                          ? "text-wpm-cyan"
-	                          : "text-wpm-lavender/90 group-hover:text-wpm-lavender"
-	                      }`}
-	                    >
-	                      <Icon name={iconName} size="sm" />
-	                    </span>
-                    <span className="ml-1.5 hidden lg:inline">
-                      {item.label}
-                    </span>
-                  </Link>
-                );
-              })}
-            </nav>
-
-            {/* Mobile nav button */}
-            <button
-              ref={modulesButtonRef}
-              className="md:hidden font-mono text-[11px] text-wpm-gray hover:text-wpm-cyan transition-colors
-                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm px-2 py-1"
-              onClick={() => setDrawerOpen(true)}
-              aria-label="Abrir menu de navegacao"
-              aria-expanded={drawerOpen}
-              aria-controls="mobile-nav-drawer"
-            >
-              MODULOS
-            </button>
-          </>
-        )}
       </header>
 
-      {/* Bottom bar */}
-      <footer className="fixed bottom-0 left-0 right-0 z-30 h-8 border-t border-white/[0.04] bg-wpm-black/80 backdrop-blur-sm flex items-center justify-between px-4 md:px-6">
-        <span className="font-mono text-[11px] text-wpm-gray">
-          {profile.name}
-        </span>
+      {/* Footer bar */}
+      <footer className="fixed bottom-0 left-0 right-0 z-30 hidden h-10 items-center justify-between border-t border-white/[0.08] bg-[#050509]/90 px-6 backdrop-blur-md md:flex">
         <div className="flex items-center gap-4">
+           <div className="h-2 w-2 rounded-full bg-wpm-success shadow-[0_0_8px_rgba(91,255,199,0.5)]" />
+           <span className="font-mono text-[9px] text-wpm-white/60 uppercase tracking-widest font-bold">
+            {profile.name} <span className="text-wpm-cyan/40">USER_AUTH_OK</span>
+          </span>
+        </div>
+        
+        <div className="flex items-center gap-6">
           {mode === "hub" && hasVisited && (
             <button
-              className="font-mono text-[11px] text-wpm-gray hover:text-wpm-cyan/80 transition-colors
-                         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm px-1"
+              className="wpm-btn-ripple font-mono text-[9px] text-wpm-muted hover:text-wpm-cyan transition-colors uppercase tracking-[0.2em]"
               onClick={handleReplayIntro}
             >
-              Repetir Intro
+              [ RE-BOOT_SYSTEM ]
             </button>
           )}
-	          {mode === "page" && (
-	            <span className="font-mono text-[11px] text-wpm-gray">
-	              ESC / VOLTAR para retornar
-	            </span>
-	          )}
-          {mode === "hub" && (
-            <span className="font-mono text-[11px] text-wpm-gray">WPM.OS v1.0</span>
+          
+          <div className="flex items-center gap-2">
+             <span className="font-mono text-[9px] text-wpm-muted uppercase">SYSTEM_STATE:</span>
+             <span className="font-mono text-[9px] text-wpm-success font-bold uppercase tracking-widest italic animate-pulse">OPERATIONAL</span>
+          </div>
+          
+          {mode === "page" && (
+            <span className="font-mono text-[9px] text-wpm-muted border-l border-white/10 pl-6">
+              TECLE <span className="text-wpm-white font-bold">[ESC]</span> PARA RETORNAR
+            </span>
           )}
         </div>
       </footer>
 
-      {/* Main content */}
-      <main id="main-content" tabIndex={-1} className="pt-12 pb-16 min-h-screen focus:outline-none">
+      {/* Main content area */}
+      <main id="main-content" tabIndex={-1} className="pt-16 pb-16 min-h-screen focus:outline-none relative z-10">
         <PageTransition>{children}</PageTransition>
       </main>
 
-      {/* Mobile drawer */}
-      <MobileNavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} returnFocusRef={modulesButtonRef} />
+      <MobileNavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
+      {/* Floating Back Button for Mobile */}
       {mode === "page" && (
         <Link
           href="/console"
-          className="fixed bottom-12 right-4 z-40 inline-flex min-h-11 items-center justify-center border border-wpm-cyan/45 bg-wpm-black/90 px-4 font-mono text-[11px] uppercase tracking-[0.14em] text-wpm-cyan shadow-[0_0_28px_rgba(116,247,255,0.12)] backdrop-blur-sm transition-colors hover:border-wpm-cyan/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-cyan/70 md:hidden"
+          className="fixed bottom-14 right-6 z-40 flex h-14 w-14 items-center justify-center border border-wpm-cyan/40 bg-wpm-black/90 text-wpm-cyan shadow-[0_0_30px_rgba(116,247,255,0.2)] backdrop-blur-lg hover:bg-wpm-cyan hover:text-wpm-black transition-all active:scale-90 lg:hidden"
           aria-label="Voltar ao console"
         >
-          Voltar
+          <span className="font-mono text-xl font-black italic">{"<"}</span>
         </Link>
       )}
 
-      {/* CRT overlays */}
-      <div className="crt-overlay" />
-      <div className="crt-vignette" />
+      {/* CRT Effects */}
+      <div className="crt-overlay pointer-events-none" />
+      <div className="crt-vignette pointer-events-none" />
     </div>
   );
 }

@@ -11,6 +11,133 @@ Regras:
 
 ---
 
+## [CODEX -> DEEPSEEK] TASK-20260508-REDESIGN-WPMOS-PREMIUM
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-08
+
+### Missao
+
+Aplicar redesign incremental premium no WPM.OS preservando a identidade de sistema operacional / launcher / menu de game, sem reescrita total, sem dependencia nova e mantendo deploy estatico GitHub Pages.
+
+### Escopo aprovado por Wallace
+
+- Home deve virar command deck / launcher premium, nao grid de cards equivalentes.
+- Cada modulo precisa ter preview significativo, metadados, status, acao clara e diferenciacao visual.
+- Paginas internas devem parecer scene pages / rooms / dossiers, com densidade util acima da dobra.
+- Criar/refinar design tokens, componentes reutilizaveis, motion economico, acessibilidade e performance.
+
+### Delegacao operacional
+
+Codex assume direcao criativa, arquitetura, implementacao final e auditoria.
+DeepSeek via Forge/Sage foi acionado para auditoria independente read-only do estado atual antes das alteracoes.
+
+### Plano de implementacao
+
+1. Auditar stack, rotas, componentes, tokens e redundancias.
+2. Redesenhar home em command deck com rail de modulos, preview stage e utilities separadas.
+3. Criar base reutilizavel para module scene pages.
+4. Aplicar scene pages em Perfil, Skills, Save, Lab, Hobbies e Contact.
+5. Atualizar documentacao com changelog e QA.
+6. Validar lint, typecheck, build e build GitHub Pages.
+
+### Restricoes
+
+- Sem backend, CMS, auth, banco, analytics ou servicos externos.
+- Sem dependencia nova.
+- Sem neon/blur/particulas em excesso.
+- Preservar reduced motion, foco visivel, semantica e compatibilidade estatica.
+
+---
+
+## [CODEX -> DEEPSEEK] EXECUTION REPORT TASK-20260508-REDESIGN-WPMOS-PREMIUM
+
+**Status:** NEEDS_HUMAN_VISUAL_QA
+**Data:** 2026-05-08
+
+### Auditoria
+
+- Stack confirmada: Next.js 16 App Router, React 19, TypeScript, Tailwind v4, Motion, Playwright, GitHub Pages static export.
+- DeepSeek via Forge/Sage foi acionado em modo read-only e recomendou baixo risco estrutural para: consolidar componentes, completar tokens, preservar WebGL/mobile e evitar novas dependencias.
+
+### Implementado
+
+- Home redesenhada como command deck premium com module rail, preview stage, CTA real e utilities separadas.
+- Previews de modulo passaram a ser significativos para todos os modulos, nao apenas Projects.
+- Criado contrato `moduleSceneData.ts`.
+- Criados `ModulePreviewPanel.tsx` e `ModuleSceneLayout.tsx`.
+- Paginas internas `/projects`, `/about`, `/skills`, `/resume`, `/lab`, `/hobbies`, `/contact` passaram para formato scene/dossier.
+- Tokens adicionados em `globals.css`: surface/elevated/text-secondary/muted/success/warning/experimental.
+- `ModuleSlideSystem.tsx` migrou de hardcoded background para `bg-wpm-elevated`.
+- Footer fixo oculto em mobile para evitar sobreposicao.
+- Artefatos em foco escondidos no launcher mobile para reduzir densidade e overlap.
+
+### Validacao
+
+```bash
+npm run lint
+npm run typecheck
+npm run build
+npm run test:e2e
+npm run build:github-pages
+```
+
+Resultados:
+- lint: PASS
+- typecheck: PASS
+- build: PASS
+- test:e2e: 13 passed, 1 skipped
+- build:github-pages: PASS
+- QA screenshot desktop/mobile: `/console`, `/projects`, `/about`, `/skills`, `/resume`, `/lab`, `/hobbies`, `/contact`, sem overflow horizontal.
+
+### Pendencia
+
+Falta QA visual humana de Wallace. Resposta esperada:
+
+- `APROVADO VISUAL`
+- ou `AJUSTAR: descreva o ajuste necessario`
+
+---
+
+## [CODEX -> DEEPSEEK] QA FOLLOW-UP TASK-20260508-REDESIGN-WPMOS-PREMIUM
+
+**Status:** DOCUMENTED
+**Data:** 2026-05-08
+
+### Ocorrencia
+
+Wallace reportou um erro visual no navegador local: `Hydration failed because the server rendered HTML didn't match the client`.
+
+### Analise
+
+O diff exibido pelo overlay do Next mostrou elemento injetado:
+
+```text
+className="translate-tooltip-mtz translator-hidden"
+```
+
+Isso indica interferencia de extensao/tradutor no DOM antes da hidratacao React, nao uma divergencia gerada pelo codigo do WPM.OS.
+
+### Verificacao independente
+
+Com Chromium limpo via Playwright:
+
+```bash
+node --input-type=module ...
+```
+
+Rotas verificadas:
+
+- `/projects`: NO_ERRORS
+- `/console`: NO_ERRORS
+- `/about`: NO_ERRORS
+
+### Decisao
+
+Nao alterar codigo para mascarar erro causado por extensao de navegador. Orientacao operacional: abrir em aba anonima sem extensoes, desativar tradutor na URL local ou recarregar com hard refresh apos desativar a extensao.
+
+---
+
 ## [DEEPSEEK -> CODEX] BLOCKER — NO READY TASK FOUND
 
 ---

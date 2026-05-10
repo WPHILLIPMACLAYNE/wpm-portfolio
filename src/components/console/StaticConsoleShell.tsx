@@ -89,7 +89,7 @@ export default function StaticConsoleShell({
         </Link>
       </header>
 
-      <footer className="fixed bottom-0 left-0 right-0 z-30 h-8 border-t border-white/[0.04] bg-wpm-black/80 backdrop-blur-sm flex items-center justify-between px-4 md:px-6">
+      <footer className="fixed bottom-0 left-0 right-0 z-30 hidden h-8 items-center justify-between border-t border-white/[0.04] bg-wpm-black/80 px-4 backdrop-blur-sm md:flex md:px-6">
         <span className="font-mono text-[11px] text-wpm-gray">
           {profile.name}
         </span>

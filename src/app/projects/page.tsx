@@ -1,8 +1,7 @@
-import Link from "next/link";
 import StaticConsoleShell from "@/components/console/StaticConsoleShell";
+import ModuleSceneLayout from "@/components/console/ModuleSceneLayout";
 import ProjectCartridge from "@/components/console/ProjectCartridge";
 import { projects, getFeaturedProjects } from "@/data/projects";
-import Divider from "@/components/ui/Divider";
 
 const featuredProofs: Record<string, string[]> = {
   "wpm-gestao-interna": ["PWA", "Offline", "Supabase", "Recepção de academias"],
@@ -16,33 +15,15 @@ export default function ProjectsPage() {
 
   return (
     <StaticConsoleShell currentHref="/projects" currentLabel="Project Library">
-      <div className="px-4 md:px-6 py-12 max-w-4xl mx-auto pb-20">
-        {/* Back link */}
-        <Link
-          href="/console"
-            className="inline-flex items-center gap-2 font-mono text-xs text-wpm-gray hover:text-wpm-cyan transition-colors mb-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wpm-purple/50 rounded-sm"
-        >
-          <span className="text-wpm-lavender/90">&lt;-</span> BACK TO CONSOLE
-        </Link>
-
-        {/* Header — curated work index */}
-        <header className="mb-14">
-          <p className="font-mono text-[11px] tracking-[0.16em] uppercase text-wpm-lavender/90 mb-4">
-            REAL WORK / 02
-          </p>
-          <h1 className="font-sans text-3xl md:text-5xl font-light tracking-tight text-wpm-white/90 max-w-2xl break-words">
-            Two shipped bodies of work
-          </h1>
-          <p className="mt-3 font-sans text-sm text-wpm-gray leading-snug max-w-md break-words">
-            One operational system. One editorial product. Both shipped from
-            real constraints.
-          </p>
-        </header>
-
+      <ModuleSceneLayout
+        moduleId="projects"
+        title="Biblioteca de Projetos"
+        subtitle="Arquivo principal de cases: estudos publicados, artefatos, metadados e entrada direta nos dossies de projeto."
+      >
         {/* Featured Projects */}
         {featured.length > 0 && (
-          <section className="mb-16">
-            <div className="flex items-center gap-3 mb-8">
+          <section className="wpm-data-surface p-5 md:p-6">
+            <div className="flex items-center gap-3 mb-6">
               <span
                 className="w-1.5 h-1.5 rounded-full"
                 style={{
@@ -51,7 +32,7 @@ export default function ProjectsPage() {
                 }}
               />
               <h2 className="font-mono text-[11px] tracking-[0.2em] uppercase text-wpm-cyan/80">
-                Work Index
+                Work index / featured
               </h2>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -79,11 +60,9 @@ export default function ProjectsPage() {
           </section>
         )}
 
-        <Divider variant="accent" className="mb-14 opacity-30" />
-
         {/* Role legend */}
-        <section className="mb-10">
-          <p className="font-mono text-[11px] text-wpm-gray uppercase tracking-wider">
+        <section className="border border-white/[0.07] bg-white/[0.02] p-5">
+          <p className="font-mono text-[11px] text-wpm-gray uppercase tracking-[0.14em] leading-relaxed">
             Each project represents a complete body of work — problem
             identification, solution design, implementation, and documented
             results.
@@ -92,7 +71,7 @@ export default function ProjectsPage() {
 
         {/* More Projects — only if any exist */}
         {more.length > 0 && (
-          <section className="mb-14">
+          <section>
             <div className="flex items-center gap-3 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-wpm-gray/40" />
               <h2 className="font-mono text-[11px] tracking-[0.2em] uppercase text-wpm-gray">
@@ -113,7 +92,7 @@ export default function ProjectsPage() {
 
         {/* Locked — only if any exist */}
         {locked.length > 0 && (
-          <section className="mb-14">
+          <section>
             <div className="flex items-center gap-3 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-wpm-purple/30" />
               <h2 className="font-mono text-[11px] tracking-[0.2em] uppercase text-wpm-lavender/90">
@@ -131,7 +110,7 @@ export default function ProjectsPage() {
             </div>
           </section>
         )}
-      </div>
+      </ModuleSceneLayout>
     </StaticConsoleShell>
   );
 }

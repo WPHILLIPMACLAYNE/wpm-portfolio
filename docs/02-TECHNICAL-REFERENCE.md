@@ -555,3 +555,43 @@ Para retomar em outro terminal/conta Codex:
 Se Wallace responder `AJUSTAR: ...`, aplicar somente o ajuste pedido, validar, documentar, commitar, publicar e pedir novo aceite visual.
 
 > **Regra do projeto:** Esta referência técnica deve ser atualizada sempre que novas tecnologias, padrões ou decisões arquiteturais forem introduzidos.
+
+---
+
+## Premium Redesign 2026-05-08
+
+Novos contratos visuais:
+
+- `src/components/console/moduleSceneData.ts`: fonte dos metadados visuais por modulo.
+- `src/components/console/ModulePreviewPanel.tsx`: preview stage reutilizavel para command deck e slide panel.
+- `src/components/console/ModuleSceneLayout.tsx`: template de paginas internas em formato scene/dossier.
+
+Tokens adicionados em `src/app/globals.css`:
+
+- `wpm-surface`
+- `wpm-elevated`
+- `wpm-text-secondary`
+- `wpm-muted`
+- `wpm-success`
+- `wpm-warning`
+- `wpm-experimental`
+
+Comandos finais executados nesta rodada:
+
+```bash
+npm run lint
+npm run typecheck
+npm run build
+npm run test:e2e
+npm run build:github-pages
+```
+
+Resultado: todos passaram; E2E final com `13 passed, 1 skipped`.
+
+Relatorio de design/QA: `docs/13-WPMOS-PREMIUM-REDESIGN-2026-05-08.md`.
+
+### Nota de QA local: Hydration overlay por extensao
+
+Um erro manual de hidratacao no navegador local foi investigado apos a rodada. A mensagem continha `translate-tooltip-mtz translator-hidden`, classe injetada por extensao/tradutor antes da hidratacao React. O erro nao foi reproduzido em Chromium limpo via Playwright nas rotas `/projects`, `/console` e `/about`.
+
+Decisao: nao alterar codigo do app para esse caso. Para QA visual, usar janela anonima sem extensoes ou desativar o tradutor na URL local.
