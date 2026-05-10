@@ -34,7 +34,6 @@ export const SITE_ROUTES = [
   "/skills",
   "/resume",
   "/lab",
-  "/hobbies",
   "/contact",
 ];
 
@@ -53,7 +52,7 @@ export function publicAssetPath(path: string) {
   return `${SITE_BASE_PATH}${normalizedPath}`;
 }
 
-function normalizeBasePath(value: string | undefined) {
+export function normalizeBasePath(value: string | undefined) {
   if (!value || value === "/") return "";
   return value.startsWith("/") ? value : `/${value}`;
 }
