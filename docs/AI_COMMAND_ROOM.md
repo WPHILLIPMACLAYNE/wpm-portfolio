@@ -5757,3 +5757,56 @@ npm run test:e2e
 Resultado:
 - `npm run typecheck && npm run lint`: PASS apos remover o artefato gerado corrompido `.next/dev/types/validator.ts`.
 - `npm run test:e2e`: BLOCKED antes de iniciar testes porque `next dev --hostname 127.0.0.1 --port 3010` falhou com `listen EPERM 127.0.0.1:3010` na sandbox atual.
+---
+
+## [CODEX -> DEEPSEEK] TASK-20260510-WEBGL-MOBILE-01
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Missao
+
+Investigar e corrigir chamadas WebGL em mobile no smoke E2E. Escopo permitido: `ShaderBackgroundWrapper`, componentes WebGL/console diretamente responsaveis por `<Canvas>` e a assercao mobile em `tests/e2e/portfolio-smoke.spec.ts`. Fora de escopo: redesign visual, novas dependencias, E2E local por bloqueio de bind da sandbox.
+
+### Diagnostico Codex
+
+Problema: o smoke mobile registrou `webglCalls > 0`.
+Causa provavel: alem do `ShaderBackgroundWrapper`, o console monta `TacticalVisualStage -> HologramStage -> <Canvas>`, criando contexto R3F em mobile. O wrapper tambem deve reforcar mobile com media queries de pointer/hover antes de qualquer `detectWebGL()`.
+Arquivos afetados: `src/components/webgl/ShaderBackgroundWrapper.tsx`, `src/components/console/TacticalVisualStage.tsx`, `tests/e2e/portfolio-smoke.spec.ts`.
+Risco: regressao visual do preview tatico em mobile; mitigacao por fallback CSS/HUD ja coerente com WPM.OS.
+
+### Validacao esperada
+
+```bash
+npm run typecheck && npm run lint
+```
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-WEBGL-MOBILE-01
+
+**Status:** DONE
+**Data:** 2026-05-10
+
+### Arquivos alterados
+
+- `src/components/webgl/ShaderBackgroundWrapper.tsx`
+- `src/components/console/TacticalVisualStage.tsx`
+- `tests/e2e/portfolio-smoke.spec.ts`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Resultado
+
+`ShaderBackgroundWrapper` recebeu guarda adicional por `matchMedia("(pointer: fine)")` e retorna `ShaderBackgroundFallback` quando o dispositivo nao possui ponteiro fino. Os updates de estado foram agendados via `requestAnimationFrame` para cumprir a regra local de lint. O teste mobile permanece estrito com `expect(webglCalls).toBe(0)` e sem comentarios TODO.
+
+O fallback do `TacticalVisualStage` tambem manteve a mesma protecao mobile/touch para evitar montagem de `<Canvas>` no console em dispositivos sem ponteiro fino.
+
+### Validacao
+
+```bash
+npm run typecheck && npm run lint
+```
+
+Resultado: PASS.
+
+---

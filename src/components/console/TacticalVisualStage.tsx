@@ -1,6 +1,8 @@
 "use client";
 
+import { useLayoutEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import { shouldAvoidWebGLOnMobile } from "@/lib/webglCapability";
 
 const HologramStage = dynamic(() => import("./HologramStage"), {
   ssr: false,
@@ -16,7 +18,36 @@ interface TacticalVisualStageProps {
   items: string[];
 }
 
+function StaticHologramFallback() {
+  return (
+    <div
+      className="relative h-full min-h-[350px] w-full overflow-hidden"
+      aria-hidden="true"
+    >
+      <div className="absolute inset-[14%] border border-wpm-cyan/15 bg-wpm-cyan/[0.025] shadow-[inset_0_0_28px_rgba(116,247,255,0.08)]" />
+      <div className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-wpm-cyan/35 bg-wpm-cyan/[0.04]" />
+      <div className="absolute left-1/2 top-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full border border-wpm-purple/25" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(116,247,255,0.018)_1px,transparent_1px)] bg-[size:100%_4px]" />
+    </div>
+  );
+}
+
 export default function TacticalVisualStage({ id }: TacticalVisualStageProps) {
+  const [canUseWebGL, setCanUseWebGL] = useState(false);
+
+  useLayoutEffect(() => {
+    let cancelled = false;
+
+    requestAnimationFrame(() => {
+      if (cancelled) return;
+      setCanUseWebGL(!shouldAvoidWebGLOnMobile());
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <div className="relative h-full w-full overflow-hidden bg-[#05070a]">
       {/* HUD Background elements */}
@@ -26,7 +57,7 @@ export default function TacticalVisualStage({ id }: TacticalVisualStageProps) {
 
       {/* TACTICAL HOLOGRAM - CENTRAL PIECE */}
       <div className="absolute inset-0 z-10 flex items-center justify-center">
-         <HologramStage id={id} />
+         {canUseWebGL ? <HologramStage id={id} /> : <StaticHologramFallback />}
       </div>
 
       {/* Decorative Corners */}

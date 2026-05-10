@@ -240,14 +240,11 @@ test("mobile uses CSS fallback without WebGL context or heavy chunk", async ({
 
   // ── Assertions ──
 
-  // 1. WebGL context guard: ShaderBackgroundWrapper currently creates a WebGL
-  // context on mobile (known perf issue, tracked as PERF-01 follow-up).
-  // Accept ≤1 call until the app fix adds pointer/media-query guard.
-  // TODO: tighten to toBe(0) after ShaderBackgroundWrapper respects touch devices.
+  // 1. WebGL context guard: mobile must stay on CSS fallbacks only.
   const webglCalls = await page.evaluate(() =>
     Number((window as unknown as Record<string, () => number>).__webglCallCount?.() ?? 0)
   );
-  expect(webglCalls).toBeLessThanOrEqual(1);
+  expect(webglCalls).toBe(0);
 
   // 2. Behavioral lazy-load guard: if the Three/R3F chunk mounted aggressively
   // on mobile, it would request multiple WebGL contexts during this window.

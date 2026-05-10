@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useReducedMotion } from "motion/react";
+import { shouldAvoidWebGLOnMobile } from "@/lib/webglCapability";
 import ShaderBackgroundFallback from "./ShaderBackgroundFallback";
 
 /* ───────────────────────────────────────────────────────────
@@ -59,29 +60,47 @@ function detectWebGL(): boolean {
 }
 
 function detectMobile(): boolean {
-  if (typeof navigator === "undefined") return false;
-  return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  return shouldAvoidWebGLOnMobile();
 }
 
 export default function ShaderBackgroundWrapper() {
   const prefersReduced = useReducedMotion();
+  const [hasFinePointer, setHasFinePointer] = useState(true);
   const [webglOk, setWebglOk] = useState<boolean | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
-    // Defer detection to next frame to avoid sync setState in effect.
-    // Mobile MUST be detected first — we skip WebGL detection on mobile
-    // to avoid creating a temporary canvas.getContext("webgl") context.
+
     requestAnimationFrame(() => {
       if (cancelled) return;
+      setHasFinePointer(window.matchMedia("(pointer: fine)").matches);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    let cancelled = false;
+
+    requestAnimationFrame(() => {
+      if (cancelled) return;
+      // Mobile/touch MUST be detected first. We skip WebGL probing there because
+      // detectWebGL intentionally creates a temporary canvas context.
       const mobile = detectMobile();
       setIsMobile(mobile);
-      // Only desktop runs WebGL detection (creates canvas context)
       setWebglOk(mobile ? false : detectWebGL());
     });
-    return () => { cancelled = true; };
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
+
+  // Touch/mobile pointers never initialize WebGL.
+  if (!hasFinePointer) return <ShaderBackgroundFallback />;
 
   // Still detecting — show nothing (prevents flash)
   if (webglOk === null) return null;
