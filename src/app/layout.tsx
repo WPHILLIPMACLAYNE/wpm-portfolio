@@ -96,12 +96,10 @@ export default function RootLayout({
       lang="pt-BR"
       translate="no"
       className={`${geistSans.variable} ${geistMono.variable} notranslate h-full antialiased`}
-      suppressHydrationWarning
     >
       <body
         translate="no"
         className="notranslate min-h-full bg-wpm-black text-wpm-white"
-        suppressHydrationWarning
       >
         <a
           href="#main-content"
