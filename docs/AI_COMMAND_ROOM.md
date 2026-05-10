@@ -5891,3 +5891,110 @@ npm run typecheck && npm run lint
 Resultado: PASS.
 
 ---
+
+## [CODEX -> DEEPSEEK] TASK-20260510-SENTRY-01
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Missao
+
+Adicionar Sentry ao WPM.OS Portfolio para monitoramento de erros client-side em Next.js 16 App Router com static export.
+
+### Diagnostico Codex
+
+Problema: o portfolio nao possui SDK Sentry configurado e os boundaries `src/app/global-error.tsx` e `src/app/error.tsx` apenas fazem `console.error`, o que perde visibilidade de erros renderizados em producao.
+
+Causa provavel: observabilidade estava prevista em ADR-008, mas ainda nao havia DSN/config/runtime de monitoramento configurados.
+
+Arquivos afetados: `package.json`, `package-lock.json`, `sentry.client.config.ts`, `instrumentation-client.ts`, `sentry.server.config.ts`, `sentry.edge.config.ts`, `src/app/global-error.tsx`, `src/app/error.tsx` somente leitura/reporte, `next.config.ts`, `.do/app.yaml`, `.github/workflows/pages.yml`, `.github/workflows/deploy-digitalocean.yml`, `.gitignore`, `docs/08-DEPLOYMENT.md`.
+
+### Plano De Correcao
+
+1. Instalar `@sentry/nextjs`.
+2. Criar configuracao client-side com DSN publico, ambiente por `NEXT_PUBLIC_DEPLOY_TARGET`, sample rates baixos e `enabled` somente em producao com DSN.
+3. Manter `sentry.server.config.ts` e `sentry.edge.config.ts` minimos, sem depender de runtime server no static export.
+4. Adicionar captura com `Sentry.captureException()` no `global-error.tsx` sem redesenhar a UI; se `src/app/error.tsx` existir, apenas ler e reportar.
+5. Ajustar `next.config.ts` com `withSentryConfig` de forma compativel com static export e sem exigir upload de source maps sem token.
+6. Documentar secrets/envs em DigitalOcean, GitHub Actions e `docs/08-DEPLOYMENT.md`.
+7. Garantir `.sentryclirc` no `.gitignore`.
+
+### Fora De Escopo
+
+- Nao executar build.
+- Nao ativar Sentry real no dashboard.
+- Nao commitar DSN real, auth token, org slug ou project slug.
+- Nao alterar direcao visual do WPM.OS.
+
+### Risco
+
+Baixo a medio: `withSentryConfig` pode alterar o build e source-map handling; mitigar desabilitando source-map upload/release automaticos enquanto nao houver `SENTRY_AUTH_TOKEN` e validando TypeScript/lint.
+
+### Validacao Esperada
+
+```bash
+npm run typecheck && npm run lint
+```
+
+Resultado esperado: PASS.
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-SENTRY-01
+
+**Status:** DONE / DEEPSEEK_UNAVAILABLE
+**Data:** 2026-05-10
+
+### Observacao De Orquestracao
+
+Codex tentou acionar DeepSeek via Forge, mas o processo falhou antes da execucao com `attempt to write a readonly database`. Para manter a tarefa auditavel, Codex assumiu a implementacao apos registrar a delegacao.
+
+### Arquivos Alterados
+
+- `package.json`
+- `package-lock.json`
+- `sentry.client.config.ts`
+- `instrumentation-client.ts`
+- `sentry.server.config.ts`
+- `sentry.edge.config.ts`
+- `src/app/global-error.tsx`
+- `next.config.ts`
+- `.do/app.yaml`
+- `.github/workflows/pages.yml`
+- `.github/workflows/deploy-digitalocean.yml`
+- `.gitignore`
+- `docs/08-DEPLOYMENT.md`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Resultado
+
+Instalado `@sentry/nextjs@10.52.0`. O client-side Sentry inicializa por `instrumentation-client.ts`, reaproveitando `sentry.client.config.ts`, com `NEXT_PUBLIC_SENTRY_DSN`, ambiente por `NEXT_PUBLIC_DEPLOY_TARGET`, sample rates solicitados, replay mascarado e `enabled` apenas em producao com DSN.
+
+`src/app/global-error.tsx` agora envia erros raiz com `Sentry.captureException(error)`. `src/app/error.tsx` existe e foi apenas lido/reportado; permanece com `console.error(error)` conforme instrucao especifica.
+
+`next.config.ts` usa `withSentryConfig` com telemetry, release creation e source-map upload desativados para nao exigir token nem quebrar o static export. GitHub Pages e DigitalOcean recebem `NEXT_PUBLIC_SENTRY_DSN` por secret/env de build. `.sentryclirc` entrou no `.gitignore`.
+
+`docs/08-DEPLOYMENT.md` documenta o setup manual do DSN no dashboard Sentry, o secret `SENTRY_DSN` no GitHub, a env build-time no DigitalOcean e a decisao de manter source maps desativados ate aprovacao separada de `SENTRY_AUTH_TOKEN`/org/project.
+
+### Validacao
+
+```bash
+npm install @sentry/nextjs
+npm run typecheck && npm run lint
+git diff --check
+```
+
+Resultados:
+- `npm install @sentry/nextjs`: PASS; adicionou 153 pacotes e reportou 0 vulnerabilidades.
+- `npm run typecheck && npm run lint`: PASS.
+- `git diff --check`: PASS.
+
+### Pendente Manual
+
+- Criar/selecionar o projeto no Sentry.
+- Copiar o DSN publico em **Client Keys (DSN)**.
+- Adicionar o DSN ao GitHub Secrets como `SENTRY_DSN`.
+- Preencher `NEXT_PUBLIC_SENTRY_DSN` no painel da DigitalOcean antes do deploy por App Platform.
+- Fazer um deploy de producao e validar um erro controlado no navegador em Sentry Issues.
+
+---

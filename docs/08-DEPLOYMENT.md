@@ -40,6 +40,7 @@ This writes the export to `out/` with:
 - `NEXT_PUBLIC_DEPLOY_TARGET=github-pages`
 - `NEXT_PUBLIC_BASE_PATH=/wpm-portfolio`
 - `NEXT_PUBLIC_SITE_URL=https://wphillipmaclayne.github.io/wpm-portfolio`
+- `NEXT_PUBLIC_SENTRY_DSN` from GitHub secret `SENTRY_DSN` when configured
 - `output: "export"`
 - `trailingSlash: true`
 - `images.unoptimized: true`
@@ -51,8 +52,36 @@ GitHub Pages serves static files and does not run a Node.js Next server. Because
 - `next.config.ts` runtime `headers()` are not available in the static export.
 - `next/image` default optimization is disabled for static export.
 - Public asset paths must include the configured `basePath`.
+- Sentry runs as browser-side monitoring only; server and edge Sentry config
+  files are present for SDK compatibility but there is no server runtime in the
+  GitHub Pages export.
 
 The Node-compatible build keeps the configured security headers and default image optimization path.
+
+## Sentry Error Monitoring
+
+Sentry is configured for client-side error monitoring only. The static export
+loads the browser SDK through `instrumentation-client.ts`, which imports
+`sentry.client.config.ts`. The SDK stays disabled in local development and in
+production builds without `NEXT_PUBLIC_SENTRY_DSN`.
+
+Manual setup:
+
+1. Open Sentry and create or select the WPM.OS Portfolio project.
+2. In the project settings, open **Client Keys (DSN)** and copy the public DSN.
+3. Add the DSN to GitHub repository secrets as `SENTRY_DSN`.
+4. For DigitalOcean App Platform, set `NEXT_PUBLIC_SENTRY_DSN` as a build-time
+   environment variable in the app settings. The `.do/app.yaml` entry is a
+   placeholder and must be replaced in the panel.
+5. Trigger a production deployment. Do not commit `.sentryclirc`, auth tokens,
+   org slugs, project slugs, or real DSN values.
+6. After deployment, verify a controlled test error from the browser appears in
+   Sentry Issues. Errors thrown from DevTools console are not reliable Sentry
+   verification events.
+
+Source-map upload is intentionally disabled in `next.config.ts` until a
+separate decision approves `SENTRY_AUTH_TOKEN`, org/project slugs, and the
+associated build-time upload flow.
 
 ## DigitalOcean App Platform
 
@@ -70,6 +99,8 @@ static export. The repo now includes `.do/app.yaml` with:
   - `NEXT_PUBLIC_DEPLOY_TARGET=digitalocean`;
   - `NEXT_PUBLIC_BASE_PATH=` empty, so the site is served from `/`;
   - `NEXT_PUBLIC_SITE_URL=https://wpm-portfolio.ondigitalocean.app` as a starter placeholder.
+  - `NEXT_PUBLIC_SENTRY_DSN` as a secret placeholder for browser-side Sentry
+    monitoring.
 
 The existing `build:github-pages` script now keeps GitHub Pages defaults when no
 external env is set, but allows DigitalOcean to override those values through
@@ -93,6 +124,8 @@ path.
    - build command: `npm ci && npm run build:github-pages`;
    - output directory: `out`;
    - environment variables listed above with `BUILD_TIME` scope.
+   - `NEXT_PUBLIC_SENTRY_DSN` populated with the Sentry project DSN when
+     monitoring is approved for the DigitalOcean deployment.
 7. Create the app and wait for the first deployment.
 8. Replace the placeholder `NEXT_PUBLIC_SITE_URL` with the final starter domain
    or custom domain after DigitalOcean shows the live URL.

@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withSentryConfig } from "@sentry/nextjs";
 import { normalizeBasePath } from "./src/lib/site";
 
 const deployTarget = process.env.NEXT_PUBLIC_DEPLOY_TARGET ?? "node";
@@ -82,4 +83,13 @@ const nextConfig: NextConfig = {
       }),
 };
 
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+  silent: !process.env.CI,
+  telemetry: false,
+  release: {
+    create: false,
+  },
+  sourcemaps: {
+    disable: true,
+  },
+});

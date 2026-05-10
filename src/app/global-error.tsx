@@ -1,6 +1,7 @@
 "use client";
 
 import "./globals.css";
+import * as Sentry from "@sentry/nextjs";
 import { useEffect } from "react";
 
 interface GlobalErrorProps {
@@ -15,6 +16,7 @@ export default function GlobalError({
   unstable_retry,
 }: GlobalErrorProps) {
   useEffect(() => {
+    Sentry.captureException(error);
     console.error(error);
   }, [error]);
 

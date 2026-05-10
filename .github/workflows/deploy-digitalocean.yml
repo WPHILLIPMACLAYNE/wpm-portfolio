@@ -35,6 +35,7 @@ jobs:
           NEXT_PUBLIC_DEPLOY_TARGET: digitalocean
           NEXT_PUBLIC_BASE_PATH: ""
           NEXT_PUBLIC_SITE_URL: https://wpm-portfolio.ondigitalocean.app
+          NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
         run: npm run build:github-pages
 
       - name: Verify security headers manifest is exported
