@@ -46,6 +46,27 @@
 | **tailwind-merge** | latest | Merge inteligente de classes Tailwind, resolve conflitos |
 | **Geist Font** | - | Fonte do sistema Next.js — Sans para UI, Mono para código |
 
+### Testes E Cobertura
+
+| Tecnologia | Versão | Função |
+|-----------|--------|--------|
+| **Vitest** | 4.1.5 | Runner unitario para `src/**/*.test.{ts,tsx}` |
+| **@testing-library/react** | 16.3.2 | Renderizacao de hooks e componentes em `jsdom` |
+| **@testing-library/user-event** | 14.6.1 | Simulacao de teclado, Tab e Shift+Tab em testes de acessibilidade |
+| **@testing-library/jest-dom** | 6.9.1 | Matchers DOM como foco, visibilidade e presenca no documento |
+| **@vitest/coverage-v8** | 4.1.5 | Cobertura V8 com saidas `text`, `json` e `lcov` |
+| **Codecov Action** | v5 | Upload de `coverage/lcov.info` no workflow `.github/workflows/test.yml` usando `CODECOV_TOKEN` |
+
+Comandos relevantes:
+
+```bash
+npm run test
+npm run test:coverage
+npx vitest run
+```
+
+`coverage/`, `test-results/` e `playwright-report/` sao artefatos gerados e ficam fora do lint/versionamento.
+
 ---
 
 ## Arquitetura do Projeto

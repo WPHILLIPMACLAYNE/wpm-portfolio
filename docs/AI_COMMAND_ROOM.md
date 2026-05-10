@@ -11,6 +11,50 @@ Regras:
 
 ---
 
+## [CODEX -> DEEPSEEK] TASK-20260510-CODECOV-UNIT-01
+
+**Status:** IN_PROGRESS
+**Data:** 2026-05-10
+
+### Missao
+
+Adicionar Codecov e ampliar testes unitarios do WPM.OS Portfolio sem alterar codigo de aplicacao.
+
+### Diagnostico Codex
+
+Problema: o projeto tem configuracao Vitest minima, sem `jsdom`, sem cobertura V8/LCOV para Codecov e com poucos testes unitarios cobrindo hooks/componentes interativos.
+
+Causa provavel: a suite inicial estava focada em smoke unitario de `src/lib`, enquanto hooks de intro, roving tabindex e componentes de boot/loading ainda nao tinham cobertura automatizada.
+
+Arquivos afetados: `vitest.config.ts`, `package.json`, `package-lock.json`, `.github/workflows/test.yml`, `src/hooks/__tests__/useIntroSkip.test.ts`, `src/hooks/__tests__/useRovingTabIndex.test.ts`, `src/components/boot/__tests__/PressStart.test.tsx`, `src/components/ui/__tests__/OSLoader.test.tsx` e esta Sala de Comunicacao.
+
+### Plano De Correcao
+
+1. Instalar dependencias de cobertura/testes: `@vitest/coverage-v8`, `@testing-library/react` e `jsdom`.
+2. Configurar Vitest com `jsdom`, globals, alias `@` e coverage V8 com reporters `text`, `json` e `lcov`.
+3. Adicionar script `test:coverage`.
+4. Criar workflow `.github/workflows/test.yml` com coverage e upload Codecov via `CODECOV_TOKEN`.
+5. Criar testes unitarios focados em `useIntroSkip`, `useRovingTabIndex`, `PressStart` e `OSLoader`.
+6. Verificar que `cn()` ja esta coberto.
+
+### Fora De Escopo
+
+- Nao alterar codigo de aplicacao.
+- Nao executar build.
+- Nao ativar servico Codecov real nem criar token.
+- Nao publicar, commitar, pushar ou abrir PR.
+
+### Risco
+
+Baixo a medio: tests em `jsdom` podem exigir mocks de `requestAnimationFrame`, `localStorage` e APIs de foco/teclado. O workflow exige `CODECOV_TOKEN` em GitHub Secrets para upload autenticado.
+
+### Validacao Esperada
+
+```bash
+npm run typecheck && npm run lint
+npx vitest run
+```
+
 ## [CODEX -> DEEPSEEK] TASK-20260510-DIGITALOCEAN-APP-PLATFORM-PREP
 
 **Status:** CODEX_EXECUTING_WITH_DEEPSEEK_UNAVAILABLE
@@ -5996,5 +6040,65 @@ Resultados:
 - Adicionar o DSN ao GitHub Secrets como `SENTRY_DSN`.
 - Preencher `NEXT_PUBLIC_SENTRY_DSN` no painel da DigitalOcean antes do deploy por App Platform.
 - Fazer um deploy de producao e validar um erro controlado no navegador em Sentry Issues.
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-CODECOV-UNIT-01
+
+**Status:** DONE / DEEPSEEK_UNAVAILABLE
+**Data:** 2026-05-10
+
+### Observacao De Orquestracao
+
+Codex registrou a delegacao na Sala e tentou acionar DeepSeek via Forge. O Forge listou o agente `forge` com provider Deepseek/model `deepseek-v4-pro`, mas a execucao falhou antes de iniciar com `attempt to write a readonly database`. Para manter a entrega auditavel, Codex assumiu a implementacao apos a falha.
+
+### Arquivos Alterados
+
+- `.github/workflows/test.yml`
+- `vitest.config.ts`
+- `package.json`
+- `package-lock.json`
+- `eslint.config.mjs`
+- `src/hooks/__tests__/useIntroSkip.test.ts`
+- `src/hooks/__tests__/useRovingTabIndex.test.ts`
+- `src/components/boot/__tests__/PressStart.test.tsx`
+- `src/components/ui/__tests__/OSLoader.test.tsx`
+- `docs/02-TECHNICAL-REFERENCE.md`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Resultado
+
+Vitest agora roda unitarios em `jsdom`, com globals, alias `@`, coverage V8 e reporters `text`, `json` e `lcov`. A suite unitária fica limitada a `src/**/*.test.{ts,tsx}` para nao misturar specs Playwright em `npx vitest run`.
+
+Adicionado o script `test:coverage` e o workflow `.github/workflows/test.yml`, que executa `npm ci`, `npm run test:coverage` e envia `coverage/lcov.info` para Codecov usando `secrets.CODECOV_TOKEN`.
+
+Foram adicionados testes para `useIntroSkip`, `useRovingTabIndex`, `PressStart` e `OSLoader`. O teste existente de `cn()` em `src/lib/__tests__/utils.test.ts` ja cobria merge condicional e conflito Tailwind, entao foi preservado sem duplicacao.
+
+`eslint.config.mjs` passou a ignorar artefatos gerados de teste/cobertura (`coverage/**`, `test-results/**`, `playwright-report/**`) para nao analisar saida gerada.
+
+### Validacao
+
+```bash
+npm install -D @vitest/coverage-v8 @testing-library/react jsdom
+npm install -D @testing-library/user-event
+npm install -D @testing-library/jest-dom
+npx vitest run src/hooks/__tests__/useIntroSkip.test.ts
+npx vitest run
+npm run test:coverage
+npm run typecheck && npm run lint
+git diff --check
+```
+
+Resultados:
+- Instalacoes npm: PASS; 0 vulnerabilidades reportadas.
+- Rodada vermelha inicial: FAIL esperado por `localStorage is not defined`, confirmando que a config anterior nao usava `jsdom`.
+- `npx vitest run`: PASS; 6 arquivos, 17 testes.
+- `npm run test:coverage`: PASS; gerou `coverage/lcov.info`.
+- `npm run typecheck && npm run lint`: PASS.
+- `git diff --check`: PASS.
+
+### Pendente Manual
+
+- Adicionar `CODECOV_TOKEN` em GitHub Secrets antes de depender do upload autenticado no CI.
 
 ---
