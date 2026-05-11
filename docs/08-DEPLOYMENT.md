@@ -14,6 +14,7 @@ Namecheap custom domain:
 
 ```text
 https://wphillipmaclayne.github.io/wpm-portfolio
+http://wpmsmartwonkey.me
 https://wpmsmartwonkey.me
 ```
 
@@ -25,6 +26,18 @@ the workflow overrides the build envs so the site is exported at the root path
 with `NEXT_PUBLIC_SITE_URL=https://wpmsmartwonkey.me` and
 `NEXT_PUBLIC_BASE_PATH=`. The repository includes `public/CNAME`, which is
 copied into `out/CNAME` during the static export.
+
+Publication status on 2026-05-10:
+
+- GitHub Pages repository: `WPHILLIPMACLAYNE/wpm-portfolio`
+- Source branch: `main`
+- Custom domain: `wpmsmartwonkey.me`
+- GitHub Pages API status: `built`
+- HTTPS certificate: approved by GitHub Pages
+- HTTPS enforcement: enabled
+- Account-wide root repository `WPHILLIPMACLAYNE/WPHILLIPMACLAYNE.github.io`
+  must not keep `wpmsmartwonkey.me` as its custom domain, otherwise all project
+  Pages under the account inherit that custom domain as their base URL.
 
 ## Commands
 
@@ -259,7 +272,8 @@ wpmsmartwonkey.me
 ```
 
 5. Save and wait for GitHub to verify DNS.
-6. Enable **Enforce HTTPS** after DNS verification is complete.
+6. Enable **Enforce HTTPS** after DNS verification and certificate issuance are
+   complete.
 
 ### Namecheap DNS setup
 
@@ -287,6 +301,11 @@ After DNS propagation:
 ```bash
 dig +short wpmsmartwonkey.me A
 dig +short www.wpmsmartwonkey.me CNAME
+gh api repos/WPHILLIPMACLAYNE/WPHILLIPMACLAYNE.github.io/pages \
+  --jq '{status:.status,cname:.cname,html_url:.html_url,https_certificate:.https_certificate}'
+gh api repos/WPHILLIPMACLAYNE/wpm-portfolio/pages \
+  --jq '{status:.status,cname:.cname,html_url:.html_url,https_enforced:.https_enforced,https_certificate:.https_certificate}'
+curl -I http://wpmsmartwonkey.me/
 curl -I https://wpmsmartwonkey.me/
 curl -I https://www.wpmsmartwonkey.me/
 ```
@@ -295,6 +314,8 @@ Expected:
 
 - apex resolves to GitHub Pages IPs;
 - `www` resolves to `wphillipmaclayne.github.io`;
-- HTTPS is valid;
+- root account Pages has `cname=null`;
+- WPM.OS project Pages has `cname=wpmsmartwonkey.me`;
+- HTTPS is valid and enforced after GitHub Pages issues the certificate;
 - canonical URLs and sitemap use `https://wpmsmartwonkey.me`;
 - navigation and assets do not include `/wpm-portfolio`.

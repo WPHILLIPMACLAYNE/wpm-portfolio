@@ -52,7 +52,10 @@ Criar um portfólio autoral que una criatividade, UX, motion design e desenvolvi
 - Repositório público publicado em `https://github.com/WPHILLIPMACLAYNE/wpm-portfolio`.
 - GitHub Pages publicado em `https://wphillipmaclayne.github.io/wpm-portfolio/` pelo commit `07a38bf` e workflow `Deploy GitHub Pages` run `25581405242`.
 - Fechamento documental e QA visual tecnico live registrados no commit `81996a8` e no workflow `Deploy GitHub Pages` run `25581839825`, com status `success`.
-- Pendencia restante: aprovacao visual humana de Wallace no site publicado (`APROVADO VISUAL` ou `AJUSTAR: ...`).
+- Dominio customizado `https://wpmsmartwonkey.me/` publicado diretamente pelo repo `WPHILLIPMACLAYNE/wpm-portfolio`.
+- HTTPS do dominio customizado esta aprovado pelo GitHub Pages e com **Enforce HTTPS** habilitado no projeto WPM.OS.
+- O repo raiz `WPHILLIPMACLAYNE/WPHILLIPMACLAYNE.github.io` nao deve manter `wpmsmartwonkey.me` como custom domain, para nao afetar os outros GitHub Pages da conta.
+- Pendencia restante: aprovacao visual humana de Wallace no site publicado (`APROVADO VISUAL` ou `AJUSTAR: ...`) ou lista objetiva de ajustes visuais.
 
 ---
 

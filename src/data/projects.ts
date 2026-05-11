@@ -47,13 +47,13 @@ export const projects: Project[] = [
       "Supabase",
       "Vitest",
       "Playwright",
-      "Vercel",
+      "GitHub Pages",
     ],
     accentColor: "#10B981",
     coverImage: "/project-wpm-gestao-cover.svg",
     featured: true,
     links: {
-      live: "https://wpm-gestao-interna.vercel.app/",
+      live: "https://wphillipmaclayne.github.io/WPM-GESTAO-INTERNA/",
       github: "https://github.com/WPHILLIPMACLAYNE/WPM-GESTAO-INTERNA",
     },
     problem:

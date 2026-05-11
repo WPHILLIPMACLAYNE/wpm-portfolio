@@ -13,7 +13,7 @@ Regra central: usar apenas dados confirmados por link, screenshot, arquivo local
   - Acesso direto automatizado bloqueado por authwall/999.
   - Screenshots completos enviados por Wallace em 2026-05-05.
 - GitHub do sistema: `https://github.com/WPHILLIPMACLAYNE/WPM-GESTAO-INTERNA`
-- Deploy do sistema: `https://wpm-gestao-interna.vercel.app/`
+- Deploy do sistema: `https://wphillipmaclayne.github.io/WPM-GESTAO-INTERNA/`
 - Portfolio legado no GitHub: `https://github.com/WPHILLIPMACLAYNE/WPM-SAP-PORTIFOLIO`
 - Portfolio legado publicado: `https://wphillipmaclayne.github.io/WPM-SAP-PORTIFOLIO/`
 - Landing do livro: `https://wphillipmaclayne.github.io/meu-livro-llm-agentes/site-apresentacao/`

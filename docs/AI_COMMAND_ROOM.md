@@ -5936,6 +5936,133 @@ Resultado: PASS.
 
 ---
 
+## [CODEX] EXECUTION REPORT TASK-20260510-GESTAO-LINK-01
+
+**Status:** DONE
+**Data:** 2026-05-10
+
+### Escopo
+
+Trocar o link do projeto `WPM Gestão Interna` no portfolio WPM.OS do deploy
+Vercel para o deploy GitHub Pages aprovado:
+`https://wphillipmaclayne.github.io/WPM-GESTAO-INTERNA/`.
+
+### Arquivos Alterados
+
+- `src/data/projects.ts`
+- `docs/CV_RECONSTRUCTION.md`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Resultado
+
+O link `links.live` do projeto `wpm-gestao-interna` agora aponta para GitHub
+Pages. O rótulo de stack visível do projeto foi alinhado de `Vercel` para
+`GitHub Pages`. A fonte documental do currículo também foi atualizada para o
+mesmo deploy.
+
+### Validacao
+
+```bash
+rg -n "wpm-gestao-interna\\.vercel\\.app|Vercel" src docs/CV_RECONSTRUCTION.md
+npm run typecheck
+npm run lint
+curl -I --max-time 20 https://wphillipmaclayne.github.io/WPM-GESTAO-INTERNA/
+git diff --check
+```
+
+Resultados:
+
+- URL antiga `wpm-gestao-interna.vercel.app`: sem ocorrencias em `src` e
+  `docs/CV_RECONSTRUCTION.md`.
+- `npm run typecheck`: PASS.
+- `npm run lint`: PASS.
+- Deploy GitHub Pages da Gestao Interna: `HTTP/2 200`.
+- `git diff --check`: PASS.
+
+### Fora De Escopo
+
+- Nenhuma alteracao visual de layout, tipografia, cor ou componente.
+- PR e merge permanecem fora do escopo.
+- Commit e push para `main` foram autorizados depois por Wallace para publicar
+  a troca do link no site.
+
+---
+
+## [CODEX] EXECUTION REPORT TASK-20260510-CUSTOM-DOMAIN-SCOPE-01
+
+**Status:** DONE
+**Data:** 2026-05-10
+
+### Escopo
+
+Corrigir o escopo do dominio customizado para que `wpmsmartwonkey.me` aponte
+somente para o WPM.OS, sem virar base dos outros GitHub Pages da conta.
+
+### Diagnostico
+
+O custom domain estava no repo raiz `WPHILLIPMACLAYNE/WPHILLIPMACLAYNE.github.io`.
+Em GitHub Pages, isso transforma o dominio em base da conta inteira e faz
+repos de projeto aparecerem como subpaths, por exemplo
+`wpmsmartwonkey.me/WPM-GESTAO-INTERNA/`.
+
+O comportamento desejado pelo Wallace e que `wpmsmartwonkey.me` seja somente o
+WPM.OS. Portanto o custom domain deve pertencer ao repo de projeto
+`WPHILLIPMACLAYNE/wpm-portfolio`, que ja possui `public/CNAME`.
+
+### Arquivos Alterados
+
+- Repo `WPHILLIPMACLAYNE.github.io`: `CNAME` removido e publicado no commit
+  `509a5b6 Delete CNAME`
+- `docs/00-OVERVIEW.md`
+- `docs/02-TECHNICAL-REFERENCE.md`
+- `docs/08-DEPLOYMENT.md`
+- `docs/AI_COMMAND_ROOM.md`
+
+### Resultado
+
+Removido o custom domain do repo raiz e configurado `wpmsmartwonkey.me` no repo
+`WPHILLIPMACLAYNE/wpm-portfolio`. O certificado GitHub Pages do WPM.OS foi
+aprovado e **Enforce HTTPS** foi habilitado.
+
+Estado final:
+
+- `WPHILLIPMACLAYNE.github.io`: `cname=null`, `html_url=https://wphillipmaclayne.github.io/`
+- `wpm-portfolio`: `cname=wpmsmartwonkey.me`, `html_url=https://wpmsmartwonkey.me/`, `https_enforced=true`
+- `WPM-GESTAO-INTERNA`: `cname=null`, `html_url=https://wphillipmaclayne.github.io/WPM-GESTAO-INTERNA/`
+
+### Validacao
+
+```bash
+git status --short --branch
+gh api repos/WPHILLIPMACLAYNE/WPHILLIPMACLAYNE.github.io/pages --jq '{status:.status,cname:.cname,custom_404:.custom_404,html_url:.html_url,https_certificate:.https_certificate}'
+gh api repos/WPHILLIPMACLAYNE/wpm-portfolio/pages --jq '{status:.status,cname:.cname,html_url:.html_url,https_enforced:.https_enforced,https_certificate:.https_certificate}'
+gh api repos/WPHILLIPMACLAYNE/WPM-GESTAO-INTERNA/pages --jq '{status:.status,cname:.cname,html_url:.html_url,https_certificate:.https_certificate}'
+curl -I --max-time 20 https://wpmsmartwonkey.me/
+curl -I --max-time 20 https://wphillipmaclayne.github.io/WPM-GESTAO-INTERNA/
+git diff --check
+```
+
+Resultados:
+
+- `wpm-portfolio`: `main...origin/main`, docs modificados.
+- `WPHILLIPMACLAYNE.github.io`: `main...origin/main`, limpo, sem `CNAME`.
+- GitHub Pages API do WPM.OS: `status=built`, `cname=wpmsmartwonkey.me`,
+  `https_enforced=true`, certificado `approved`.
+- `https://wpmsmartwonkey.me/`: `200 OK`.
+- `https://wphillipmaclayne.github.io/WPM-GESTAO-INTERNA/`: `200 OK`.
+- `http://wpmsmartwonkey.me/WPM-GESTAO-INTERNA/` ainda pode responder por cache
+  de borda temporario (`max-age=600`), mas a API do Pages voltou a apontar
+  `WPM-GESTAO-INTERNA` para o dominio padrao.
+- `git diff --check`: PASS.
+
+### Fora De Escopo
+
+- Nenhuma alteracao visual.
+- Nenhuma alteracao de DNS no Namecheap.
+- Nenhum PR ou merge.
+
+---
+
 ## [CODEX -> DEEPSEEK] TASK-20260510-SENTRY-01
 
 **Status:** IN_PROGRESS

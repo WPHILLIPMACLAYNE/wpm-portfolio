@@ -563,6 +563,20 @@ Cobertura atual de regressao E2E:
 
 ---
 
+## Dominio Customizado 2026-05-10
+
+- Repo fonte do WPM.OS: `/home/acewallthemac/Documentos/portifoliomain/wpm-portfolio`
+- Repo GitHub do WPM.OS: `WPHILLIPMACLAYNE/wpm-portfolio`
+- Repo raiz da conta: `WPHILLIPMACLAYNE/WPHILLIPMACLAYNE.github.io`, sem custom domain
+- Dominio customizado aprovado: `wpmsmartwonkey.me`
+- URL canonica validada: `https://wpmsmartwonkey.me/`
+- GitHub Pages API do WPM.OS: `status=built`, `cname=wpmsmartwonkey.me`, `html_url=https://wpmsmartwonkey.me/`, `https_enforced=true`
+- Certificado HTTPS: aprovado pelo GitHub Pages para `wpmsmartwonkey.me` e `www.wpmsmartwonkey.me`.
+- `WPM-GESTAO-INTERNA` voltou ao dominio padrao `https://wphillipmaclayne.github.io/WPM-GESTAO-INTERNA/`.
+- Observacao de diagnostico: o custom domain deve ficar no repo `wpm-portfolio`, nao no repo raiz `WPHILLIPMACLAYNE.github.io`; se ficar no repo raiz, os outros GitHub Pages da conta herdam `wpmsmartwonkey.me` como base.
+
+---
+
 ## Handoff Operacional — 2026-05-08
 
 Para retomar em outro terminal/conta Codex:
