@@ -31,6 +31,40 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    slug: "macagents-hermes",
+    title: "MacAgents Hermes",
+    subtitle: "Agente pessoal de IA local-first com ferramentas, memória e avaliação contínua",
+    description:
+      "Agente pessoal de IA que roda localmente no Linux e executa tarefas reais no computador, navegador, arquivos e e-mail. Mantém memória, rotinas agendadas e habilidades próprias, com suíte de 20 tarefas, linha de base medida, backup testado, limites de ferramenta e revisão independente.",
+    year: 2026,
+    role: "Product, Systems Design e AI Operations",
+    category: "Agente de IA / Automação local",
+    status: "Active",
+    stack: [
+      "Hermes Agent",
+      "DeepSeek V4.1 Flash",
+      "Python",
+      "SQLite",
+      "Linux/systemd",
+      "Telegram Bot API",
+      "MCP",
+      "Markdown",
+      "Git",
+    ],
+    accentColor: "#74F7FF",
+    coverImage: "/project-macagents-hermes-cover.svg",
+    featured: true,
+    links: {},
+    problem:
+      "Um agente de IA que só conversa não resolve operação real. Quando começa a executar comandos, arquivos, navegador e e-mail, surgem falhas silenciosas, custo imprevisível, memória cheia, ferramentas demais e risco de mudança sem rollback. Faltava um sistema que funcionasse no uso diário e pudesse ser medido.",
+    solution:
+      "Implementei e opero um agente pessoal local-first sobre o Hermes Agent, com ferramentas reais, memória, skills, cron e três interfaces no mesmo backend. A camada principal é a engenharia de operação: suíte de 20 tarefas, verificadores independentes, snapshot de telemetria, backup com restauração testada, redução de superfície e processo de mudança com revisão separada.",
+    process:
+      "Diagnostiquei 10.404 chamadas de ferramenta e encontrei 3,73% de falhas, 22 compactações e memória perto do limite. Criei uma suíte de 20 tarefas em terminal, arquivos, navegador e e-mail, com três execuções por tarefa e verificador independente. Rodei duas bases em 0.23.0 e uma em 0.23.1, reduzi a superfície de 20/29 para 17/28 ferramentas, desabilitei integrações de acesso amplo e testei a restauração do backup antes de mudar configuração. A execução ficou com o Hermes, a medição com o Codex e a revisão com Fable/Claude.",
+    results:
+      "Três rodadas de 60 execuções: 60/60 aprovadas, pass^3 20/20 e zero intervenções. Custo por execução entre US$ 0,0016 e US$ 0,0024. O eval de alucinação passou 24/24 e a fumaça 21/21. O backup restaurou 22.420 mensagens, 268 sessões e 113 skills com 8/8 hashes conferidos. O agente segue em uso diário para organização, análise, relatórios e automações, agora com limites e evidência.",
+  },
+  {
     slug: "wpm-gestao-interna",
     title: "WPM Gestão Interna",
     subtitle: "Sistema operacional para recepção de academias",

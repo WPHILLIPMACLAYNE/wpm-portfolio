@@ -4,6 +4,7 @@ import ProjectCartridge from "@/components/console/ProjectCartridge";
 import { projects, getFeaturedProjects } from "@/data/projects";
 
 const featuredProofs: Record<string, string[]> = {
+  "macagents-hermes": ["20 tarefas", "60/60", "0 intervenções", "17/28 ferramentas"],
   "wpm-gestao-interna": ["PWA", "Offline", "Supabase", "Recepção de academias"],
   "livro-llm-agentes": ["290 páginas", "7 partes", "26 capítulos", "3 apêndices"],
 };

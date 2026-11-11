@@ -68,7 +68,7 @@ export const moduleScenes: Record<string, ModuleScene> = {
     tone: "primary",
     tags: ["cases", "deploy", "produto", "evidencia"],
     meta: [
-      { label: "cases", value: "02 destacados" },
+      { label: "cases", value: "03 destacados" },
       { label: "modo", value: "dossie" },
       { label: "entrada", value: "direta" },
     ],

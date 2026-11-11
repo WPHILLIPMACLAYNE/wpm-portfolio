@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">MacAgents Hermes cover</title>
+  <desc id="desc">Console escuro com grid ciano, identificação do agente pessoal MacAgents Hermes, métricas de 20 tarefas, 60 de 60 execuções e zero intervenções.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050816"/>
+      <stop offset="0.55" stop-color="#080d1c"/>
+      <stop offset="1" stop-color="#02040a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#74F7FF"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#74F7FF" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <rect width="1200" height="900" fill="url(#grid)"/>
+  <circle cx="1120" cy="110" r="160" fill="#74F7FF" opacity="0.04"/>
+  <circle cx="170" cy="760" r="260" fill="#A78BFA" opacity="0.06"/>
+
+  <rect x="64" y="64" width="1072" height="772" rx="28" fill="#080d19" stroke="#74F7FF" stroke-opacity="0.45" stroke-width="2"/>
+  <rect x="64" y="64" width="1072" height="772" rx="28" fill="none" stroke="#A78BFA" stroke-opacity="0.16" stroke-width="1"/>
+
+  <rect x="104" y="104" width="992" height="70" rx="14" fill="#0d1424" stroke="#74F7FF" stroke-opacity="0.18"/>
+  <circle cx="140" cy="139" r="9" fill="#34D399"/>
+  <circle cx="172" cy="139" r="9" fill="#FBBF24"/>
+  <circle cx="204" cy="139" r="9" fill="#A78BFA"/>
+  <text x="240" y="148" fill="#D9FBFF" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700" letter-spacing="2">MACAGENTS / HERMES</text>
+  <text x="1040" y="147" text-anchor="end" fill="#74F7FF" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="600" letter-spacing="3">LOCAL-FIRST</text>
+
+  <text x="104" y="250" fill="#74F7FF" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="5">AGENTE PESSOAL DE IA</text>
+  <text y="352" fill="#F5F8FF" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="800">
+    <tspan x="104">OPERAÇÃO</tspan>
+    <tspan x="480">MEDIDA</tspan>
+  </text>
+  <text x="108" y="414" fill="#A9B6CC" font-family="Inter, Arial, sans-serif" font-size="22">Ferramentas reais. Memória. Rotinas. Avaliação contínua.</text>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <rect x="104" y="520" width="236" height="150" rx="18" fill="#0d1728" stroke="#74F7FF" stroke-opacity="0.25"/>
+    <text x="132" y="566" fill="#74F7FF" font-size="18" font-weight="700" letter-spacing="2">SUÍTE</text>
+    <text x="132" y="626" fill="#F5F8FF" font-size="54" font-weight="800">20</text>
+    <text x="132" y="652" fill="#8FA3BF" font-size="16">tarefas em 4 categorias</text>
+
+    <rect x="364" y="520" width="236" height="150" rx="18" fill="#0d1728" stroke="#34D399" stroke-opacity="0.32"/>
+    <text x="392" y="566" fill="#34D399" font-size="18" font-weight="700" letter-spacing="2">EXECUÇÕES</text>
+    <text x="392" y="626" fill="#F5F8FF" font-size="54" font-weight="800">60/60</text>
+    <text x="392" y="652" fill="#8FA3BF" font-size="16">pass^3 20/20</text>
+
+    <rect x="624" y="520" width="236" height="150" rx="18" fill="#0d1728" stroke="#A78BFA" stroke-opacity="0.32"/>
+    <text x="652" y="566" fill="#A78BFA" font-size="18" font-weight="700" letter-spacing="2">INTERVENÇÕES</text>
+    <text x="652" y="626" fill="#F5F8FF" font-size="54" font-weight="800">0</text>
+    <text x="652" y="652" fill="#8FA3BF" font-size="16">nas três rodadas</text>
+
+    <rect x="884" y="520" width="212" height="150" rx="18" fill="#0d1728" stroke="#FBBF24" stroke-opacity="0.3"/>
+    <text x="912" y="566" fill="#FBBF24" font-size="18" font-weight="700" letter-spacing="2">SUPERFÍCIE</text>
+    <text x="912" y="626" fill="#F5F8FF" font-size="54" font-weight="800">17/28</text>
+    <text x="912" y="652" fill="#8FA3BF" font-size="16">ferramentas expostas</text>
+  </g>
+
+  <g font-family="Inter, Arial, sans-serif">
+    <line x1="104" y1="726" x2="1096" y2="726" stroke="#74F7FF" stroke-opacity="0.16"/>
+    <text x="104" y="772" fill="#8FA3BF" font-size="14" letter-spacing="1">TOOLS</text>
+    <text x="200" y="772" fill="#8FA3BF" font-size="14" letter-spacing="1">MEMORY</text>
+    <text x="320" y="772" fill="#8FA3BF" font-size="14" letter-spacing="1">SKILLS</text>
+    <text x="410" y="772" fill="#8FA3BF" font-size="14" letter-spacing="1">CRON</text>
+    <text x="490" y="772" fill="#8FA3BF" font-size="14" letter-spacing="1">TELEGRAM</text>
+    <text x="620" y="772" fill="#8FA3BF" font-size="14" letter-spacing="1">DESKTOP</text>
+    <text x="730" y="772" fill="#8FA3BF" font-size="14" letter-spacing="1">WEBAPP</text>
+    <text x="1096" y="772" text-anchor="end" fill="#74F7FF" font-size="15" font-weight="700" letter-spacing="2">v0.23.1</text>
+  </g>
+
+  <rect x="104" y="796" width="992" height="2" fill="url(#accent)" opacity="0.5"/>
+</svg>
